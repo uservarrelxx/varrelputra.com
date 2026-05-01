@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m http.server 8099)",
+      "Bash(curl -s http://localhost:8099/index_16.html)",
+      "Bash(node --input-type=module)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
