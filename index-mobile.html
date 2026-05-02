@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>if (window.innerWidth < 769 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) { window.location.replace('index-mobile.html'); }</script>
     <title>Varrel Putra - Strategic Sales & Marketing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,7 +80,6 @@ body::-webkit-scrollbar {
         .header-left {
             font-size: 11px;
             color: var(--text-primary);
-            cursor: none;
             transition: color 0.3s ease;
         }
 
@@ -99,7 +97,6 @@ body::-webkit-scrollbar {
             font-size: 11px;
             color: var(--text-primary);
             text-decoration: none;
-            cursor: none;
             transition: color 0.3s ease;
             white-space: nowrap;
             position: relative;
@@ -112,19 +109,12 @@ body::-webkit-scrollbar {
         .header-right {
             font-size: 11px;
             color: var(--text-primary);
-            cursor: none;
             transition: color 0.3s ease;
         }
 
         .header-right:hover {
             color: var(--text-primary);
         }
-
-        .cta {
-            font-size: 11px;
-            color: var(--text-tertiary);
-        }
-
 
         /* PREVIEW SECTIONS */
         .preview-sections {
@@ -151,7 +141,6 @@ body::-webkit-scrollbar {
             margin-bottom: 2rem;
             padding-bottom: 2rem;
             border-bottom: 1px solid var(--border-light);
-            cursor: none;
         }
 
         .preview-item:last-child {
@@ -211,7 +200,6 @@ body::-webkit-scrollbar {
             text-decoration: none;
             display: block;
             margin-bottom: 0.5rem;
-            cursor: none;
         }
 
         .footer-column a:hover {
@@ -334,7 +322,6 @@ body::-webkit-scrollbar {
             font-size: 11px;
             font-style: italic;
             color: var(--text-tertiary);
-            cursor: none;
             padding: 0.4rem 0;
             transition: color 0.2s ease;
             background: none;
@@ -344,23 +331,6 @@ body::-webkit-scrollbar {
 
         .floating-menu-item:hover {
             color: var(--text-primary);
-        }
-
-        /* CUSTOM CURSOR */
-        .custom-cursor {
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            font-size: 11px;
-            color: var(--text-primary);
-            white-space: nowrap;
-            display: none;
-            transform: translate(10px, -20px);
-            transition: opacity 0.2s ease;
-        }
-
-        .custom-cursor.visible {
-            display: block;
         }
 
         /* GARAGE */
@@ -373,7 +343,6 @@ body::-webkit-scrollbar {
 
         .garage-card {
             border: 1px solid var(--border-light);
-            cursor: none;
             transition: border-color 0.2s ease;
         }
 
@@ -429,7 +398,6 @@ body::-webkit-scrollbar {
             font-size: 11px;
             color: var(--text-tertiary);
             text-decoration: none;
-            cursor: none;
             transition: color 0.2s ease;
         }
 
@@ -474,7 +442,6 @@ body::-webkit-scrollbar {
             color: #f6f1df;
             overflow: hidden;
             position: relative;
-            cursor: none;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -513,33 +480,138 @@ body::-webkit-scrollbar {
             background: transparent;
             color: var(--text-primary);
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 13px;
+            font-size: 10px;
             font-style: italic;
             font-weight: 400;
-            cursor: none;
             white-space: nowrap;
-            flex: 1;
+            flex: none;
             text-align: center;
         }
 
         .hero-nav-link:first-child { text-align: left; }
         .hero-nav-link:last-child  { text-align: right; }
 
-        @media (max-width: 760px) {
-            .hero-wrapper {
-                height: 100vh;
-                padding: 0.75rem;
-                grid-template-rows: 1fr auto;
-            }
+        .hero-wrapper {
+            height: 100vh;
+            padding: 0.75rem;
+            grid-template-rows: 58vh auto;
+        }
 
-            .hero-wordmark {
-                font-size: clamp(3.7rem, 20vw, 7rem);
-            }
+        .hero-wordmark {
+            font-size: clamp(1.8rem, 9vw, 3rem);
+            white-space: nowrap;
+            overflow: hidden;
+        }
 
-            .hero-nav-row {
-                flex-wrap: wrap;
-                gap: 0.5rem 1rem;
-            }
+        .hero-nav-row {
+            flex-wrap: wrap;
+            gap: 0.3rem 0.6rem;
+            padding: 0.4rem 0 0.1rem 0;
+        }
+
+        .hero-click-hint {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            color: var(--text-tertiary);
+            padding: 0.5rem 0 0.2rem 0;
+            animation: hintPulse 0.7s ease-in-out infinite alternate;
+        }
+        @keyframes hintPulse {
+            from { opacity: 0.1; }
+            to { opacity: 1; }
+        }
+
+        .site-header { padding: 1rem 1.25rem; }
+
+        .content-page { padding: 1.5rem; }
+        .preview-sections { padding: 2rem 1.5rem 1rem 1.5rem; }
+        .preview-section { padding: 0; }
+        .site-footer {
+            grid-template-columns: 1fr;
+            padding: 2rem 1.5rem;
+            gap: 1.5rem;
+        }
+
+        /* MOBILE NAV OVERLAY */
+        .mobile-nav-overlay {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 600;
+            background: var(--bg);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            /* closed state */
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(0.94) translateY(16px);
+            transform-origin: bottom right;
+            pointer-events: none;
+            transition: opacity 0.22s ease,
+                        transform 0.26s cubic-bezier(0.34, 1.4, 0.64, 1),
+                        visibility 0s linear 0.26s;
+        }
+        .mobile-nav-overlay.open {
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            transition: opacity 0.22s ease,
+                        transform 0.26s cubic-bezier(0.34, 1.4, 0.64, 1),
+                        visibility 0s linear 0s;
+        }
+        .mobile-nav-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .mobile-nav-item {
+            background: none;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem 0;
+        }
+
+        /* HERO IDENTITY BOTTOM ROW */
+        .hero-identity-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hero-menu-btn {
+            display: block;
+            background: none;
+            border: 1px solid var(--text-primary);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.35rem 0.6rem;
+            white-space: nowrap;
+        }
+        .hero-nav-row { display: none; }
+
+        /* PAGE TRANSITION */
+        #pageContent {
+            transition: opacity 0.2s ease;
+        }
+        #pageContent.fading {
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -591,7 +663,17 @@ body::-webkit-scrollbar {
         <button class="floating-menu-item" data-nav="contact">CONTACT</button>
     </div>
 
-    <div class="custom-cursor" id="customCursor">more →</div>
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+        <button class="mobile-nav-item" onclick="mobileNav('home')">VARREL PUTRA</button>
+        <button class="mobile-nav-item" onclick="mobileNav('garage')">[GARAGE]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('work')">[WORK]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('about')">[ABOUT]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('experience')">[EXPERIENCE]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('blog')">[INSIGHT]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('contact')">CONTACT</button>
+    </div>
 
     <script>
         const chars = '!@#$%^&*(){}[]<>?/\|~`+-=_';
@@ -781,28 +863,32 @@ body::-webkit-scrollbar {
                         <div class="hero-artwork" id="heroArtwork" aria-label="Animated 3D ASCII artwork"></div>
                         <div class="hero-identity" id="heroIdentity">
                             <div class="hero-wordmark" aria-label="varrelputra.com">varrelputra.com</div>
-                            <div class="hero-nav-row" id="heroNavRow">
-                                <button class="hero-nav-link glitch-text" data-text="VARREL PUTRA" onclick="loadPage('home')">
-                                    <span class="text-content">VARREL PUTRA</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[GARAGE]" onclick="loadPage('garage')">
-                                    <span class="text-content">[GARAGE]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[WORK]" onclick="loadPage('work')">
-                                    <span class="text-content">[WORK]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[ABOUT]" onclick="loadPage('about')">
-                                    <span class="text-content">[ABOUT]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[EXPERIENCE]" onclick="loadPage('experience')">
-                                    <span class="text-content">[EXPERIENCE]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[INSIGHT]" onclick="loadPage('blog')">
-                                    <span class="text-content">[INSIGHT]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="CONTACT" onclick="loadPage('contact')">
-                                    <span class="text-content">CONTACT</span>
-                                </button>
+                            <div class="hero-click-hint">CLICK TO SCROLL</div>
+                            <div class="hero-identity-bottom">
+                                <div class="hero-nav-row" id="heroNavRow">
+                                    <button class="hero-nav-link glitch-text" data-text="VARREL PUTRA" onclick="loadPage('home')">
+                                        <span class="text-content">VARREL PUTRA</span>
+                                    </button>
+                                    <button class="hero-nav-link glitch-text" data-text="[GARAGE]" onclick="loadPage('garage')">
+                                        <span class="text-content">[GARAGE]</span>
+                                    </button>
+                                    <button class="hero-nav-link glitch-text" data-text="[WORK]" onclick="loadPage('work')">
+                                        <span class="text-content">[WORK]</span>
+                                    </button>
+                                    <button class="hero-nav-link glitch-text" data-text="[ABOUT]" onclick="loadPage('about')">
+                                        <span class="text-content">[ABOUT]</span>
+                                    </button>
+                                    <button class="hero-nav-link glitch-text" data-text="[EXPERIENCE]" onclick="loadPage('experience')">
+                                        <span class="text-content">[EXPERIENCE]</span>
+                                    </button>
+                                    <button class="hero-nav-link glitch-text" data-text="[INSIGHT]" onclick="loadPage('blog')">
+                                        <span class="text-content">[INSIGHT]</span>
+                                    </button>
+                                    <button class="hero-nav-link glitch-text" data-text="CONTACT" onclick="loadPage('contact')">
+                                        <span class="text-content">CONTACT</span>
+                                    </button>
+                                </div>
+                                <button class="hero-menu-btn" id="heroMenuBtn">[ MENU ]</button>
                             </div>
                         </div>
                     </section>
@@ -1007,6 +1093,8 @@ body::-webkit-scrollbar {
             }
 
             setupGlitchEffects();
+            }; // end _renderPage
+            setTimeout(_renderPage, 180);
         }
 
         function setupPageDelegation() {
@@ -1102,9 +1190,9 @@ body::-webkit-scrollbar {
                 let frameId = null;
 
                 // Intro: 3/4 angle, zoomed in, shifted left-of-centre
-                const INTRO_CAM_Z = 5.6;
-                const INTRO_CAM_X = 3.0;
-                const FINAL_CAM_Z = 6.8;
+                const INTRO_CAM_Z = 8.0;
+                const INTRO_CAM_X = 0.0;
+                const FINAL_CAM_Z = 9.5;
                 const FINAL_CAM_X = 0.0;
                 const INTRO_ROT_Y = Math.PI * 0.2;
                 const FINAL_ROT_Y = Math.PI * 0.5;
@@ -1113,9 +1201,10 @@ body::-webkit-scrollbar {
                 const pointer = { active: false, x: 0, y: 0, targetX: 0, targetY: 0, enabled: false };
 
                 const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 200);
+                const mobileLookY = -2.2;
+                const camera = new THREE.PerspectiveCamera(55, 1, 0.01, 200);
                 camera.position.set(INTRO_CAM_X, 0.1, INTRO_CAM_Z);
-                camera.lookAt(0, 0.1, 0);
+                camera.lookAt(0, mobileLookY, 0);
 
                 const renderer = new THREE.WebGLRenderer({ antialias: true });
                 renderer.setClearColor(0xffffff, 1);
@@ -1124,10 +1213,6 @@ body::-webkit-scrollbar {
                 const effect = new AsciiEffect(renderer, '      .:-=+*#%@GS', {
                     invert: false,
                     resolution: 0.18,
-                    overlayProvider: ({ cols, height, rows, width }) => {
-                        if (!pointer.enabled || !pointer.active) return null;
-                        return { col: (pointer.x / width) * cols, row: (pointer.y / height) * rows, text: 'CLICK' };
-                    },
                 });
                 effect.domElement.style.cssText = 'width:100%;height:100%;color:#f6f1df;background-color:#050505;font-size:4.8px;line-height:4.8px;';
                 container.appendChild(effect.domElement);
@@ -1149,7 +1234,7 @@ body::-webkit-scrollbar {
                     const h = Math.max(1, Math.floor(r.height));
                     camera.aspect = w / h;
                     camera.updateProjectionMatrix();
-                    camera.lookAt(0, 0.1, 0);
+                    camera.lookAt(0, mobileLookY, 0);
                     renderer.setSize(w, h);
                     effect.setSize(w, h);
                 };
@@ -1238,7 +1323,7 @@ body::-webkit-scrollbar {
                         // Zoom out and pan to centre simultaneously
                         camera.position.z = INTRO_CAM_Z + (FINAL_CAM_Z - INTRO_CAM_Z) * e;
                         camera.position.x = INTRO_CAM_X + (FINAL_CAM_X - INTRO_CAM_X) * e;
-                        camera.lookAt(0, 0.1, 0);
+                        camera.lookAt(0, mobileLookY, 0);
                         if (model) model.rotation.y = INTRO_ROT_Y + (FINAL_ROT_Y - INTRO_ROT_Y) * e;
                         if (t >= 1) {
                             // Step 3 → 4: transition done — reveal wordmark + nav
@@ -1307,18 +1392,31 @@ body::-webkit-scrollbar {
                         }
                     };
 
-                    // Enable CLICK cursor
-                    pointer.enabled = true;
-                    const movePointer = (ev) => {
-                        const r = container.getBoundingClientRect();
-                        pointer.active = true;
-                        pointer.targetX = ev.clientX - r.left;
-                        pointer.targetY = ev.clientY - r.top;
-                        if (pointer.x === 0 && pointer.y === 0) { pointer.x = pointer.targetX; pointer.y = pointer.targetY; }
-                    };
-                    container.addEventListener('pointerenter', () => { pointer.active = true; });
-                    container.addEventListener('pointermove', movePointer);
-                    container.addEventListener('pointerleave', () => { pointer.active = false; });
+                    // "CLICK TO SCROLL" hint — fades in/out
+                    const clickHint = document.createElement('div');
+                    clickHint.textContent = 'CLICK TO SCROLL';
+                    clickHint.style.cssText = [
+                        'position:absolute',
+                        'bottom:1.2rem',
+                        'left:50%',
+                        'transform:translateX(-50%)',
+                        "font-family:'IBM Plex Mono',monospace",
+                        'font-size:10px',
+                        'letter-spacing:0.15em',
+                        'color:#f6f1df',
+                        'pointer-events:none',
+                        'z-index:20',
+                        'opacity:0',
+                        'transition:opacity 0.6s ease',
+                    ].join(';');
+                    container.appendChild(clickHint);
+                    // Pulse in/out every 2.5s
+                    let hintVisible = false;
+                    const hintInterval = setInterval(() => {
+                        hintVisible = !hintVisible;
+                        clickHint.style.opacity = hintVisible ? '1' : '0';
+                    }, 2500);
+                    setTimeout(() => { hintVisible = true; clickHint.style.opacity = '1'; }, 100);
 
                     const clickOverlay = document.createElement('div');
                     clickOverlay.style.cssText = 'position:absolute;inset:0;z-index:10;cursor:none;';
@@ -1331,6 +1429,7 @@ body::-webkit-scrollbar {
 
                     heroModelCleanup = () => {
                         disposed = true;
+                        clearInterval(hintInterval);
                         unblockScroll();
                         if (frameId) cancelAnimationFrame(frameId);
                         window.removeEventListener('resize', heroResize);
@@ -1376,6 +1475,8 @@ body::-webkit-scrollbar {
 
             heroModelCleanup = () => {
                 disposed = true;
+                clearInterval(hintInterval);
+                unblockScroll();
                 container.innerHTML = '';
             };
 
@@ -1416,6 +1517,7 @@ body::-webkit-scrollbar {
 
             heroModelCleanup = () => {
                 disposed = true;
+                clearInterval(hintInterval);
                 unblockScroll();
                 container.innerHTML = '';
             };
@@ -1425,7 +1527,33 @@ body::-webkit-scrollbar {
             clickOverlay.style.cssText = 'position:absolute;inset:0;z-index:10;cursor:none;';
             container.appendChild(clickOverlay);
 
+            // "CLICK TO SCROLL" hint
+            const clickHint = document.createElement('div');
+            clickHint.textContent = 'CLICK TO SCROLL';
+            clickHint.style.cssText = [
+                'position:absolute',
+                'bottom:1.2rem',
+                'left:50%',
+                'transform:translateX(-50%)',
+                "font-family:'IBM Plex Mono',monospace",
+                'font-size:10px',
+                'letter-spacing:0.15em',
+                'color:#f6f1df',
+                'pointer-events:none',
+                'z-index:20',
+                'opacity:0',
+                'transition:opacity 0.6s ease',
+            ].join(';');
+            container.appendChild(clickHint);
+            let hintVisible = false;
+            const hintInterval = setInterval(() => {
+                hintVisible = !hintVisible;
+                clickHint.style.opacity = hintVisible ? '1' : '0';
+            }, 2500);
+            setTimeout(() => { hintVisible = true; clickHint.style.opacity = '1'; }, 100);
+
             clickOverlay.addEventListener('click', () => {
+                clearInterval(hintInterval);
                 unblockScroll();
                 const target = document.getElementById('mainContent');
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1445,9 +1573,10 @@ body::-webkit-scrollbar {
                 const scene = new THREE.Scene();
                 scene.background = new THREE.Color(0xffffff);
 
-                const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 200);
-                camera.position.set(0, 0.1, 6.8);
-                camera.lookAt(0, 0.1, 0);
+                const smLookY = -2.2;
+                const camera = new THREE.PerspectiveCamera(55, 1, 0.01, 200);
+                camera.position.set(0, 0.1, 9.5);
+                camera.lookAt(0, smLookY, 0);
 
                 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
                 renderer.setClearColor(0xffffff, 1);
@@ -1456,14 +1585,6 @@ body::-webkit-scrollbar {
                 const effect = new AsciiEffect(renderer, '      .:-=+*#%@GS', {
                     invert: false,
                     resolution: 0.18,
-                    overlayProvider: ({ cols, height, rows, width }) => {
-                        if (!pointer.active) return null;
-                        return {
-                            col: (pointer.x / width) * cols,
-                            row: (pointer.y / height) * rows,
-                            text: 'CLICK',
-                        };
-                    },
                 });
 
                 effect.domElement.style.width = '100%';
@@ -1509,7 +1630,7 @@ body::-webkit-scrollbar {
                     const height = Math.max(1, Math.floor(rect.height));
                     camera.aspect = width / height;
                     camera.updateProjectionMatrix();
-                    camera.lookAt(0, 0.1, 0);
+                    camera.lookAt(0, smLookY, 0);
                     renderer.setSize(width, height);
                     effect.setSize(width, height);
                 };
@@ -1667,56 +1788,7 @@ body::-webkit-scrollbar {
             `;
             setupGlitchEffects();
             window.scrollTo(0, 0);
-            }; // end _renderPage
-            setTimeout(_renderPage, 180);
         }
-
-        // CUSTOM CURSOR
-        document.addEventListener('mousemove', (e) => {
-            const cursor = document.getElementById('customCursor');
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-
-            const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
-            let cursorText = '';
-            let shouldShow = false;
-
-            if (hoveredElement) {
-                if (hoveredElement.closest('.hero-nav-link, .nav-link, .header-left, .header-right')) {
-                    cursorText = 'navigate →';
-                    shouldShow = true;
-                } else if (hoveredElement.closest('.preview-item')) {
-                    const previewItem = hoveredElement.closest('.preview-item');
-                    const section = previewItem.closest('.preview-section');
-                    if (section) {
-                        const header = section.querySelector('.section-header');
-                        if (header && header.textContent.includes('WORK')) {
-                            cursorText = 'view case →';
-                        } else if (header && header.textContent.includes('INSIGHT')) {
-                            cursorText = 'read article →';
-                        } else if (header && header.textContent.includes('GARAGE')) {
-                            cursorText = 'view listing →';
-                        } else {
-                            cursorText = 'learn more →';
-                        }
-                    }
-                    shouldShow = true;
-                } else if (hoveredElement.closest('.footer-column a')) {
-                    cursorText = 'open link →';
-                    shouldShow = true;
-                } else if (hoveredElement.closest('.hero-artwork')) {
-                    cursorText = 'scroll down →';
-                    shouldShow = true;
-                }
-            }
-
-            cursor.textContent = cursorText;
-            if (shouldShow) {
-                cursor.classList.add('visible');
-            } else {
-                cursor.classList.remove('visible');
-            }
-        });
 
         // FLOATING BUTTONS + MENU
         window.addEventListener('scroll', () => {
@@ -1755,6 +1827,21 @@ body::-webkit-scrollbar {
 
 
         // NAVIGATION — set up once, delegates to dynamically rendered content
+        // MOBILE NAV
+        function mobileNav(page) {
+            document.getElementById('mobileNavOverlay').classList.remove('open');
+            loadPage(page);
+        }
+        document.getElementById('mobileNavClose').addEventListener('click', () => {
+            document.getElementById('mobileNavOverlay').classList.remove('open');
+        });
+        // Hero menu button uses event delegation since it's rendered dynamically
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'heroMenuBtn') {
+                document.getElementById('mobileNavOverlay').classList.add('open');
+            }
+        });
+
         // Prevent browser from restoring scroll position on refresh — always start at top
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
