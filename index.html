@@ -84,10 +84,6 @@ body::-webkit-scrollbar {
             transition: color 0.3s ease;
         }
 
-        .header-left:hover {
-            color: var(--text-primary);
-        }
-
         .header-center {
             display: flex;
             align-items: center;
@@ -115,14 +111,6 @@ body::-webkit-scrollbar {
             transition: color 0.3s ease;
         }
 
-        .header-right:hover {
-            color: var(--text-primary);
-        }
-
-        .cta {
-            font-size: 11px;
-            color: var(--text-tertiary);
-        }
 
 
         /* PREVIEW SECTIONS */
@@ -524,21 +512,77 @@ body::-webkit-scrollbar {
         .hero-nav-link:first-child { text-align: left; }
         .hero-nav-link:last-child  { text-align: right; }
 
-        @media (max-width: 760px) {
+        /* MOBILE NAV OVERLAY */
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 600;
+            background: var(--bg);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .mobile-nav-overlay.open { display: flex; }
+        .mobile-nav-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .mobile-nav-item {
+            background: none;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
             .hero-wrapper {
                 height: 100vh;
                 padding: 0.75rem;
                 grid-template-rows: 1fr auto;
             }
-
             .hero-wordmark {
-                font-size: clamp(3.7rem, 20vw, 7rem);
+                font-size: clamp(2.2rem, 14vw, 5rem);
             }
-
-            .hero-nav-row {
-                flex-wrap: wrap;
-                gap: 0.5rem 1rem;
+            .hero-nav-row { display: none; }
+            .hero-hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding: 0.5rem 0 0.2rem 0;
             }
+            .hero-hamburger-btn {
+                background: none;
+                border: none;
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 22px;
+                color: var(--text-primary);
+                cursor: pointer;
+                line-height: 1;
+            }
+            .content-page { padding: 1.5rem; }
+            .preview-sections { padding: 2rem 1.5rem 1rem 1.5rem; }
+            .preview-section { padding: 0; }
+            .site-footer {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+                gap: 1.5rem;
+            }
+        }
+        @media (min-width: 769px) {
+            .hero-hamburger { display: none; }
         }
     </style>
 </head>
@@ -591,6 +635,18 @@ body::-webkit-scrollbar {
     </div>
 
     <div class="custom-cursor" id="customCursor">more →</div>
+
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+        <button class="mobile-nav-item" onclick="mobileNav('home')">VARREL PUTRA</button>
+        <button class="mobile-nav-item" onclick="mobileNav('garage')">[GARAGE]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('work')">[WORK]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('about')">[ABOUT]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('experience')">[EXPERIENCE]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('blog')">[INSIGHT]</button>
+        <button class="mobile-nav-item" onclick="mobileNav('contact')">CONTACT</button>
+    </div>
 
     <script>
         const chars = '!@#$%^&*(){}[]<>?/\|~`+-=_';
@@ -660,7 +716,7 @@ body::-webkit-scrollbar {
             ],
             aboutText: 'Strategic sales and marketing professional based in Southeast Asia. Ten years building and scaling revenue organisations across enterprise SaaS, fintech, and high-growth technology. Known for opening new markets from zero — APAC expansion, enterprise segment builds, and partner ecosystems that generate real pipeline. Equal parts strategist and operator: I write the playbook and run it.',
             contactEmail: 'varrelsales@gmail.com',
-            cvUrl: '#',
+
             garageListings: [
                 {
                     id: 1,
@@ -774,6 +830,9 @@ body::-webkit-scrollbar {
                         <div class="hero-artwork" id="heroArtwork" aria-label="Animated 3D ASCII artwork"></div>
                         <div class="hero-identity" id="heroIdentity">
                             <div class="hero-wordmark" aria-label="varrelputra.com">varrelputra.com</div>
+                            <div class="hero-hamburger">
+                                <button class="hero-hamburger-btn" id="heroHamburger">☰</button>
+                            </div>
                             <div class="hero-nav-row" id="heroNavRow">
                                 <button class="hero-nav-link glitch-text" data-text="VARREL PUTRA" onclick="loadPage('home')">
                                     <span class="text-content">VARREL PUTRA</span>
@@ -994,25 +1053,11 @@ body::-webkit-scrollbar {
                     </div>
                     ${renderFooter([['Home','home'],['Garage','garage'],['Work','work'],['About','about']])}
                 `;
-            } else if (pageName === 'experience') {
-                window.open(siteData.cvUrl, '_blank');
-                return;
             }
 
             setupGlitchEffects();
         }
 
-        function setupPageDelegation() {
-            const pageContent = document.getElementById('pageContent');
-            pageContent.addEventListener('click', (e) => {
-                const workTarget = e.target.closest('[data-view-work]');
-                const blogTarget = e.target.closest('[data-view-blog]');
-                const navTarget = e.target.closest('[data-nav]');
-                if (workTarget) viewWorkItem(parseInt(workTarget.dataset.viewWork));
-                else if (blogTarget) viewBlogPost(parseInt(blogTarget.dataset.viewBlog));
-                else if (navTarget) { e.preventDefault(); loadPage(navTarget.dataset.nav); }
-            });
-        }
 
         function runIntroSequence() {
             introHasPlayed = true;
@@ -1080,10 +1125,11 @@ body::-webkit-scrollbar {
                 let disposed = false;
                 let frameId = null;
 
-                // Intro: 3/4 angle, zoomed in, shifted left-of-centre
-                const INTRO_CAM_Z = 5.6;
-                const INTRO_CAM_X = 3.0;
-                const FINAL_CAM_Z = 6.8;
+                // Intro: 3/4 angle, zoomed in — adjusted for mobile portrait
+                const mobile = window.innerWidth < 769;
+                const INTRO_CAM_Z = mobile ? 8.5 : 5.6;
+                const INTRO_CAM_X = mobile ? 0.0 : 3.0;
+                const FINAL_CAM_Z = mobile ? 10.0 : 6.8;
                 const FINAL_CAM_X = 0.0;
                 const INTRO_ROT_Y = Math.PI * 0.2;
                 const FINAL_ROT_Y = Math.PI * 0.5;
@@ -1424,7 +1470,7 @@ body::-webkit-scrollbar {
                 scene.background = new THREE.Color(0xffffff);
 
                 const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 200);
-                camera.position.set(0, 0.1, 6.8);
+                camera.position.set(0, 0.1, window.innerWidth < 769 ? 10.0 : 6.8);
                 camera.lookAt(0, 0.1, 0);
 
                 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
@@ -1729,6 +1775,20 @@ body::-webkit-scrollbar {
             document.getElementById('darkModeBtn').textContent = '[ ☀ ]';
         }
 
+
+        // MOBILE NAV
+        function mobileNav(page) {
+            document.getElementById('mobileNavOverlay').classList.remove('open');
+            loadPage(page);
+        }
+        document.getElementById('mobileNavClose').addEventListener('click', () => {
+            document.getElementById('mobileNavOverlay').classList.remove('open');
+        });
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'heroHamburger') {
+                document.getElementById('mobileNavOverlay').classList.add('open');
+            }
+        });
 
         // NAVIGATION — set up once, delegates to dynamically rendered content
         // Prevent browser from restoring scroll position on refresh — always start at top
