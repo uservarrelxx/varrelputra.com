@@ -55,7 +55,8 @@
     .vmark { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 500; font-size: 28px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; line-height: 1; }
 
     /* FOOTER NAV */
-    .site-footer-nav { position: fixed; bottom: 0; left: 5rem; right: 5rem; display: flex; justify-content: space-between; align-items: center; z-index: 9000; padding: 8vh 3.5rem 2.6rem; background: transparent; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); -webkit-mask-image: linear-gradient(to top, black 55%, transparent 100%); mask-image: linear-gradient(to top, black 55%, transparent 100%); pointer-events: auto; cursor: default; opacity: 0; transition: opacity 0.6s ease; }
+    .site-footer-nav { position: fixed; bottom: 0; left: 5rem; right: 5rem; display: flex; justify-content: space-between; align-items: center; z-index: 9000; padding: 8vh 3.5rem 2.6rem; background: rgba(0,0,0,0.035); -webkit-backdrop-filter: blur(24px) saturate(1.05); backdrop-filter: blur(24px) saturate(1.05); -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 50%, transparent 100%); pointer-events: auto; cursor: default; opacity: 0; transition: opacity 0.6s ease; }
+    [data-theme="dark"] .site-footer-nav { background: rgba(0,0,0,0.14); }
     .site-footer-nav.visible { opacity: 1; }
     .site-footer-nav a, .site-footer-nav button { cursor: pointer; }
     .footer-clock { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.07em; color: var(--mid); text-transform: uppercase; min-width: 13ch; }
@@ -223,12 +224,12 @@
   <nav class="site-footer-nav" aria-label="Site navigation">
     <span class="footer-clock" id="clockLocal"></span>
     <div class="nav">
-      <a data-page="home"    class="active"><span class="num">00</span>Home</a>
-      <a data-page="work"               ><span class="num">01</span>Work</a>
-      <a data-page="writing"            ><span class="num">02</span>Writing</a>
-      <a data-page="about"              ><span class="num">03</span>About</a>
-      <a data-page="garage"             ><span class="num">04</span>Garage</a>
-      <a data-page="contact"            ><span class="num">05</span>Contact</a>
+      <a data-page="home"    data-label="Shift + 0" class="active"><span class="num">00</span>Home</a>
+      <a data-page="work"    data-label="Shift + 1"             ><span class="num">01</span>Work</a>
+      <a data-page="writing" data-label="Shift + 2"             ><span class="num">02</span>Writing</a>
+      <a data-page="about"   data-label="Shift + 3"             ><span class="num">03</span>About</a>
+      <a data-page="garage"  data-label="Shift + 4"             ><span class="num">04</span>Garage</a>
+      <a data-page="contact" data-label="Shift + 5"             ><span class="num">05</span>Contact</a>
     </div>
     <span class="footer-clock right" id="clockVancouver"></span>
   </nav>
@@ -392,6 +393,14 @@
       writing: 'Writing — Varrel Putra', about: 'About — Varrel Putra',
       garage: 'Garage — Varrel Putra', contact: 'Contact — Varrel Putra',
     };
+    const HOTKEY_PAGES = {
+      Digit0: 'home',
+      Digit1: 'work',
+      Digit2: 'writing',
+      Digit3: 'about',
+      Digit4: 'garage',
+      Digit5: 'contact',
+    };
     let currentPage = 'home';
 
     function showPage(id, skipAnim) {
@@ -442,6 +451,16 @@
       if (!a) return;
       const page = a.dataset.page;
       if (!page) return;
+      e.preventDefault();
+      navigate(page);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) return;
+      const page = HOTKEY_PAGES[e.code];
+      if (!page) return;
+      const typing = e.target.closest('input, textarea, select, [contenteditable="true"]');
+      if (typing) return;
       e.preventDefault();
       navigate(page);
     });
