@@ -397,10 +397,13 @@
     function showPage(id, skipAnim) {
       const el = document.getElementById('page-' + id);
       if (!el) return;
-      // Hide all pages first, then show the target
-      document.querySelectorAll('.page').forEach(p => { if (p !== el) p.classList.remove('active', 'exiting'); });
-      el.classList.remove('exiting');
-      el.classList.add('active');
+      clearTimeout(navTimer);
+      navTimer = null;
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.toggle('active', p === el);
+        p.classList.remove('exiting');
+        p.style.animationDuration = '';
+      });
       if (skipAnim) el.style.animationDuration = '0s';
       else el.style.animationDuration = '';
       document.querySelectorAll('.nav a[data-page], .vmark[data-page]').forEach(a => {
@@ -411,29 +414,25 @@
       currentPage = id;
     }
 
-    let navTimer = null, pendingPage = null, exitingEl = null;
+    let navTimer = null, transitionId = 0;
     function navigate(id) {
-      if (id === currentPage || id === pendingPage) return;
+      if (id === currentPage) return;
 
-      // Immediately settle any in-progress exit so stale animationend can't fire later
-      if (exitingEl) {
-        exitingEl.classList.remove('active', 'exiting');
-        exitingEl = null;
-      }
+      const target = document.getElementById('page-' + id);
+      if (!target) return;
+
+      transitionId += 1;
+      const thisTransition = transitionId;
       clearTimeout(navTimer);
 
       const curr = document.getElementById('page-' + currentPage);
-      if (curr) {
-        curr.classList.add('exiting');
-        exitingEl = curr;
-        curr.addEventListener('animationend', () => {
-          curr.classList.remove('active', 'exiting');
-          if (exitingEl === curr) exitingEl = null;
-        }, { once: true });
-      }
+      document.querySelectorAll('.page.exiting').forEach(p => p.classList.remove('exiting'));
+      if (curr) curr.classList.add('exiting');
 
-      pendingPage = id;
-      navTimer = setTimeout(() => { pendingPage = null; showPage(id); }, 260);
+      navTimer = setTimeout(() => {
+        if (thisTransition !== transitionId) return;
+        showPage(id);
+      }, 260);
       history.pushState({ page: id }, '', id === 'home' ? './' : '#' + id);
     }
 
