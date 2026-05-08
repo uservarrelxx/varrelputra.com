@@ -5,7 +5,6 @@
     "role": "Sales, marketing &amp; brand operator — building things that endure.",
     "mission": "A builder of things that endure. Sales is communication, marketing is belief, and product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc."
   },
-
   "work": [
     {
       "num": "01",
@@ -56,7 +55,6 @@
       ]
     }
   ],
-
   "writing": [
     {
       "title": "The Future of B2B Sales",
@@ -93,14 +91,13 @@
       ]
     }
   ],
-
   "about": {
     "bio": [
       "Strategic sales and marketing professional based in Southeast Asia. Ten years building and scaling revenue organisations across enterprise SaaS, fintech, and high-growth technology.",
       "Known for opening new markets from zero — APAC expansion, enterprise segment builds, and partner ecosystems that generate real pipeline. <em>Equal parts strategist and operator:</em> I write the playbook and run it.",
       "Sales is communication. Marketing is belief. Product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc."
     ],
-    "based_in": "Southeast Asia",
+    "based_in": "Vancouver, British Columbia",
     "specialisms": [
       "Enterprise Sales",
       "Market Entry",
@@ -109,14 +106,14 @@
       "Partner Ecosystems"
     ],
     "links": [
-      { "label": "LinkedIn", "url": "#" },
-      { "label": "Read.cv",  "url": "#" },
-      { "label": "Are.na",   "url": "#" }
+      {
+        "label": "LinkedIn",
+        "url": "linkedin.com/in/varrel"
+      }
     ],
     "email": "varrelsales@gmail.com",
     "cv_url": "#"
   },
-
   "garage": {
     "subtitle": "A personal index of automobiles. Inquire via email.",
     "listings": [
@@ -161,27 +158,25 @@
       }
     ]
   },
-
   "contact": {
     "body": "I'm interested in <em>sales leadership roles, consulting engagements,</em> and conversations about craft, commerce, and building things that last.",
     "email": "varrelsales@gmail.com",
-    "location_note": "Based in Vancouver, BC.<br>Response within 48 hours.",
+    "location_note": "Based in Vancouver, BC.<br>Response within 24 hours.",
     "links": [
-      { "label": "Read.cv",   "url": "#" },
-      { "label": "LinkedIn",  "url": "#" },
-      { "label": "Are.na",    "url": "#" },
-      { "label": "Instagram", "url": "#" }
+      {
+        "label": "LinkedIn",
+        "url": "linkedin.com/in/varrel"
+      }
     ]
   },
-
   "colophon": {
     "byline": "Designed and written by Varrel Putra, MMXXVI.",
     "quote": "I&rsquo;m obsessed with better, not done.",
     "links": [
-      { "label": "Read.cv",   "url": "#" },
-      { "label": "LinkedIn",  "url": "#" },
-      { "label": "Are.na",    "url": "#" },
-      { "label": "Instagram", "url": "#" }
+      {
+        "label": "LinkedIn",
+        "url": "linkedin.com/in/varrel"
+      }
     ],
     "email": "varrelsales@gmail.com",
     "location": "Vancouver, BC"
