@@ -5,6 +5,7 @@
     "role": "Sales, marketing &amp; brand operator — building things that endure.",
     "mission": "A builder of things that endure. Sales is communication, marketing is belief, and product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc."
   },
+
   "work": [
     {
       "num": "01",
@@ -55,6 +56,7 @@
       ]
     }
   ],
+
   "writing": [
     {
       "title": "The Future of B2B Sales",
@@ -91,13 +93,14 @@
       ]
     }
   ],
+
   "about": {
     "bio": [
       "Strategic sales and marketing professional based in Southeast Asia. Ten years building and scaling revenue organisations across enterprise SaaS, fintech, and high-growth technology.",
       "Known for opening new markets from zero — APAC expansion, enterprise segment builds, and partner ecosystems that generate real pipeline. <em>Equal parts strategist and operator:</em> I write the playbook and run it.",
       "Sales is communication. Marketing is belief. Product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc."
     ],
-    "based_in": "Vancouver, British Columbia",
+    "based_in": "Southeast Asia",
     "specialisms": [
       "Enterprise Sales",
       "Market Entry",
@@ -106,14 +109,14 @@
       "Partner Ecosystems"
     ],
     "links": [
-      {
-        "label": "LinkedIn",
-        "url": "linkedin.com/in/varrel"
-      }
+      { "label": "LinkedIn", "url": "#" },
+      { "label": "Read.cv",  "url": "#" },
+      { "label": "Are.na",   "url": "#" }
     ],
     "email": "varrelsales@gmail.com",
     "cv_url": "#"
   },
+
   "garage": {
     "subtitle": "A personal index of automobiles. Inquire via email.",
     "listings": [
@@ -124,6 +127,12 @@
         "mileage": "87,400 km",
         "condition": "Original paint, full service history",
         "contact_url": "mailto:varrelsales@gmail.com",
+        "images": [
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=1991+Porsche+911+%E2%80%94+Front",
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=1991+Porsche+911+%E2%80%94+Rear",
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=1991+Porsche+911+%E2%80%94+Interior",
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=1991+Porsche+911+%E2%80%94+Engine"
+        ],
         "body": [
           "A clean, unmolested Carrera 2 in Guards Red over black leather. One of the last air-cooled 911s built before Porsche moved to the water-cooled 996, and it shows in the way it drives — immediate, physical, demanding in the best way.",
           "The car has covered 87,400 km from new and retains its original Brilliant Red paint with no known accidents or resprays. Service history is complete and on file. The engine was last serviced 4,200 km ago with fresh oil, filters, and a valve adjustment.",
@@ -137,6 +146,11 @@
         "mileage": "112,000 km",
         "condition": "SMG, recent clutch, Imola Red",
         "contact_url": "mailto:varrelsales@gmail.com",
+        "images": [
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=2003+BMW+M3+%E2%80%94+Front",
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=2003+BMW+M3+%E2%80%94+Rear",
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=2003+BMW+M3+%E2%80%94+Interior"
+        ],
         "body": [
           "The E46 M3 is widely considered the last great analogue M car — built before weight crept in and electronics started making decisions the driver used to make. This example is finished in Imola Red with a black Nappa leather interior and the SMG II transmission.",
           "At 112,000 km it's well into its life but has been maintained properly. The SMG clutch and pump were replaced 8,000 km ago — a significant job, done correctly. The S54 engine runs cleanly with strong oil pressure and no rod bearing noise. VANOS units have been serviced.",
@@ -150,6 +164,11 @@
         "mileage": "143,000 km",
         "condition": "Smoke Silver, both tops included",
         "contact_url": "mailto:varrelsales@gmail.com",
+        "images": [
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=1987+Mercedes+560SL+%E2%80%94+Front",
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=1987+Mercedes+560SL+%E2%80%94+Rear",
+          "https://placehold.co/1200x675/e8e4dc/6b6b66?text=1987+Mercedes+560SL+%E2%80%94+Interior"
+        ],
         "body": [
           "The R107 560SL is the definitive version of one of the longest-running model runs in automotive history. This 1987 example in Smoke Silver Metallic is a proper two-top car — both the soft top and the removable hardtop are present and in good condition.",
           "The 5.6-litre V8 is the strongest engine fitted to the R107 and this one runs exactly as it should: smooth, torquey, and utterly unstressed at highway speeds. The transmission shifts cleanly through all four gears. Air conditioning blows cold.",
@@ -158,25 +177,27 @@
       }
     ]
   },
+
   "contact": {
     "body": "I'm interested in <em>sales leadership roles, consulting engagements,</em> and conversations about craft, commerce, and building things that last.",
     "email": "varrelsales@gmail.com",
-    "location_note": "Based in Vancouver, BC.<br>Response within 24 hours.",
+    "location_note": "Based in Vancouver, BC.<br>Response within 48 hours.",
     "links": [
-      {
-        "label": "LinkedIn",
-        "url": "linkedin.com/in/varrel"
-      }
+      { "label": "Read.cv",   "url": "#" },
+      { "label": "LinkedIn",  "url": "#" },
+      { "label": "Are.na",    "url": "#" },
+      { "label": "Instagram", "url": "#" }
     ]
   },
+
   "colophon": {
     "byline": "Designed and written by Varrel Putra, MMXXVI.",
     "quote": "I&rsquo;m obsessed with better, not done.",
     "links": [
-      {
-        "label": "LinkedIn",
-        "url": "linkedin.com/in/varrel"
-      }
+      { "label": "Read.cv",   "url": "#" },
+      { "label": "LinkedIn",  "url": "#" },
+      { "label": "Are.na",    "url": "#" },
+      { "label": "Instagram", "url": "#" }
     ],
     "email": "varrelsales@gmail.com",
     "location": "Vancouver, BC"

@@ -139,7 +139,7 @@
     .sidebar { padding-top: 0.5rem; }
     .sidebar-block { margin-bottom: 3rem; }
     .sidebar-block h4 { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 1rem; }
-    .sidebar-block p, .sidebar-block a { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.6; color: var(--mid); text-decoration: none; display: inline-block; transition: color 0.2s ease; }
+    .sidebar-block p, .sidebar-block a { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.6; color: var(--mid); text-decoration: none; display: block; transition: color 0.2s ease; margin-bottom: 0.3rem; }
     .sidebar-block a:hover { color: var(--ink); }
 
     /* ── GARAGE ── */
@@ -202,6 +202,15 @@
     .detail-body::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
     .detail-action { display: inline-block; margin-top: 3rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--mid); text-decoration: none; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
     .detail-action:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── GALLERY ── */
+    .gallery { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 3rem; user-select: none; }
+    .gallery-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+    .gallery-img.active { opacity: 1; }
+    .gallery-dots { position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 10; }
+    .gallery-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--ink); background: transparent; cursor: pointer; transition: background 0.25s ease, border-color 0.25s ease; opacity: 0.5; }
+    .gallery-dot.active { background: var(--ink); opacity: 1; }
+    .gallery-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--faint); }
 
     /* MOBILE */
     @media (max-width: 760px) {
@@ -363,12 +372,20 @@
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           Back
         </button>
+        <div class="gallery" id="detail-gallery" style="display:none"></div>
         <h1 class="page-title" id="detail-title"></h1>
         <div class="detail-meta" id="detail-meta"></div>
         <div class="detail-body" id="detail-body"></div>
         <a class="detail-action" id="detail-action" href="#" style="display:none"></a>
       </main>
     </div>
+
+    <!-- SHARED FOOTER -->
+    <footer class="colophon" id="site-colophon">
+      <div><h4>Set in</h4><p><em>EB Garamond</em> &amp; IBM&nbsp;Plex&nbsp;Mono</p><p class="colophon-byline" id="colophon-byline"></p></div>
+      <div><h4>Elsewhere</h4><div id="colophon-links"></div></div>
+      <div><h4>Contact</h4><a id="colophon-email" href="#"></a><a id="colophon-location" href="#"></a><p class="colophon-note"><em id="colophon-quote"></em></p></div>
+    </footer>
 
   </div><!-- /.site-card -->
 
@@ -383,10 +400,13 @@
       ).join('');
     }
 
-    function renderColophon(page, c) {
-      if (page.querySelector('.colophon')) return;
-      const links = c.links.map(l => `<a href="${l.url}">${l.label}</a>`).join('');
-      page.insertAdjacentHTML('beforeend', `<footer class="colophon"><div><h4>Set in</h4><p><em>EB Garamond</em> &amp; IBM&nbsp;Plex&nbsp;Mono</p><p class="colophon-byline">${c.byline}</p></div><div><h4>Elsewhere</h4>${links}</div><div><h4>Contact</h4><a href="mailto:${c.email}">${c.email}</a><a href="#">${c.location}</a><p class="colophon-note"><em>${c.quote}</em></p></div></footer>`);
+    function renderColophon(c) {
+      document.getElementById('colophon-byline').textContent = c.byline;
+      document.getElementById('colophon-links').innerHTML = c.links.map(l => `<a href="${l.url}">${l.label}</a>`).join('');
+      const emailEl = document.getElementById('colophon-email');
+      emailEl.href = `mailto:${c.email}`; emailEl.textContent = c.email;
+      document.getElementById('colophon-location').textContent = c.location;
+      document.getElementById('colophon-quote').innerHTML = c.quote;
     }
 
     function openDetail(type, index) {
@@ -425,6 +445,52 @@
         bodyEl.innerHTML  = l.body.map(p => `<p>${p}</p>`).join('');
         actionEl.href = l.contact_url; actionEl.textContent = 'Inquire ↗';
         actionEl.style.display = 'inline-block'; actionEl.dataset.label = 'Inquire';
+
+        // Gallery
+        const galleryEl = document.getElementById('detail-gallery');
+        const images = l.images || [];
+        if (images.length === 0) {
+          galleryEl.style.display = 'none';
+        } else {
+          galleryEl.style.display = 'block';
+          let current = 0;
+          galleryEl.innerHTML = images.map((src, i) =>
+            `<img class="gallery-img${i === 0 ? ' active' : ''}" src="${src}" alt="${l.title} — photo ${i+1}">`
+          ).join('') + `<div class="gallery-dots">${images.map((_, i) =>
+            `<div class="gallery-dot${i === 0 ? ' active' : ''}" data-index="${i}"></div>`
+          ).join('')}</div>`;
+
+          function goTo(n) {
+            const imgs = galleryEl.querySelectorAll('.gallery-img');
+            const dots = galleryEl.querySelectorAll('.gallery-dot');
+            imgs[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (n + images.length) % images.length;
+            imgs[current].classList.add('active');
+            dots[current].classList.add('active');
+          }
+
+          galleryEl.querySelectorAll('.gallery-dot').forEach(dot => {
+            dot.addEventListener('click', () => goTo(parseInt(dot.dataset.index)));
+          });
+
+          let wheelLock = false;
+          galleryEl.addEventListener('wheel', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (wheelLock) return;
+            wheelLock = true;
+            goTo(current + (e.deltaY > 0 ? 1 : -1));
+            setTimeout(() => wheelLock = false, 500);
+          }, { passive: false });
+
+          galleryEl.addEventListener('mouseenter', () => {
+            document.body.style.overflow = 'hidden';
+          });
+          galleryEl.addEventListener('mouseleave', () => {
+            document.body.style.overflow = '';
+          });
+        }
       }
 
       navigate('detail');
@@ -472,8 +538,8 @@
         document.getElementById('contact-links').innerHTML = d.contact.links.map(l => `<a href="${l.url}" data-label="${l.label}">${l.label}</a>`).join('');
         document.getElementById('contact-note').innerHTML = d.contact.location_note;
 
-        // Colophons
-        document.querySelectorAll('.page').forEach(p => renderColophon(p, d.colophon));
+        // Colophon
+        renderColophon(d.colophon);
       })
       .catch(err => console.error('Could not load content.json:', err));
 
