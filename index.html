@@ -7,6 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+      });
+    }
+  </script>
   <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js"}}</script>
   <style>
     /* INTRO */
@@ -180,6 +188,21 @@
       .cursor-label.active { display: block; }
     }
 
+    /* ── DETAIL PAGE ── */
+    .detail-back { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); text-decoration: none; border: none; background: none; cursor: pointer; padding: 0; margin-bottom: 4rem; transition: color 0.2s ease; }
+    .detail-back:hover { color: var(--ink); }
+    .detail-back svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .detail-meta { display: flex; gap: 2rem; margin-bottom: 4rem; flex-wrap: wrap; }
+    .detail-meta-item { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+    .detail-meta-item span { color: var(--mid); display: block; margin-top: 0.3rem; text-transform: none; letter-spacing: 0; font-size: 12px; }
+    .detail-body { max-width: 34em; font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.65; color: var(--ink); }
+    .detail-body p { margin-bottom: 1.5rem; }
+    .detail-body p:last-child { margin-bottom: 0; }
+    .detail-body em { font-style: italic; color: var(--mid); }
+    .detail-body::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
+    .detail-action { display: inline-block; margin-top: 3rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--mid); text-decoration: none; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
+    .detail-action:hover { color: var(--ink); border-color: var(--ink); }
+
     /* MOBILE */
     @media (max-width: 760px) {
       .site-header { padding: 1rem 1.2rem; }
@@ -248,9 +271,9 @@
     <!-- HOME -->
     <div id="page-home" class="page active">
       <section class="hero">
-        <h1 class="hero-name">Varrel <em>Putra</em></h1>
-        <p class="hero-role">Sales, marketing &amp; brand operator — building things that endure.</p>
-        <p class="hero-mission">A builder of things that endure. Sales is communication, marketing is belief, and product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc.</p>
+        <h1 class="hero-name" id="hero-name"></h1>
+        <p class="hero-role" id="hero-role"></p>
+        <p class="hero-mission" id="hero-mission"></p>
       </section>
       <section class="featured">
         <div class="section-rule"><span class="section-rule-label">I. &nbsp; Selected Work</span></div>
@@ -270,20 +293,7 @@
     <div id="page-writing" class="page">
       <main class="page-content">
         <h1 class="page-title">Field <em>Notes</em></h1>
-        <div class="post-list">
-          <a class="post-row" href="#" data-label="Read article">
-            <span class="post-title">The Future of B2B Sales <em>— on AI and the human edge</em></span>
-            <span class="post-date">2026.04.15</span>
-          </a>
-          <a class="post-row" href="#" data-label="Read article">
-            <span class="post-title">Building High-Performance Teams <em>— scaling from 5 to 50</em></span>
-            <span class="post-date">2026.03.28</span>
-          </a>
-          <a class="post-row" href="#" data-label="Coming soon">
-            <span class="post-title">On Market Entry <em>— lessons from Southeast Asia</em></span>
-            <span class="post-date">Coming soon</span>
-          </a>
-        </div>
+        <div class="post-list" id="post-list"></div>
       </main>
     </div>
 
@@ -293,35 +303,25 @@
         <div class="about-layout">
           <div>
             <h1 class="page-title">Varrel <em>Putra</em></h1>
-            <div class="about-body">
-              <p>Strategic sales and marketing professional based in Southeast Asia. Ten years building and scaling revenue organisations across enterprise SaaS, fintech, and high-growth technology.</p>
-              <p>Known for opening new markets from zero — APAC expansion, enterprise segment builds, and partner ecosystems that generate real pipeline. <em>Equal parts strategist and operator:</em> I write the playbook and run it.</p>
-              <p>Sales is communication. Marketing is belief. Product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc.</p>
-            </div>
-            <a href="#" class="cv-link" data-label="Download CV">Download CV ↗</a>
+            <div class="about-body" id="about-bio"></div>
+            <a id="about-cv" href="#" class="cv-link" data-label="Download CV">Download CV ↗</a>
           </div>
           <aside class="sidebar">
             <div class="sidebar-block">
               <h4>Based in</h4>
-              <p>Southeast Asia</p>
+              <p id="about-based"></p>
             </div>
             <div class="sidebar-block">
               <h4>Specialisms</h4>
-              <p>Enterprise Sales</p>
-              <p>Market Entry</p>
-              <p>Revenue Operations</p>
-              <p>Brand Strategy</p>
-              <p>Partner Ecosystems</p>
+              <div id="about-specialisms"></div>
             </div>
             <div class="sidebar-block">
               <h4>Elsewhere</h4>
-              <a href="#" data-label="View LinkedIn">LinkedIn ↗</a>
-              <a href="#" data-label="View Read.cv">Read.cv ↗</a>
-              <a href="#" data-label="View Are.na">Are.na ↗</a>
+              <div id="about-links"></div>
             </div>
             <div class="sidebar-block">
               <h4>Contact</h4>
-              <a href="mailto:varrelsales@gmail.com" data-label="Send email">varrelsales@gmail.com</a>
+              <a id="about-email" href="#" data-label="Send email"></a>
             </div>
           </aside>
         </div>
@@ -332,9 +332,9 @@
     <div id="page-garage" class="page">
       <main class="page-content">
         <h1 class="page-title">Current <em>Listings</em></h1>
-        <p class="page-subtitle">A personal index of automobiles. Inquire via email.</p>
+        <p class="page-subtitle" id="garage-subtitle"></p>
         <div class="garage-section-rule"><span class="garage-section-rule-label">For Sale</span></div>
-        <div class="empty-state">No current listings — check back shortly.</div>
+        <div id="garage-listings"></div>
       </main>
     </div>
 
@@ -344,54 +344,158 @@
         <h1 class="page-title">Get in <em>touch</em></h1>
         <div class="contact-grid">
           <div>
-            <p class="contact-body">I'm interested in <em>sales leadership roles, consulting engagements,</em> and conversations about craft, commerce, and building things that last.</p>
-            <a class="contact-email" href="mailto:varrelsales@gmail.com" data-label="Send email">varrelsales@gmail.com</a>
+            <p class="contact-body" id="contact-body"></p>
+            <a class="contact-email" id="contact-email" href="#" data-label="Send email"></a>
           </div>
           <div class="contact-sidebar">
             <h4>Elsewhere</h4>
-            <div class="contact-links">
-              <a href="#" data-label="Read.cv">Read.cv</a>
-              <a href="#" data-label="LinkedIn">LinkedIn</a>
-              <a href="#" data-label="Are.na">Are.na</a>
-              <a href="#" data-label="Instagram">Instagram</a>
-            </div>
-            <p class="contact-note">Based in Vancouver, BC.<br>Response within 48 hours.</p>
+            <div class="contact-links" id="contact-links"></div>
+            <p class="contact-note" id="contact-note"></p>
           </div>
         </div>
+      </main>
+    </div>
+
+    <!-- DETAIL -->
+    <div id="page-detail" class="page">
+      <main class="page-content">
+        <button class="detail-back" id="detail-back" data-label="Go back">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <h1 class="page-title" id="detail-title"></h1>
+        <div class="detail-meta" id="detail-meta"></div>
+        <div class="detail-body" id="detail-body"></div>
+        <a class="detail-action" id="detail-action" href="#" style="display:none"></a>
       </main>
     </div>
 
   </div><!-- /.site-card -->
 
   <script>
-    // ── SHARED DATA ──────────────────────────────────────────────────────────
-    const WORK_ITEMS = [
-      { num: '01', title: 'Coastal Ford', sub: 'retail systems &amp; consultations', tag: 'Sales', year: '2024' },
-      { num: '02', title: 'Killing Floor', sub: 'consulting practice', tag: 'Brand', year: '2023' },
-      { num: '03', title: 'Garage', sub: 'a personal index of automobiles', tag: 'Project', year: '2022' },
-      { num: '04', title: 'Field Notes', sub: 'writing on craft and commerce', tag: 'Writing', year: 'Ongoing' },
-    ];
-    const COLOPHON_HTML = `<footer class="colophon"><div><h4>Set in</h4><p><em>EB Garamond</em> &amp; IBM&nbsp;Plex&nbsp;Mono</p><p class="colophon-byline">Designed and written by Varrel Putra, MMXXVI.</p></div><div><h4>Elsewhere</h4><a href="#">Read.cv</a><a href="#">LinkedIn</a><a href="#">Are.na</a><a href="#">Instagram</a></div><div><h4>Contact</h4><a href="mailto:varrelsales@gmail.com">varrelsales@gmail.com</a><a href="#">Vancouver, BC</a><p class="colophon-note"><em>I&rsquo;m obsessed with better, not done.</em></p></div></footer>`;
+    // ── CONTENT FROM JSON ────────────────────────────────────────────────────
+    let siteContent = null;
+    let detailOrigin = 'home'; // which page the user came from before opening a detail
 
-    function renderWorkRows(container) {
-      container.innerHTML = WORK_ITEMS.map(w =>
-        `<a class="work-row" href="#" data-label="View case"><span class="work-num">${w.num}</span><span class="work-title">${w.title} <em>— ${w.sub}</em></span><span class="work-tag">${w.tag}</span><span class="work-year">${w.year}</span></a>`
+    function renderWorkRows(container, items) {
+      container.innerHTML = items.map((w, i) =>
+        `<a class="work-row" href="#" data-detail-type="work" data-detail-index="${i}" data-label="View case"><span class="work-num">${w.num}</span><span class="work-title">${w.title} <em>— ${w.sub}</em></span><span class="work-tag">${w.tag}</span><span class="work-year">${w.year}</span></a>`
       ).join('');
     }
-    function renderColophon(page) {
-      if (!page.querySelector('.colophon')) page.insertAdjacentHTML('beforeend', COLOPHON_HTML);
+
+    function renderColophon(page, c) {
+      if (page.querySelector('.colophon')) return;
+      const links = c.links.map(l => `<a href="${l.url}">${l.label}</a>`).join('');
+      page.insertAdjacentHTML('beforeend', `<footer class="colophon"><div><h4>Set in</h4><p><em>EB Garamond</em> &amp; IBM&nbsp;Plex&nbsp;Mono</p><p class="colophon-byline">${c.byline}</p></div><div><h4>Elsewhere</h4>${links}</div><div><h4>Contact</h4><a href="mailto:${c.email}">${c.email}</a><a href="#">${c.location}</a><p class="colophon-note"><em>${c.quote}</em></p></div></footer>`);
     }
 
-    // Render work rows and colophons on first load
-    renderWorkRows(document.getElementById('work-list-home'));
-    renderWorkRows(document.getElementById('work-list-page'));
-    document.querySelectorAll('.page').forEach(renderColophon);
+    function openDetail(type, index) {
+      const d = siteContent;
+      if (!d) return;
+      detailOrigin = currentPage;
+
+      const titleEl  = document.getElementById('detail-title');
+      const metaEl   = document.getElementById('detail-meta');
+      const bodyEl   = document.getElementById('detail-body');
+      const actionEl = document.getElementById('detail-action');
+
+      if (type === 'work') {
+        const w = d.work[index];
+        titleEl.innerHTML = `${w.title} <em>— ${w.sub}</em>`;
+        metaEl.innerHTML  = `<div class="detail-meta-item">Type<span>${w.tag}</span></div><div class="detail-meta-item">Year<span>${w.year}</span></div>`;
+        bodyEl.innerHTML  = w.body.map(p => `<p>${p}</p>`).join('');
+        actionEl.style.display = 'none';
+
+      } else if (type === 'writing') {
+        const p = d.writing[index];
+        titleEl.innerHTML = `${p.title} <em>— ${p.subtitle}</em>`;
+        metaEl.innerHTML  = `<div class="detail-meta-item">Published<span>${p.date}</span></div>`;
+        bodyEl.innerHTML  = p.body.map(b => `<p>${b}</p>`).join('');
+        if (p.url && p.url !== '#') {
+          actionEl.href = p.url; actionEl.textContent = 'Read full article ↗';
+          actionEl.style.display = 'inline-block'; actionEl.dataset.label = 'Read full article';
+        } else {
+          actionEl.style.display = 'none';
+        }
+
+      } else if (type === 'garage') {
+        const l = d.garage.listings[index];
+        titleEl.innerHTML = l.title;
+        metaEl.innerHTML  = `<div class="detail-meta-item">Price<span>${l.price}</span></div><div class="detail-meta-item">Year<span>${l.year}</span></div><div class="detail-meta-item">Mileage<span>${l.mileage}</span></div><div class="detail-meta-item">Condition<span>${l.condition}</span></div>`;
+        bodyEl.innerHTML  = l.body.map(p => `<p>${p}</p>`).join('');
+        actionEl.href = l.contact_url; actionEl.textContent = 'Inquire ↗';
+        actionEl.style.display = 'inline-block'; actionEl.dataset.label = 'Inquire';
+      }
+
+      navigate('detail');
+    }
+
+    fetch('./content.json')
+      .then(r => r.json())
+      .then(d => {
+        siteContent = d;
+
+        // Hero
+        document.getElementById('hero-name').innerHTML = `${d.hero.name} <em>${d.hero.name_italic}</em>`;
+        document.getElementById('hero-role').innerHTML = d.hero.role;
+        document.getElementById('hero-mission').innerHTML = d.hero.mission;
+
+        // Work
+        renderWorkRows(document.getElementById('work-list-home'), d.work);
+        renderWorkRows(document.getElementById('work-list-page'), d.work);
+
+        // Writing
+        document.getElementById('post-list').innerHTML = d.writing.map((p, i) =>
+          `<a class="post-row" href="#" data-detail-type="writing" data-detail-index="${i}" data-label="${p.date === 'Coming soon' ? 'Coming soon' : 'Read article'}"><span class="post-title">${p.title} <em>— ${p.subtitle}</em></span><span class="post-date">${p.date}</span></a>`
+        ).join('');
+
+        // About
+        document.getElementById('about-bio').innerHTML = d.about.bio.map(p => `<p>${p}</p>`).join('');
+        document.getElementById('about-cv').href = d.about.cv_url;
+        document.getElementById('about-based').textContent = d.about.based_in;
+        document.getElementById('about-specialisms').innerHTML = d.about.specialisms.map(s => `<p>${s}</p>`).join('');
+        document.getElementById('about-links').innerHTML = d.about.links.map(l => `<a href="${l.url}" data-label="View ${l.label}">${l.label} ↗</a>`).join('');
+        const aboutEmail = document.getElementById('about-email');
+        aboutEmail.href = `mailto:${d.about.email}`; aboutEmail.textContent = d.about.email;
+
+        // Garage
+        document.getElementById('garage-subtitle').textContent = d.garage.subtitle;
+        const listings = d.garage.listings;
+        document.getElementById('garage-listings').innerHTML = listings.length === 0
+          ? `<div class="empty-state">No current listings — check back shortly.</div>`
+          : `<div class="garage-grid">${listings.map((l, i) => `<div class="garage-card" data-detail-type="garage" data-detail-index="${i}" style="cursor:pointer" data-label="View listing"><div class="garage-card-image">${l.title}</div><div class="garage-card-body"><div class="garage-card-title">${l.title}</div><div class="garage-card-price">${l.price}</div><div class="garage-card-meta">${l.year} &nbsp;·&nbsp; ${l.mileage}</div><div class="garage-card-meta">${l.condition}</div><span class="garage-card-contact" data-label="View listing">View listing ↗</span></div></div>`).join('')}</div>`;
+
+        // Contact
+        document.getElementById('contact-body').innerHTML = d.contact.body;
+        const cEmail = document.getElementById('contact-email');
+        cEmail.href = `mailto:${d.contact.email}`; cEmail.textContent = d.contact.email;
+        document.getElementById('contact-links').innerHTML = d.contact.links.map(l => `<a href="${l.url}" data-label="${l.label}">${l.label}</a>`).join('');
+        document.getElementById('contact-note').innerHTML = d.contact.location_note;
+
+        // Colophons
+        document.querySelectorAll('.page').forEach(p => renderColophon(p, d.colophon));
+      })
+      .catch(err => console.error('Could not load content.json:', err));
+
+    // Detail click handler
+    document.addEventListener('click', e => {
+      const el = e.target.closest('[data-detail-type]');
+      if (!el) return;
+      e.preventDefault();
+      openDetail(el.dataset.detailType, parseInt(el.dataset.detailIndex, 10));
+    });
+
+    // Back button
+    document.getElementById('detail-back').addEventListener('click', () => {
+      navigate(detailOrigin);
+    });
 
     // ── ROUTER ──────────────────────────────────────────────────────────────
     const TITLES = {
       home: 'Varrel Putra', work: 'Work — Varrel Putra',
       writing: 'Writing — Varrel Putra', about: 'About — Varrel Putra',
       garage: 'Garage — Varrel Putra', contact: 'Contact — Varrel Putra',
+      detail: 'Varrel Putra',
     };
     const HOTKEY_PAGES = {
       Digit0: 'home',

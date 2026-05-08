@@ -1,0 +1,189 @@
+{
+  "hero": {
+    "name": "Varrel",
+    "name_italic": "Putra",
+    "role": "Sales, marketing &amp; brand operator — building things that endure.",
+    "mission": "A builder of things that endure. Sales is communication, marketing is belief, and product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc."
+  },
+
+  "work": [
+    {
+      "num": "01",
+      "title": "Coastal Ford",
+      "sub": "retail systems &amp; consultations",
+      "tag": "Sales",
+      "year": "2024",
+      "body": [
+        "Engaged as a sales and systems consultant for a high-volume Ford dealership on the British Columbia coast. The mandate was to restructure the retail sales floor — tighten the process, reduce friction, and recover margin that was being left on the table.",
+        "Rebuilt the deal structure from the ground up: new walkaround cadence, revised F&amp;I handoff, and a coached follow-up sequence that reduced unsold-traffic falloff by a material percentage within the first quarter.",
+        "<em>The insight:</em> most underperformance in retail auto isn't a product problem or a traffic problem — it's a consistency problem. Salespeople who knew the process beat those who didn't, every time. The work was about installing that consistency at scale."
+      ]
+    },
+    {
+      "num": "02",
+      "title": "Killing Floor",
+      "sub": "consulting practice",
+      "tag": "Brand",
+      "year": "2023",
+      "body": [
+        "Killing Floor is an independent consulting practice focused on go-to-market strategy, brand positioning, and revenue architecture for early and growth-stage companies.",
+        "Clients have included B2B SaaS founders preparing for Series A, regional consumer brands expanding into new markets, and operators who needed an outside perspective on why growth had stalled.",
+        "<em>The practice is selective by design.</em> I work with fewer clients at higher depth — embedded enough to understand the real problem, detached enough to say what insiders won't."
+      ]
+    },
+    {
+      "num": "03",
+      "title": "Garage",
+      "sub": "a personal index of automobiles",
+      "tag": "Project",
+      "year": "2022",
+      "body": [
+        "A side project that became a small business. The Garage started as a personal log of cars bought, driven, and sold — and evolved into a curated trading operation focused on interesting European metal from the 1970s through the early 2000s.",
+        "Each car is bought with specific criteria: mechanical soundness, original paint where possible, and a story worth telling. Nothing is flipped fast. Most cars spend time being used before they move on.",
+        "<em>This is not a dealership.</em> It's a considered approach to ownership — buy well, maintain properly, sell honestly."
+      ]
+    },
+    {
+      "num": "04",
+      "title": "Field Notes",
+      "sub": "writing on craft and commerce",
+      "tag": "Writing",
+      "year": "Ongoing",
+      "body": [
+        "Field Notes is the writing side of this practice — observations on sales, brand, market dynamics, and the craft of building things that last.",
+        "The format is deliberate: long-form when the idea demands it, short when it doesn't. No newsletter cadence, no engagement optimisation. Written when there's something worth saying.",
+        "<em>Topics covered:</em> the mechanics of enterprise sales, brand as a durable asset, market entry in emerging geographies, and the gap between strategy and execution."
+      ]
+    }
+  ],
+
+  "writing": [
+    {
+      "title": "The Future of B2B Sales",
+      "subtitle": "on AI and the human edge",
+      "date": "2026.04.15",
+      "url": "#",
+      "body": [
+        "The conversation around AI in B2B sales has collapsed into two camps: the utopians who believe automation will replace the sales function entirely, and the resistors who dismiss the technology as a toy. Both are wrong, and both are missing the actual shift.",
+        "What AI is doing — right now, not in five years — is compressing the parts of the sales process that were always rote: research, sequencing, first-touch personalisation, pipeline hygiene. These were never where value was created. They were tax.",
+        "The human edge in sales has always been judgment: reading a room, knowing when to push and when to wait, building the kind of trust that survives a bad quarter. <em>That doesn't compress.</em> It actually becomes more valuable as the rote work disappears, because it's the only thing left that can't be replicated.",
+        "The salespeople who will struggle are the ones whose entire identity is built around doing the rote work well. The ones who will thrive are the ones who were always doing something else — and using the process as cover."
+      ]
+    },
+    {
+      "title": "Building High-Performance Teams",
+      "subtitle": "scaling from 5 to 50",
+      "date": "2026.03.28",
+      "url": "#",
+      "body": [
+        "The jump from 5 to 50 people is where most organisations break. Not because the founders lack ambition or the market isn't there — but because the things that made the first five exceptional are almost impossible to replicate at ten times the size.",
+        "At five people, culture is implicit. Everyone knows what good looks like because they've watched the founders do it. At fifty, that implicit knowledge has to become explicit — documented, modelled, reinforced. The founders who resist this step, who believe culture should be felt not written, end up with a culture they don't recognise by the time they hit a hundred.",
+        "<em>The highest-leverage move</em> in that scaling window is identifying the two or three people who already embody what you want the organisation to become — and making their behaviour visible. Not through titles or org charts, but through the problems you give them and the decisions you let them make in public.",
+        "Hiring is the other lever, and it's the one most founders underinvest in during the growth phase. The instinct is to fill seats fast. The right move is to slow down, hire for the organisation you're building in eighteen months, and be willing to carry a gap longer than is comfortable."
+      ]
+    },
+    {
+      "title": "On Market Entry",
+      "subtitle": "lessons from Southeast Asia",
+      "date": "Coming soon",
+      "url": "#",
+      "body": [
+        "This piece is still being written. The short version: Southeast Asia is not a market. It's eight distinct markets that happen to share a geography, and the companies that treat it as a single entry point consistently underperform against those that pick one country, go deep, and expand from a position of real strength.",
+        "<em>More coming soon.</em>"
+      ]
+    }
+  ],
+
+  "about": {
+    "bio": [
+      "Strategic sales and marketing professional based in Southeast Asia. Ten years building and scaling revenue organisations across enterprise SaaS, fintech, and high-growth technology.",
+      "Known for opening new markets from zero — APAC expansion, enterprise segment builds, and partner ecosystems that generate real pipeline. <em>Equal parts strategist and operator:</em> I write the playbook and run it.",
+      "Sales is communication. Marketing is belief. Product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc."
+    ],
+    "based_in": "Southeast Asia",
+    "specialisms": [
+      "Enterprise Sales",
+      "Market Entry",
+      "Revenue Operations",
+      "Brand Strategy",
+      "Partner Ecosystems"
+    ],
+    "links": [
+      { "label": "LinkedIn", "url": "#" },
+      { "label": "Read.cv",  "url": "#" },
+      { "label": "Are.na",   "url": "#" }
+    ],
+    "email": "varrelsales@gmail.com",
+    "cv_url": "#"
+  },
+
+  "garage": {
+    "subtitle": "A personal index of automobiles. Inquire via email.",
+    "listings": [
+      {
+        "title": "1991 Porsche 911 Carrera 2",
+        "price": "$48,500",
+        "year": "1991",
+        "mileage": "87,400 km",
+        "condition": "Original paint, full service history",
+        "contact_url": "mailto:varrelsales@gmail.com",
+        "body": [
+          "A clean, unmolested Carrera 2 in Guards Red over black leather. One of the last air-cooled 911s built before Porsche moved to the water-cooled 996, and it shows in the way it drives — immediate, physical, demanding in the best way.",
+          "The car has covered 87,400 km from new and retains its original Brilliant Red paint with no known accidents or resprays. Service history is complete and on file. The engine was last serviced 4,200 km ago with fresh oil, filters, and a valve adjustment.",
+          "<em>Mechanicals:</em> G50 5-speed manual, new clutch at 80,000 km, recent brake refresh front and rear. Bilstein sport shocks, sport seats in very good condition. No modifications — the car is exactly as it left Stuttgart, which is increasingly rare."
+        ]
+      },
+      {
+        "title": "2003 BMW M3 E46",
+        "price": "$34,000",
+        "year": "2003",
+        "mileage": "112,000 km",
+        "condition": "SMG, recent clutch, Imola Red",
+        "contact_url": "mailto:varrelsales@gmail.com",
+        "body": [
+          "The E46 M3 is widely considered the last great analogue M car — built before weight crept in and electronics started making decisions the driver used to make. This example is finished in Imola Red with a black Nappa leather interior and the SMG II transmission.",
+          "At 112,000 km it's well into its life but has been maintained properly. The SMG clutch and pump were replaced 8,000 km ago — a significant job, done correctly. The S54 engine runs cleanly with strong oil pressure and no rod bearing noise. VANOS units have been serviced.",
+          "<em>A note on the SMG:</em> it polarises people. In Sport+ mode with throttle blip enabled, it's genuinely quick and engaging. If you want a manual, this isn't the car — but if you've driven a properly set-up SMG E46, you know the appeal."
+        ]
+      },
+      {
+        "title": "1987 Mercedes-Benz 560SL",
+        "price": "$22,000",
+        "year": "1987",
+        "mileage": "143,000 km",
+        "condition": "Smoke Silver, both tops included",
+        "contact_url": "mailto:varrelsales@gmail.com",
+        "body": [
+          "The R107 560SL is the definitive version of one of the longest-running model runs in automotive history. This 1987 example in Smoke Silver Metallic is a proper two-top car — both the soft top and the removable hardtop are present and in good condition.",
+          "The 5.6-litre V8 is the strongest engine fitted to the R107 and this one runs exactly as it should: smooth, torquey, and utterly unstressed at highway speeds. The transmission shifts cleanly through all four gears. Air conditioning blows cold.",
+          "<em>Cosmetically:</em> the silver paint presents very well from ten feet and honestly from five. There are minor age marks consistent with a 38-year-old car — not a trailer queen, but not a project either. Interior is largely original with a reupholstered driver's bolster. A comfortable, usable classic."
+        ]
+      }
+    ]
+  },
+
+  "contact": {
+    "body": "I'm interested in <em>sales leadership roles, consulting engagements,</em> and conversations about craft, commerce, and building things that last.",
+    "email": "varrelsales@gmail.com",
+    "location_note": "Based in Vancouver, BC.<br>Response within 48 hours.",
+    "links": [
+      { "label": "Read.cv",   "url": "#" },
+      { "label": "LinkedIn",  "url": "#" },
+      { "label": "Are.na",    "url": "#" },
+      { "label": "Instagram", "url": "#" }
+    ]
+  },
+
+  "colophon": {
+    "byline": "Designed and written by Varrel Putra, MMXXVI.",
+    "quote": "I&rsquo;m obsessed with better, not done.",
+    "links": [
+      { "label": "Read.cv",   "url": "#" },
+      { "label": "LinkedIn",  "url": "#" },
+      { "label": "Are.na",    "url": "#" },
+      { "label": "Instagram", "url": "#" }
+    ],
+    "email": "varrelsales@gmail.com",
+    "location": "Vancouver, BC"
+  }
+}
