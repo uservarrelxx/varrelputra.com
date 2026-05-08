@@ -1,1778 +1,775 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>if (window.innerWidth < 769 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) { window.location.replace('index-mobile.html'); }</script>
-    <title>Varrel Putra - Strategic Sales & Marketing</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "./vendor/three/build/three.module.js"
-            }
-        }
-    </script>
-    <style>
-        /* Hide scrollbar but keep scrolling */
-html, body {
-    -ms-overflow-style: none;  /* IE + Edge */
-    scrollbar-width: none;     /* Firefox */
-}
-
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-    display: none;             /* Chrome, Safari */
-}
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg: #f5f5f0;
-            --text-primary: #161615;
-            --text-tertiary: #666660;
-            --border-light: rgba(22, 22, 21, 0.15);
-            --shadow: rgba(22, 22, 21, 0.1);
-        }
-
-        body.dark-mode {
-            --bg: #161615;
-            --text-primary: #f5f5f0;
-            --text-tertiary: #999990;
-            --border-light: rgba(245, 245, 240, 0.15);
-            --shadow: rgba(0, 0, 0, 0.4);
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            font-family: 'IBM Plex Mono', monospace;
-            background: var(--bg);
-            color: var(--text-primary);
-        }
-
-        .site-container {
-            width: 100%;
-            margin: 0;
-            background: transparent;
-            min-height: 100vh;
-            padding: 0;
-        }
-
-        /* HEADER */
-        .site-header {
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .header-left {
-            font-size: 11px;
-            color: var(--text-primary);
-            cursor: none;
-            transition: color 0.3s ease;
-        }
-
-        .header-left:hover {
-            color: var(--text-primary);
-        }
-
-        .header-center {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            font-size: 11px;
-            color: var(--text-primary);
-            text-decoration: none;
-            cursor: none;
-            transition: color 0.3s ease;
-            white-space: nowrap;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--text-primary);
-        }
-
-        .header-right {
-            font-size: 11px;
-            color: var(--text-primary);
-            cursor: none;
-            transition: color 0.3s ease;
-        }
-
-        .header-right:hover {
-            color: var(--text-primary);
-        }
-
-        .cta {
-            font-size: 11px;
-            color: var(--text-tertiary);
-        }
-
-
-        /* PREVIEW SECTIONS */
-        .preview-sections {
-            width: 100%;
-            margin: 0 auto;
-            padding: 4rem 4rem 2rem 4rem;
-            transition: opacity 0.15s ease;
-        }
-
-        .preview-section {
-            max-width: 600px;
-            margin: 0 auto 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-header {
-            font-size: 11px;
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-
-        .preview-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-light);
-            cursor: none;
-        }
-
-        .preview-item:last-child {
-            border-bottom: none;
-        }
-
-        .preview-title {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .preview-meta {
-            font-size: 11px;
-            color: var(--text-tertiary);
-            margin-bottom: 0.5rem;
-        }
-
-        .preview-text {
-            font-size: 12px;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .preview-cta {
-            font-size: 11px;
-            color: var(--text-tertiary);
-        }
-
-        /* FOOTER */
-        .site-footer {
-            padding: 3rem 4rem;
-            border-top: 1px solid var(--border-light);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .footer-column {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-column h3 {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .footer-column p,
-        .footer-column a {
-            font-size: 11px;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            cursor: none;
-        }
-
-        .footer-column a:hover {
-            color: var(--text-primary);
-        }
-
-        /* CONTENT PAGES */
-        .content-page {
-            padding: 4rem;
-        }
-
-        .content-page h1 {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
-
-        .content-page .content {
-            font-size: 13px;
-            line-height: 1.8;
-            color: var(--text-primary);
-        }
-
-        .content-page .content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .blog-post-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-light);
-            cursor: pointer;
-        }
-
-        .blog-post-title {
-            font-size: 16px;
-            font-weight: 500;
-            margin: 8px 0;
-        }
-
-        .work-item {
-            margin-bottom: 3rem;
-        }
-
-        .work-item-title {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .post-date {
-            margin-bottom: 2rem;
-            color: var(--text-tertiary);
-        }
-
-        /* FLOATING BUTTONS */
-        .floating-buttons {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
-        }
-
-        .floating-buttons.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .float-btn {
-            background: var(--bg);
-            border: 1px solid var(--border-light);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: 'IBM Plex Mono', monospace;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .float-btn:hover {
-            color: var(--text-primary);
-            border-color: var(--text-tertiary);
-        }
-
-
-        /* FLOATING MENU */
-        .floating-menu {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg);
-            border: 1px solid var(--border-light);
-            padding: 0.6rem 1.5rem;
-            display: flex;
-            gap: 2rem;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 4px 16px var(--shadow);
-            white-space: nowrap;
-        }
-
-        .floating-menu.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .floating-menu-item {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
-            font-style: italic;
-            color: var(--text-tertiary);
-            cursor: none;
-            padding: 0.4rem 0;
-            transition: color 0.2s ease;
-            background: none;
-            border: none;
-            appearance: none;
-        }
-
-        .floating-menu-item:hover {
-            color: var(--text-primary);
-        }
-
-        /* CUSTOM CURSOR */
-        .custom-cursor {
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            font-size: 11px;
-            color: var(--text-primary);
-            white-space: nowrap;
-            display: none;
-            transform: translate(10px, -20px);
-            transition: opacity 0.2s ease;
-        }
-
-        .custom-cursor.visible {
-            display: block;
-        }
-
-        /* GARAGE */
-        .garage-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .garage-card {
-            border: 1px solid var(--border-light);
-            cursor: none;
-            transition: border-color 0.2s ease;
-        }
-
-        .garage-card:hover {
-            border-color: var(--text-tertiary);
-        }
-
-        .garage-card-image {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: var(--text-tertiary);
-        }
-
-        .garage-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .garage-card-body {
-            padding: 1.25rem;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .garage-card-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .garage-card-price {
-            font-size: 13px;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .garage-card-meta {
-            font-size: 11px;
-            color: var(--text-tertiary);
-            margin-bottom: 0.25rem;
-        }
-
-        .garage-card-contact {
-            display: inline-block;
-            margin-top: 1rem;
-            font-size: 11px;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            cursor: none;
-            transition: color 0.2s ease;
-        }
-
-        .garage-card-contact:hover {
-            color: var(--text-primary);
-        }
-
-        /* BLOG PARAGRAPHS */
-        .post-body p {
-            font-size: 13px;
-            line-height: 1.9;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-        }
-
-        /* GLITCH TEXT */
-        .glitch-text {
-            position: relative;
-            display: inline-block;
-        }
-
-        .text-content {
-            display: inline-block;
-        }
-
-        /* MODEL HERO */
-        body.home-page .site-header {
-            display: none;
-        }
-
-        .hero-wrapper {
-            height: 100vh;
-            padding: 1rem;
-            background: var(--bg);
-            display: grid;
-            grid-template-rows: 1fr auto;
-            gap: 1rem;
-        }
-
-        .hero-artwork {
-            background: #050505;
-            color: #f6f1df;
-            overflow: hidden;
-            position: relative;
-            cursor: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-artwork table,
-        .hero-artwork div {
-            letter-spacing: 0;
-        }
-
-        .hero-identity {
-            background: var(--bg);
-            color: var(--text-primary);
-        }
-
-        .hero-wordmark {
-            font-size: clamp(3rem, 12vw, 16rem);
-            line-height: 0.85;
-            font-weight: 600;
-            letter-spacing: -0.06em;
-            white-space: nowrap;
-            color: var(--text-primary);
-            overflow: visible;
-        }
-
-        .hero-nav-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 0 0.2rem 0;
-        }
-
-        .hero-nav-link {
-            appearance: none;
-            border: 0;
-            background: transparent;
-            color: var(--text-primary);
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 13px;
-            font-style: italic;
-            font-weight: 400;
-            cursor: none;
-            white-space: nowrap;
-            flex: 1;
-            text-align: center;
-        }
-
-        .hero-nav-link:first-child { text-align: left; }
-        .hero-nav-link:last-child  { text-align: right; }
-
-        @media (max-width: 760px) {
-            .hero-wrapper {
-                height: 100vh;
-                padding: 0.75rem;
-                grid-template-rows: 1fr auto;
-            }
-
-            .hero-wordmark {
-                font-size: clamp(3.7rem, 20vw, 7rem);
-            }
-
-            .hero-nav-row {
-                flex-wrap: wrap;
-                gap: 0.5rem 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Varrel Putra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js"}}</script>
+  <style>
+    /* INTRO */
+    #intro { position: fixed; inset: 0; z-index: 500; background: #f2ede6; transition: transform 1.1s cubic-bezier(0.76,0,0.24,1); }
+    #intro.dismissed { transform: translateY(-100%); }
+    #introArtwork { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 55%, #ffffff 0%, #f4f0e8 50%, #ddd8d0 100%); }
+    #introProgress { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; z-index: 30; pointer-events: none; display: flex; align-items: center; gap: 1rem; transition: opacity 0.5s ease; }
+    #introProgressBar { flex: 1; height: 1px; background: rgba(26,26,24,0.12); position: relative; overflow: hidden; }
+    #introProgressFill { position: absolute; inset: 0; background: #1a1a18; transform: scaleX(0); transform-origin: left; will-change: transform; }
+    #introPct { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #1a1a18; white-space: nowrap; }
+    #introClickHint { position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #6b6660; text-transform: uppercase; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; white-space: nowrap; z-index: 30; }
+
+    /* TOKENS */
+    :root {
+      --paper: #fafaf7; --bg: #e8e4dc; --ink: #1a1a18; --mid: #6b6b66; --faint: #a8a8a3;
+      --border: rgba(26,26,24,0.10);
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      --bg-gradient: radial-gradient(ellipse at 60% 40%, #fafaf7 0%, #f0ece4 55%, #e8e4dc 100%);
+    }
+    [data-theme="dark"] {
+      --paper: #131312; --bg: #090908; --ink: #f0ece0; --mid: #807c70; --faint: #4d4a44;
+      --border: rgba(240,236,224,0.10);
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      --bg-gradient: radial-gradient(ellipse at 60% 40%, #1c1c1a 0%, #111110 55%, #090908 100%);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background-color: var(--bg); background-image: var(--grain), var(--bg-gradient); background-attachment: local, fixed; scroll-behavior: auto; }
+    html, body { height: 100%; }
+    body { background: transparent; color: var(--ink); font-family: 'EB Garamond', serif; font-feature-settings: 'liga','kern','onum'; -webkit-font-smoothing: antialiased; min-height: 100vh; overflow-x: hidden; }
+
+    /* CARD */
+    .site-card { margin: 1.2rem 5rem 1.2rem; padding-bottom: calc(8vh + 5rem); background: var(--paper); background-image: var(--grain); border-radius: 20px; box-shadow: 0 4px 60px rgba(0,0,0,0.10),0 1px 6px rgba(0,0,0,0.06); position: relative; animation: card-enter 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes card-enter { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+
+    /* SPA PAGES */
+    .page { display: none; }
+    .page.active { display: block; }
+    @keyframes page-in  { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+    @keyframes page-out { from { opacity:1; transform:none; } to { opacity:0; transform:translateY(-8px); } }
+    .page.active  { animation: page-in  0.42s cubic-bezier(0.16,1,0.3,1) both; }
+    .page.exiting { animation: page-out 0.26s ease forwards; display: block; }
+
+    /* HEADER */
+    .site-header { position: fixed; top: 0; left: 0; padding: 1.3rem 1.6rem; z-index: 200; pointer-events: none; }
+    .site-header > * { pointer-events: auto; }
+    .vmark { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 500; font-size: 28px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; line-height: 1; }
+
+    /* FOOTER NAV */
+    .site-footer-nav { position: fixed; bottom: 0; left: 5rem; right: 5rem; display: flex; justify-content: space-between; align-items: center; z-index: 9000; padding: 8vh 3.5rem 2.6rem; background: transparent; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); -webkit-mask-image: linear-gradient(to top, black 55%, transparent 100%); mask-image: linear-gradient(to top, black 55%, transparent 100%); pointer-events: auto; cursor: default; opacity: 0; transition: opacity 0.6s ease; }
+    .site-footer-nav.visible { opacity: 1; }
+    .site-footer-nav a, .site-footer-nav button { cursor: pointer; }
+    .footer-clock { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.07em; color: var(--mid); text-transform: uppercase; min-width: 13ch; }
+    .footer-clock.right { text-align: right; }
+    .nav { display: flex; gap: 2.8rem; }
+    .nav a { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.07em; color: var(--mid); text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--faint); transition: color 0.2s ease, text-decoration-color 0.2s ease; cursor: pointer; }
+    .nav a:hover, .nav a.active { color: var(--ink); text-decoration-color: var(--mid); }
+    .nav .num { color: var(--faint); margin-right: 0.45em; }
+
+    /* FLOAT BUTTONS */
+    .float-btns { position: fixed; bottom: 2.4rem; right: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; z-index: 250; }
+    .float-btn { appearance: none; background: var(--paper); border: 1px solid var(--border); color: var(--mid); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: color 0.2s ease, border-color 0.2s ease; text-decoration: none; cursor: pointer; }
+    .float-btn:hover { color: var(--ink); border-color: var(--ink); }
+    .float-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* WATERMARK */
+    .v-watermark { position: fixed; bottom: -3vw; right: -2vw; font-family: 'EB Garamond', serif; font-style: italic; font-size: 38vw; line-height: 0.8; color: rgba(26,26,24,0.025); pointer-events: none; user-select: none; z-index: 0; }
+    [data-theme="dark"] .v-watermark { color: rgba(240,236,224,0.04); }
+
+    /* ── HOME ── */
+    .hero { min-height: calc(100vh - 2.4rem); display: grid; align-items: center; padding: 9rem 4rem 4rem; max-width: 1280px; margin: 0 auto; }
+    .hero-name { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(72px,11vw,168px); letter-spacing: -0.025em; line-height: 0.92; color: var(--ink); margin-bottom: 0.4rem; }
+    .hero-name em { font-style: italic; font-weight: 400; }
+    .hero-role { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(20px,2vw,26px); color: var(--mid); margin-bottom: 4rem; max-width: 32em; }
+    .hero-mission { max-width: 28em; font-size: 19px; line-height: 1.55; color: var(--ink); margin-bottom: 4rem; }
+    .hero-mission::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
+    .hero-mission em { font-style: italic; color: var(--mid); }
+    .featured { padding: 4rem 4rem 3rem; max-width: 1280px; margin: 0 auto; }
+    .section-rule { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 4rem; }
+    .section-rule::before, .section-rule::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-rule-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--mid); text-transform: uppercase; padding: 0 0.4rem; }
+    .colophon { border-top: 1px solid var(--border); padding: 3rem 4rem 4rem; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.7; color: var(--mid); }
+    .colophon h4 { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.8rem; }
+    .colophon a { color: var(--mid); text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--faint); display: block; transition: color 0.2s ease, text-decoration-color 0.2s ease; }
+    .colophon a:hover { color: var(--ink); text-decoration-color: var(--mid); }
+    .colophon em { font-family: 'EB Garamond', serif; font-style: italic; font-size: 13px; color: var(--ink); }
+    .colophon-byline { margin-top: 0.4rem; }
+    .colophon-note { margin-top: 0.8rem; }
+
+    /* ── SHARED SUBPAGE ── */
+    .page-content { max-width: 1280px; margin: 0 auto; padding: 10rem 4rem 3rem; }
+    .page-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(48px,7vw,96px); letter-spacing: -0.025em; line-height: 0.92; color: var(--ink); margin-bottom: 5rem; }
+    .page-title em { font-style: italic; font-weight: 400; }
+
+    /* ── WORK ── */
+    .work-list { display: grid; gap: 0; }
+    .work-row { display: grid; grid-template-columns: 40px 1fr auto auto; gap: 2rem; align-items: baseline; padding: 1.6rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
+    .work-row:hover { transform: translateX(0.8rem); }
+    .work-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint); }
+    .work-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 26px; letter-spacing: -0.01em; color: var(--ink); }
+    .work-title em { font-style: italic; font-weight: 400; color: var(--mid); margin-left: 0.4em; }
+    .work-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--faint); text-transform: uppercase; }
+    .work-year { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint); white-space: nowrap; }
+
+    /* ── WRITING ── */
+    .post-list { display: grid; gap: 0; }
+    .post-row { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: baseline; padding: 1.6rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
+    .post-row:hover { transform: translateX(0.8rem); }
+    .post-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 26px; letter-spacing: -0.01em; color: var(--ink); }
+    .post-title em { font-style: italic; font-weight: 400; color: var(--mid); margin-left: 0.4em; }
+    .post-date { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: var(--faint); white-space: nowrap; }
+
+    /* ── ABOUT ── */
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .about-body { font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.65; color: var(--ink); }
+    .about-body p { margin-bottom: 1.5rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body em { font-style: italic; color: var(--mid); }
+    .about-body::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
+    .cv-link { display: inline-block; margin-top: 2.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--mid); text-decoration: none; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
+    .cv-link:hover { color: var(--ink); border-color: var(--ink); }
+    .sidebar { padding-top: 0.5rem; }
+    .sidebar-block { margin-bottom: 3rem; }
+    .sidebar-block h4 { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 1rem; }
+    .sidebar-block p, .sidebar-block a { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.6; color: var(--mid); text-decoration: none; display: inline-block; transition: color 0.2s ease; }
+    .sidebar-block a:hover { color: var(--ink); }
+
+    /* ── GARAGE ── */
+    .page-subtitle { font-family: 'EB Garamond', serif; font-style: italic; font-size: 19px; color: var(--mid); margin-bottom: 5rem; }
+    .garage-section-rule { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3rem; }
+    .garage-section-rule::before, .garage-section-rule::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .garage-section-rule-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--mid); text-transform: uppercase; padding: 0 0.4rem; }
+    .garage-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .garage-card { background: var(--paper); display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: background 0.25s ease; }
+    .garage-card:hover { background: rgba(26,26,24,0.02); }
+    [data-theme="dark"] .garage-card:hover { background: rgba(240,236,224,0.03); }
+    .garage-card-image { width: 100%; aspect-ratio: 4/3; background: var(--border); display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint); letter-spacing: 0.1em; }
+    .garage-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .garage-card-body { padding: 1.6rem; border-top: 1px solid var(--border); }
+    .garage-card-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.3rem; }
+    .garage-card-price { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink); margin-bottom: 1rem; }
+    .garage-card-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint); letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .garage-card-contact { display: inline-block; margin-top: 1.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--mid); text-decoration: none; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
+    .garage-card-contact:hover { color: var(--ink); border-color: var(--ink); }
+    .empty-state { padding: 5rem 0; text-align: center; font-family: 'EB Garamond', serif; font-style: italic; font-size: 19px; color: var(--faint); }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .contact-body { font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.55; color: var(--ink); max-width: 28em; }
+    .contact-body em { font-style: italic; color: var(--mid); }
+    .contact-email { display: inline-block; margin-top: 3rem; font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(24px,2.5vw,36px); letter-spacing: -0.01em; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 0.1em; transition: color 0.2s ease, border-color 0.2s ease; }
+    .contact-email:hover { color: var(--mid); border-color: var(--mid); }
+    .contact-sidebar h4 { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 1.2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 3rem; }
+    .contact-links a { font-family: 'EB Garamond', serif; font-size: 19px; color: var(--mid); text-decoration: none; display: inline-block; transition: color 0.2s ease; }
+    .contact-links a:hover { color: var(--ink); }
+    .contact-note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.7; color: var(--faint); margin-top: 3rem; }
+
+    /* CURSOR */
+    @media (hover: hover) and (pointer: fine) {
+      * { cursor: none !important; }
+      .cursor-ring { position: fixed; pointer-events: none; z-index: 9999; top: 0; left: 0; width: 22px; height: 22px; border: 1.5px solid var(--ink); border-radius: 50%; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease; opacity: 0; will-change: transform; }
+      .cursor-ring.active { opacity: 1; }
+      .cursor-ring.hovered { width: 36px; height: 36px; border-color: var(--mid); }
+      .cursor-coords { position: fixed; pointer-events: none; z-index: 9999; top: 0; left: 0; font-family: 'IBM Plex Mono', monospace; font-size: 10px; line-height: 1.4; color: var(--mid); white-space: nowrap; letter-spacing: 0.05em; opacity: 0; transition: opacity 0.2s ease; will-change: transform; }
+      .cursor-coords.active { opacity: 1; }
+      .cursor-box { position: fixed; pointer-events: none; z-index: 9998; border: 1px solid var(--ink); border-radius: 8px; opacity: 0; transform: scale(0); transform-origin: center center; transition: top 0.08s ease, left 0.08s ease, width 0.08s ease, height 0.08s ease, border-radius 0.08s ease, opacity 0.15s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+      .cursor-box.active { opacity: 1; transform: scale(1); }
+      .cursor-box.no-transition { transition: opacity 0.15s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+      .cursor-label { position: fixed; pointer-events: none; z-index: 10000; background: var(--ink); color: var(--paper); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 4px; white-space: nowrap; display: none; transform: translateX(-50%); }
+      .cursor-label.active { display: block; }
+    }
+
+    /* MOBILE */
+    @media (max-width: 760px) {
+      .site-header { padding: 1rem 1.2rem; }
+      .site-card { margin: 0; border-radius: 0; box-shadow: none; padding-bottom: calc(8vh + 4rem); }
+      .site-footer-nav { left: 0; right: 0; bottom: 0; border-radius: 0; padding: 8vh 1.4rem 1rem; }
+      .float-btns { right: 1rem; bottom: 1.2rem; }
+      .nav { gap: 1.2rem; font-size: 11px; }
+      .hero { padding: 7rem 1.4rem 3rem; min-height: 100vh; }
+      .featured { padding: 2rem 1.4rem 5rem; }
+      .colophon { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.4rem; }
+      .page-content { padding: 7rem 1.4rem 10rem; }
+      .work-row { grid-template-columns: 30px 1fr auto; }
+      .work-tag { display: none; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .garage-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <div class="site-container" id="siteContainer">
-        <header class="site-header">
-            <div class="header-left glitch-text" data-text="VARREL PUTRA" id="logoLink">
-                <span class="text-content">VARREL PUTRA</span>
+
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-coords" id="cursorCoords">X:0000<br>Y:0000</div>
+  <div class="cursor-box" id="cursorBox"></div>
+  <div class="cursor-label" id="cursorLabel"></div>
+
+  <div id="intro">
+    <div id="introArtwork"></div>
+    <div id="introProgress">
+      <div id="introProgressBar"><div id="introProgressFill"></div></div>
+      <div id="introPct">0%</div>
+    </div>
+    <div id="introClickHint">Click anywhere to continue</div>
+  </div>
+
+  <div class="v-watermark" aria-hidden="true">v</div>
+
+  <header class="site-header">
+    <a class="vmark" data-page="home" aria-label="Varrel Putra — home">v.</a>
+  </header>
+
+  <nav class="site-footer-nav" aria-label="Site navigation">
+    <span class="footer-clock" id="clockLocal"></span>
+    <div class="nav">
+      <a data-page="home"    class="active"><span class="num">00</span>Home</a>
+      <a data-page="work"               ><span class="num">01</span>Work</a>
+      <a data-page="writing"            ><span class="num">02</span>Writing</a>
+      <a data-page="about"              ><span class="num">03</span>About</a>
+      <a data-page="garage"             ><span class="num">04</span>Garage</a>
+      <a data-page="contact"            ><span class="num">05</span>Contact</a>
+    </div>
+    <span class="footer-clock right" id="clockVancouver"></span>
+  </nav>
+
+  <div class="float-btns">
+    <button class="float-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" data-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="float-btn" id="scrollTop" type="button" aria-label="Scroll to top" data-label="Scroll to top">
+      <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+  </div>
+
+  <div class="site-card">
+
+    <!-- HOME -->
+    <div id="page-home" class="page active">
+      <section class="hero">
+        <h1 class="hero-name">Varrel <em>Putra</em></h1>
+        <p class="hero-role">Sales, marketing &amp; brand operator — building things that endure.</p>
+        <p class="hero-mission">A builder of things that endure. Sales is communication, marketing is belief, and product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc.</p>
+      </section>
+      <section class="featured">
+        <div class="section-rule"><span class="section-rule-label">I. &nbsp; Selected Work</span></div>
+        <div class="work-list" id="work-list-home"></div>
+      </section>
+    </div>
+
+    <!-- WORK -->
+    <div id="page-work" class="page">
+      <main class="page-content">
+        <h1 class="page-title">Selected <em>Work</em></h1>
+        <div class="work-list" id="work-list-page"></div>
+      </main>
+    </div>
+
+    <!-- WRITING -->
+    <div id="page-writing" class="page">
+      <main class="page-content">
+        <h1 class="page-title">Field <em>Notes</em></h1>
+        <div class="post-list">
+          <a class="post-row" href="#" data-label="Read article">
+            <span class="post-title">The Future of B2B Sales <em>— on AI and the human edge</em></span>
+            <span class="post-date">2026.04.15</span>
+          </a>
+          <a class="post-row" href="#" data-label="Read article">
+            <span class="post-title">Building High-Performance Teams <em>— scaling from 5 to 50</em></span>
+            <span class="post-date">2026.03.28</span>
+          </a>
+          <a class="post-row" href="#" data-label="Coming soon">
+            <span class="post-title">On Market Entry <em>— lessons from Southeast Asia</em></span>
+            <span class="post-date">Coming soon</span>
+          </a>
+        </div>
+      </main>
+    </div>
+
+    <!-- ABOUT -->
+    <div id="page-about" class="page">
+      <main class="page-content">
+        <div class="about-layout">
+          <div>
+            <h1 class="page-title">Varrel <em>Putra</em></h1>
+            <div class="about-body">
+              <p>Strategic sales and marketing professional based in Southeast Asia. Ten years building and scaling revenue organisations across enterprise SaaS, fintech, and high-growth technology.</p>
+              <p>Known for opening new markets from zero — APAC expansion, enterprise segment builds, and partner ecosystems that generate real pipeline. <em>Equal parts strategist and operator:</em> I write the playbook and run it.</p>
+              <p>Sales is communication. Marketing is belief. Product is the proof. I work where those three meet — quietly, with attention to craft, and a bias for the long arc.</p>
             </div>
-            <nav class="header-center">
-                <a class="nav-link glitch-text" data-text="[GARAGE]" data-page="garage">
-                    <span class="text-content">[GARAGE]</span>
-                </a>
-                <a class="nav-link glitch-text" data-text="[WORK]" data-page="work">
-                    <span class="text-content">[WORK]</span>
-                </a>
-                <a class="nav-link glitch-text" data-text="[ABOUT]" data-page="about">
-                    <span class="text-content">[ABOUT]</span>
-                </a>
-                <a class="nav-link glitch-text" data-text="[EXPERIENCE]" data-page="experience">
-                    <span class="text-content">[EXPERIENCE]</span>
-                </a>
-                <a class="nav-link glitch-text" data-text="[INSIGHT]" data-page="blog">
-                    <span class="text-content">[INSIGHT]</span>
-                </a>
-            </nav>
-            <div class="header-right glitch-text" data-text="CONTACT" id="contactLink">
-                <span class="text-content">CONTACT</span>
+            <a href="#" class="cv-link" data-label="Download CV">Download CV ↗</a>
+          </div>
+          <aside class="sidebar">
+            <div class="sidebar-block">
+              <h4>Based in</h4>
+              <p>Southeast Asia</p>
             </div>
-        </header>
-
-        <div id="pageContent"></div>
+            <div class="sidebar-block">
+              <h4>Specialisms</h4>
+              <p>Enterprise Sales</p>
+              <p>Market Entry</p>
+              <p>Revenue Operations</p>
+              <p>Brand Strategy</p>
+              <p>Partner Ecosystems</p>
+            </div>
+            <div class="sidebar-block">
+              <h4>Elsewhere</h4>
+              <a href="#" data-label="View LinkedIn">LinkedIn ↗</a>
+              <a href="#" data-label="View Read.cv">Read.cv ↗</a>
+              <a href="#" data-label="View Are.na">Are.na ↗</a>
+            </div>
+            <div class="sidebar-block">
+              <h4>Contact</h4>
+              <a href="mailto:varrelsales@gmail.com" data-label="Send email">varrelsales@gmail.com</a>
+            </div>
+          </aside>
+        </div>
+      </main>
     </div>
 
-    <!-- FLOATING BUTTONS -->
-    <div class="floating-buttons" id="floatingButtons">
-        <button class="float-btn" id="scrollTopBtn">[ ↑ ]</button>
-        <button class="float-btn" id="darkModeBtn">[ ◐ ]</button>
+    <!-- GARAGE -->
+    <div id="page-garage" class="page">
+      <main class="page-content">
+        <h1 class="page-title">Current <em>Listings</em></h1>
+        <p class="page-subtitle">A personal index of automobiles. Inquire via email.</p>
+        <div class="garage-section-rule"><span class="garage-section-rule-label">For Sale</span></div>
+        <div class="empty-state">No current listings — check back shortly.</div>
+      </main>
     </div>
 
-
-
-    <div class="floating-menu" id="floatingMenu">
-        <button class="floating-menu-item" data-nav="garage">[GARAGE]</button>
-        <button class="floating-menu-item" data-nav="work">[WORK]</button>
-        <button class="floating-menu-item" data-nav="about">[ABOUT]</button>
-        <button class="floating-menu-item" data-nav="experience">[EXPERIENCE]</button>
-        <button class="floating-menu-item" data-nav="blog">[INSIGHT]</button>
-        <button class="floating-menu-item" data-nav="contact">CONTACT</button>
+    <!-- CONTACT -->
+    <div id="page-contact" class="page">
+      <main class="page-content">
+        <h1 class="page-title">Get in <em>touch</em></h1>
+        <div class="contact-grid">
+          <div>
+            <p class="contact-body">I'm interested in <em>sales leadership roles, consulting engagements,</em> and conversations about craft, commerce, and building things that last.</p>
+            <a class="contact-email" href="mailto:varrelsales@gmail.com" data-label="Send email">varrelsales@gmail.com</a>
+          </div>
+          <div class="contact-sidebar">
+            <h4>Elsewhere</h4>
+            <div class="contact-links">
+              <a href="#" data-label="Read.cv">Read.cv</a>
+              <a href="#" data-label="LinkedIn">LinkedIn</a>
+              <a href="#" data-label="Are.na">Are.na</a>
+              <a href="#" data-label="Instagram">Instagram</a>
+            </div>
+            <p class="contact-note">Based in Vancouver, BC.<br>Response within 48 hours.</p>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <div class="custom-cursor" id="customCursor">more →</div>
+  </div><!-- /.site-card -->
 
-    <script>
-        const chars = '!@#$%^&*(){}[]<>?/\|~`+-=_';
-        let currentPage = 'home';
-        const glitchIntervals = new Map();
-        const periodicTimers = new Map();
-        let glitchObserver = null;
-        let heroModelCleanup = null;
-        let heroBlockScroll = null;
-        let introHasPlayed = false;
+  <script>
+    // ── SHARED DATA ──────────────────────────────────────────────────────────
+    const WORK_ITEMS = [
+      { num: '01', title: 'Coastal Ford', sub: 'retail systems &amp; consultations', tag: 'Sales', year: '2024' },
+      { num: '02', title: 'Killing Floor', sub: 'consulting practice', tag: 'Brand', year: '2023' },
+      { num: '03', title: 'Garage', sub: 'a personal index of automobiles', tag: 'Project', year: '2022' },
+      { num: '04', title: 'Field Notes', sub: 'writing on craft and commerce', tag: 'Writing', year: 'Ongoing' },
+    ];
+    const COLOPHON_HTML = `<footer class="colophon"><div><h4>Set in</h4><p><em>EB Garamond</em> &amp; IBM&nbsp;Plex&nbsp;Mono</p><p class="colophon-byline">Designed and written by Varrel Putra, MMXXVI.</p></div><div><h4>Elsewhere</h4><a href="#">Read.cv</a><a href="#">LinkedIn</a><a href="#">Are.na</a><a href="#">Instagram</a></div><div><h4>Contact</h4><a href="mailto:varrelsales@gmail.com">varrelsales@gmail.com</a><a href="#">Vancouver, BC</a><p class="colophon-note"><em>I&rsquo;m obsessed with better, not done.</em></p></div></footer>`;
 
-        // SITE DATA
-        const siteData = {
-            heroModel: 'models/930-compressed.glb',
-            workPreviews: [
-                {
-                    id: 1,
-                    title: 'APAC Market Entry — SaaS',
-                    meta: '2024 · Enterprise Sales',
-                    text: 'Led end-to-end go-to-market strategy for a Series B SaaS company entering Southeast Asia, closing $4.2M in new ARR within 12 months.',
-                    fullContent: 'Designed and executed a phased market entry across Singapore, Indonesia, and Vietnam. Built local partner networks, adapted pricing models for regional buying behavior, and hired and onboarded the first regional sales team of 8. Achieved 150% of Year 1 ARR target.'
-                },
-                {
-                    id: 2,
-                    title: 'Revenue Operations Overhaul',
-                    meta: '2023 · Revenue Strategy',
-                    text: 'Rebuilt the entire revenue stack for a 200-person B2B company — CRM, pipeline methodology, forecasting, and comp structure — reducing sales cycle by 35%.',
-                    fullContent: 'Audited existing CRM hygiene, sales process, and incentive structure. Introduced a structured qualification framework (MEDDIC), automated pipeline reporting, and redesigned commission plans to align rep behavior with company margin targets. Result: 35% shorter average deal cycle, 40% improvement in forecast accuracy.'
-                },
-                {
-                    id: 3,
-                    title: 'Brand Relaunch — Fintech',
-                    meta: '2023 · Marketing Strategy',
-                    text: 'Directed full rebrand and go-to-market relaunch for a fintech platform pivoting from SMB to enterprise, including messaging, positioning, and campaign execution.',
-                    fullContent: 'Collaborated with product, design, and leadership to redefine ICP and value proposition. Produced new messaging framework, website, sales collateral, and a 3-month awareness campaign across LinkedIn and targeted media. Brand NPS improved 28 points within 6 months of relaunch.'
-                },
-                {
-                    id: 4,
-                    title: 'Enterprise Pipeline — Zero to One',
-                    meta: '2022 · Business Development',
-                    text: 'Opened enterprise segment from scratch at a growth-stage startup, closing first 5 enterprise accounts within 9 months.',
-                    fullContent: 'Defined ICP for the enterprise tier, built a targeted outbound motion using intent data and custom research, and personally closed the first 3 accounts to establish proof points. Hired and ramped 3 account executives. Enterprise now represents 60% of total ARR.'
-                },
-                {
-                    id: 5,
-                    title: 'Partnership & Channel Strategy',
-                    meta: '2021 · Partnerships',
-                    text: 'Built a partner ecosystem from zero — 12 active reseller and integration partners generating 30% of new pipeline within 18 months.',
-                    fullContent: 'Designed the partner program structure, tiering, and incentives. Recruited, enabled, and managed partners across consulting, systems integration, and technology alliance categories. Built co-sell playbooks and joint marketing programs. Partner-sourced revenue grew from 0 to 30% of new business pipeline.'
-                }
-            ],
-            blogPosts: [
-                {
-                    id: 1,
-                    title: 'The Future of B2B Sales',
-                    date: '2026.04.15',
-                    preview: 'Exploring how AI and automation are reshaping enterprise sales strategies.',
-                    fullContent: 'The tools have changed but the fundamentals haven\'t. Buyers are more informed, cycles are longer, and every deal has six people in the room who all have veto power. AI helps you research faster and personalise at scale — but it can\'t replace the rep who actually understands the customer\'s business problem.\n\nWhat I\'ve seen work: automation handling the top of funnel ruthlessly, while senior reps go deep on fewer, better-qualified accounts. The mistake most teams make is automating the wrong half — the part that actually needs a human.\n\nThe next five years will separate teams that use AI as a force multiplier from those that use it as a shortcut. The shortcut always shows.'
-                },
-                {
-                    id: 2,
-                    title: 'Building High-Performance Teams',
-                    date: '2026.03.28',
-                    preview: 'Lessons learned from scaling sales organizations from 5 to 50 people.',
-                    fullContent: 'The first five hires define the culture. Not the values on the wall — the actual working culture, the bar for what\'s acceptable, the pace. Get those wrong and you spend the next two years managing around people instead of with them.\n\nThe hardest part of scaling from 5 to 50 isn\'t hiring — it\'s preserving the things that made the original team good while adding enough structure to stop things falling apart. Most founders add process too late, then overcompensate.\n\nMy rule: document the things that work before you need to. By the time a process breaks, you\'ve already forgotten why it existed.'
-                }
-            ],
-            aboutText: 'Strategic sales and marketing professional based in Southeast Asia. Ten years building and scaling revenue organisations across enterprise SaaS, fintech, and high-growth technology. Known for opening new markets from zero — APAC expansion, enterprise segment builds, and partner ecosystems that generate real pipeline. Equal parts strategist and operator: I write the playbook and run it.',
-            contactEmail: 'varrelsales@gmail.com',
-            cvUrl: '#',
-            garageListings: [
-                {
-                    id: 1,
-                    title: 'Listing coming soon',
-                    year: '—',
-                    price: '—',
-                    mileage: '—',
-                    condition: 'Check back shortly for current inventory.',
-                    image: null
-                }
-            ]
+    function renderWorkRows(container) {
+      container.innerHTML = WORK_ITEMS.map(w =>
+        `<a class="work-row" href="#" data-label="View case"><span class="work-num">${w.num}</span><span class="work-title">${w.title} <em>— ${w.sub}</em></span><span class="work-tag">${w.tag}</span><span class="work-year">${w.year}</span></a>`
+      ).join('');
+    }
+    function renderColophon(page) {
+      if (!page.querySelector('.colophon')) page.insertAdjacentHTML('beforeend', COLOPHON_HTML);
+    }
+
+    // Render work rows and colophons on first load
+    renderWorkRows(document.getElementById('work-list-home'));
+    renderWorkRows(document.getElementById('work-list-page'));
+    document.querySelectorAll('.page').forEach(renderColophon);
+
+    // ── ROUTER ──────────────────────────────────────────────────────────────
+    const TITLES = {
+      home: 'Varrel Putra', work: 'Work — Varrel Putra',
+      writing: 'Writing — Varrel Putra', about: 'About — Varrel Putra',
+      garage: 'Garage — Varrel Putra', contact: 'Contact — Varrel Putra',
+    };
+    let currentPage = 'home';
+
+    function showPage(id, skipAnim) {
+      const el = document.getElementById('page-' + id);
+      if (!el) return;
+      // Hide all pages first, then show the target
+      document.querySelectorAll('.page').forEach(p => { if (p !== el) p.classList.remove('active', 'exiting'); });
+      el.classList.remove('exiting');
+      el.classList.add('active');
+      if (skipAnim) el.style.animationDuration = '0s';
+      else el.style.animationDuration = '';
+      document.querySelectorAll('.nav a[data-page], .vmark[data-page]').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === id);
+      });
+      document.title = TITLES[id] || 'Varrel Putra';
+      window.scrollTo(0, 0);
+      currentPage = id;
+    }
+
+    let navTimer = null, pendingPage = null, exitingEl = null;
+    function navigate(id) {
+      if (id === currentPage || id === pendingPage) return;
+
+      // Immediately settle any in-progress exit so stale animationend can't fire later
+      if (exitingEl) {
+        exitingEl.classList.remove('active', 'exiting');
+        exitingEl = null;
+      }
+      clearTimeout(navTimer);
+
+      const curr = document.getElementById('page-' + currentPage);
+      if (curr) {
+        curr.classList.add('exiting');
+        exitingEl = curr;
+        curr.addEventListener('animationend', () => {
+          curr.classList.remove('active', 'exiting');
+          if (exitingEl === curr) exitingEl = null;
+        }, { once: true });
+      }
+
+      pendingPage = id;
+      navTimer = setTimeout(() => { pendingPage = null; showPage(id); }, 260);
+      history.pushState({ page: id }, '', id === 'home' ? './' : '#' + id);
+    }
+
+    // Wire up all data-page links
+    document.addEventListener('click', e => {
+      const a = e.target.closest('[data-page]');
+      if (!a) return;
+      const page = a.dataset.page;
+      if (!page) return;
+      e.preventDefault();
+      navigate(page);
+    });
+
+    // Handle browser back/forward
+    window.addEventListener('popstate', e => {
+      const page = (e.state && e.state.page) || 'home';
+      showPage(page, true);
+    });
+
+    // Init from hash on load
+    (function() {
+      const hash = location.hash.slice(1);
+      if (hash && document.getElementById('page-' + hash)) {
+        showPage(hash, true);
+        history.replaceState({ page: hash }, '', location.href);
+      } else {
+        history.replaceState({ page: 'home' }, '', location.href);
+      }
+    })();
+
+    // ── INTRO ANIMATION ──────────────────────────────────────────────────────
+    (function() {
+      const intro      = document.getElementById('intro');
+      // Skip intro entirely if loading directly into a subpage
+      const initHash = location.hash.slice(1);
+      const footerNav = document.querySelector('.site-footer-nav');
+      const showNav = () => footerNav.classList.add('visible');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (initHash && initHash !== 'home' && document.getElementById('page-' + initHash)) { intro.remove(); showNav(); return; }
+      const navEntry   = performance.getEntriesByType('navigation')[0];
+      const isHardRefresh = navEntry?.type === 'reload' && (navEntry?.transferSize ?? 0) > 0;
+      const isFirstVisit  = !sessionStorage.getItem('vp-intro-seen');
+      if (reducedMotion || (!isHardRefresh && !isFirstVisit)) { intro.remove(); showNav(); return; }
+
+      // Conditionally preload GLB only when intro will actually show
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload'; preloadLink.as = 'fetch';
+      preloadLink.href = './models/930-compressed.glb'; preloadLink.crossOrigin = 'anonymous';
+      document.head.appendChild(preloadLink);
+
+      const container  = document.getElementById('introArtwork');
+      const progressEl = document.getElementById('introProgress');
+      const fillEl     = document.getElementById('introProgressFill');
+      const pctEl      = document.getElementById('introPct');
+      const clickHint  = document.getElementById('introClickHint');
+      const MODEL      = './models/930-compressed.glb';
+      const loadStart  = performance.now();
+
+      // Overlay starts covering everything
+      fillEl.style.transform = 'scaleX(0)';
+
+      let targetProg = 0, displayProg = 0, modelLoaded = false, lastFrameTime = performance.now();
+      const MIN_LOAD_MS = 3200; // minimum visible progress duration
+
+      function applyProgress(p) {
+        pctEl.textContent = Math.min(Math.round(p * 100), 100) + '%';
+        fillEl.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+      }
+
+      function dismiss() {
+        sessionStorage.setItem('vp-intro-seen', '1');
+        intro.classList.add('dismissed');
+        intro.addEventListener('transitionend', () => intro.remove(), { once: true });
+        showNav();
+      }
+
+      Promise.all([
+        import('./vendor/three/build/three.module.js'),
+        import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),
+        import('./vendor/three/examples/jsm/loaders/DRACOLoader.js'),
+      ]).then(([THREE, { GLTFLoader }, { DRACOLoader }]) => {
+        let disposed = false, frameId = null, introPhaseTimer = null;
+
+        function cleanupScene() {
+          disposed = true;
+          cancelAnimationFrame(frameId);
+          clearTimeout(introPhaseTimer);
+          window.removeEventListener('resize', heroResize);
+          scene.traverse(obj => {
+            if (obj.geometry) obj.geometry.dispose();
+            if (obj.material) {
+              const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+              mats.forEach(m => { Object.values(m).forEach(v => { if (v && v.isTexture) v.dispose(); }); m.dispose(); });
+            }
+          });
+          renderer.dispose();
+          renderer.forceContextLoss();
+          renderer.domElement.remove();
+          draco.dispose();
+        }
+        const INTRO_CAM_Z = 5.6, INTRO_CAM_X = 3.0, FINAL_CAM_Z = 6.8, FINAL_CAM_X = 0.0;
+        const INTRO_ROT_Y = Math.PI * 0.2, FINAL_ROT_Y = Math.PI * 0.5, TRANSITION_MS = 3000;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 200);
+        camera.position.set(INTRO_CAM_X, 0.1, INTRO_CAM_Z);
+        camera.lookAt(0, 0.1, 0);
+
+        // Transparent renderer — gallery gradient from CSS shows through
+        // Disable antialias on low-end devices (1x DPI screens) — high-DPI naturally smooths edges anyway
+        const isLowEnd = window.devicePixelRatio <= 1 || (navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 4);
+        const renderer = new THREE.WebGLRenderer({ antialias: !isLowEnd, alpha: true, logarithmicDepthBuffer: true });
+        renderer.setClearColor(0x000000, 0);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+        renderer.domElement.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+        container.appendChild(renderer.domElement);
+
+        // Studio lighting tuned for original model textures
+        scene.add(new THREE.HemisphereLight(0xffffff, 0xe8e4dc, 2.2));
+        const kl = new THREE.DirectionalLight(0xffffff, 3.0); kl.position.set(3, 6, 4); scene.add(kl);
+        const fl = new THREE.DirectionalLight(0xfaf8f4, 1.8); fl.position.set(-5, 2, 3); scene.add(fl);
+        const rl = new THREE.DirectionalLight(0xffffff, 1.4); rl.position.set(-2, 4, -6); scene.add(rl);
+
+        const draco = new DRACOLoader();
+        draco.setDecoderPath('./vendor/three/examples/jsm/libs/draco/');
+        const loader = new GLTFLoader();
+        loader.setDRACOLoader(draco);
+
+        const heroResize = () => {
+          const w = Math.max(1, container.clientWidth), h = Math.max(1, container.clientHeight);
+          camera.aspect = w / h; camera.updateProjectionMatrix(); camera.lookAt(0, 0.1, 0);
+          renderer.setSize(w, h);
         };
+        window.addEventListener('resize', heroResize);
+        heroResize();
 
-        // GLITCH ANIMATION SYSTEM
-        function glitchText(element, targetText, duration = 600) {
-            const textSpan = element.querySelector('.text-content') || element;
-            if (!textSpan) return;
+        let model = null, phase = 'loading', transStart = null, transEndTime = null;
 
-            let iterations = 0;
-            const maxIterations = Math.ceil(duration / 50);
+        loader.load(MODEL, (gltf) => {
+          if (disposed) return;
+          model = gltf.scene;
+          // Use original model materials — no override
+          const box = new THREE.Box3().setFromObject(model);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          const scale = 5.8 / Math.max(size.x, size.y, size.z);
+          model.scale.setScalar(scale);
+          model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
+          model.rotation.y = INTRO_ROT_Y;
+          scene.add(model);
+          modelLoaded = true;
+          targetProg = 1.0; // animate will smooth display to 1.0
+        },
+        (xhr) => {
+          if (xhr.total > 0) targetProg = Math.max(targetProg, Math.min(xhr.loaded / xhr.total * 0.88, 0.88));
+        },
+        () => { cleanupScene(); dismiss(); });
 
-            if (glitchIntervals.has(element)) {
-                clearInterval(glitchIntervals.get(element));
+        function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+        function animate() {
+          if (disposed) return;
+          const now = performance.now();
+          const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
+
+          // During loading, throttle to ~30fps — model is visible but not interactive yet
+          if (phase === 'loading') {
+            const throttleMs = 33; // ~30fps
+            if (now - lastFrameTime < throttleMs) { frameId = requestAnimationFrame(animate); return; }
+          }
+
+          lastFrameTime = now;
+          frameId = requestAnimationFrame(animate);
+
+          // Smooth progress — time-based floor ensures visible animation even on fast loads
+          if (phase === 'loading') {
+            const timeProg = Math.min((now - loadStart) / MIN_LOAD_MS, 0.92);
+            targetProg = Math.max(targetProg, timeProg);
+            displayProg += (targetProg - displayProg) * Math.min(dt * 2.8, 1);
+            applyProgress(displayProg);
+            // Trigger transition only once model is loaded AND display reaches 100%
+            if (modelLoaded && displayProg >= 0.995) {
+              phase = 'loaded';
+              progressEl.style.opacity = '0';
+              introPhaseTimer = setTimeout(() => { if (disposed) return; phase = 'transitioning'; transStart = performance.now(); }, 500);
             }
-
-            const interval = setInterval(() => {
-                textSpan.textContent = targetText
-                    .split('')
-                    .map((char, index) => {
-                        if (char === ' ' || char === '.' || char === ',' || char === '—' || char === '$' ||
-                            char === '[' || char === ']' || char === '(' || char === ')') return char;
-                        if (iterations > index * (maxIterations / targetText.length)) {
-                            return char;
-                        }
-                        return chars[Math.floor(Math.random() * chars.length)];
-                    })
-                    .join('');
-
-                iterations++;
-
-                if (iterations >= maxIterations) {
-                    clearInterval(interval);
-                    textSpan.textContent = targetText;
-                    glitchIntervals.delete(element);
-                }
-            }, 50);
-
-            glitchIntervals.set(element, interval);
+          } else if (phase === 'transitioning') {
+            const t = Math.min((now - transStart) / TRANSITION_MS, 1);
+            const e = easeInOut(t);
+            camera.position.z = INTRO_CAM_Z + (FINAL_CAM_Z - INTRO_CAM_Z) * e;
+            camera.position.x = INTRO_CAM_X + (FINAL_CAM_X - INTRO_CAM_X) * e;
+            camera.lookAt(0, 0.1, 0);
+            if (model) model.rotation.y = INTRO_ROT_Y + (FINAL_ROT_Y - INTRO_ROT_Y) * e;
+            if (t >= 1) { phase = 'done'; transEndTime = now; clickHint.style.opacity = '1'; }
+          } else if (phase === 'done' && model) {
+            model.rotation.y = FINAL_ROT_Y + (now - transEndTime) * 0.00028;
+          }
+          renderer.render(scene, camera);
         }
-
-        function startPeriodicGlitch(element, targetText) {
-            if (periodicTimers.has(element)) return;
-
-            const randomDelay = Math.random() * 10000 + 10000;
-
-            const timer = setInterval(() => {
-                glitchText(element, targetText);
-            }, randomDelay);
-
-            periodicTimers.set(element, timer);
-        }
-
-        function clearAllTimers() {
-            glitchIntervals.forEach(id => clearInterval(id));
-            glitchIntervals.clear();
-            periodicTimers.forEach(id => clearInterval(id));
-            periodicTimers.clear();
-            if (heroModelCleanup) {
-                heroModelCleanup();
-                heroModelCleanup = null;
-            }
-            if (glitchObserver) {
-                glitchObserver.disconnect();
-                glitchObserver = null;
-            }
-        }
-
-        // Reusable footer HTML
-        function renderFooter(navLinks) {
-            return `
-                <footer class="site-footer">
-                    <div class="footer-column">
-                        <h3>CONTACT</h3>
-                        <a href="mailto:${siteData.contactEmail}" style="color:inherit;text-decoration:none;">${siteData.contactEmail}</a>
-                    </div>
-                    <div class="footer-column">
-                        <h3>LINKS</h3>
-                        <a href="https://linkedin.com/in/varrel" target="_blank">LinkedIn ↗</a>
-                    </div>
-                    <div class="footer-column">
-                        <h3>NAVIGATE</h3>
-                        ${navLinks.map(([label, page]) =>
-                            `<a href="#" onclick="loadPage('${page}'); return false;">${label}</a>`
-                        ).join('')}
-                    </div>
-                </footer>
-            `;
-        }
-
-        // PAGE LOADING
-        function loadPage(pageName) {
-            clearAllTimers();
-            currentPage = pageName;
-            document.body.classList.toggle('home-page', pageName === 'home');
-            document.body.style.overflow = '';
-            document.documentElement.style.overflow = '';
-            const pageContent = document.getElementById('pageContent');
-            pageContent.style.transition = 'opacity 0.18s ease';
-            pageContent.style.opacity = '0';
-            pageContent.style.pointerEvents = 'none';
-            const _renderPage = () => {
-            pageContent.style.opacity = '';
-            pageContent.style.pointerEvents = '';
-            if (pageName === 'home') {
-                pageContent.innerHTML = `
-                    <section class="hero-wrapper" id="hero">
-                        <div class="hero-artwork" id="heroArtwork" aria-label="Animated 3D ASCII artwork"></div>
-                        <div class="hero-identity" id="heroIdentity">
-                            <div class="hero-wordmark" aria-label="varrelputra.com">varrelputra.com</div>
-                            <div class="hero-nav-row" id="heroNavRow">
-                                <button class="hero-nav-link glitch-text" data-text="VARREL PUTRA" onclick="loadPage('home')">
-                                    <span class="text-content">VARREL PUTRA</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[GARAGE]" onclick="loadPage('garage')">
-                                    <span class="text-content">[GARAGE]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[WORK]" onclick="loadPage('work')">
-                                    <span class="text-content">[WORK]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[ABOUT]" onclick="loadPage('about')">
-                                    <span class="text-content">[ABOUT]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[EXPERIENCE]" onclick="loadPage('experience')">
-                                    <span class="text-content">[EXPERIENCE]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="[INSIGHT]" onclick="loadPage('blog')">
-                                    <span class="text-content">[INSIGHT]</span>
-                                </button>
-                                <button class="hero-nav-link glitch-text" data-text="CONTACT" onclick="loadPage('contact')">
-                                    <span class="text-content">CONTACT</span>
-                                </button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <div style="height: 3rem; background: var(--bg);"></div>
-                    <div class="preview-sections" id="mainContent">
-                        <div class="preview-section" id="garage">
-                            <div class="section-header glitch-text" data-text="[ 000_GARAGE ]">
-                                <span class="text-content">[ 000_GARAGE ]</span>
-                            </div>
-                            <div class="preview-item" onclick="loadPage('garage')">
-                                <div class="preview-text glitch-text" data-text="Current listings — cars for sale.">
-                                    <span class="text-content">Current listings — cars for sale.</span>
-                                </div>
-                                <div class="preview-cta">view garage →</div>
-                            </div>
-                        </div>
-
-                        <div class="preview-section" id="work">
-                            <div class="section-header glitch-text" data-text="[ 001_WORK ]">
-                                <span class="text-content">[ 001_WORK ]</span>
-                            </div>
-                            ${siteData.workPreviews.map(item => `
-                                <div class="preview-item" onclick="viewWorkItem(${item.id})">
-                                    <div class="preview-meta">${item.meta}</div>
-                                    <div class="preview-title">${item.title}</div>
-                                    <div class="preview-text">${item.text}</div>
-                                    <div class="preview-cta">view case →</div>
-                                </div>
-                            `).join('')}
-                        </div>
-
-                        <div class="preview-section" id="about">
-                            <div class="section-header glitch-text" data-text="[ 002_ABOUT ]">
-                                <span class="text-content">[ 002_ABOUT ]</span>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-text glitch-text" data-text="${siteData.aboutText}">
-                                    <span class="text-content">${siteData.aboutText}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="preview-section" id="experience">
-                            <div class="section-header glitch-text" data-text="[ 003_EXPERIENCE ]">
-                                <span class="text-content">[ 003_EXPERIENCE ]</span>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-text glitch-text" data-text="View full resume and work history">
-                                    <span class="text-content">View full resume and work history</span>
-                                </div>
-                                <div class="preview-cta" onclick="loadPage('experience')">View details →</div>
-                            </div>
-                        </div>
-
-                        <div class="preview-section" id="insights">
-                            <div class="section-header glitch-text" data-text="[ 004_INSIGHTS ]">
-                                <span class="text-content">[ 004_INSIGHTS ]</span>
-                            </div>
-                            ${siteData.blogPosts.map(post => `
-                                <div class="preview-item glitch-text" data-text="${post.title}" onclick="viewBlogPost(${post.id})">
-                                    <div class="preview-meta glitch-text" data-text="${post.date}">
-                                        <span class="text-content">${post.date}</span>
-                                    </div>
-                                    <div class="preview-title">
-                                        <span class="text-content">${post.title}</span>
-                                    </div>
-                                    <div class="preview-text glitch-text" data-text="${post.preview}">
-                                        <span class="text-content">${post.preview}</span>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-
-                        <div class="preview-section" id="contact">
-                            <div class="section-header glitch-text" data-text="[ 005_CONTACT ]">
-                                <span class="text-content">[ 005_CONTACT ]</span>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-text glitch-text" data-text="${siteData.contactEmail}">
-                                    <span class="text-content">${siteData.contactEmail}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    ${renderFooter([['Garage','garage'],['Work','work'],['About','about'],['Experience','experience'],['Insights','blog'],['Contact','contact']])}
-                `;
-                window.scrollTo(0, 0);
-                if (!introHasPlayed) {
-                    runIntroSequence();
-                } else {
-                    setupHeroModel();
-                }
-            } else if (pageName === 'work') {
-                pageContent.innerHTML = `
-                    <div class="content-page">
-                        <h1 class="glitch-text" data-text="WORK">
-                            <span class="text-content">WORK</span>
-                        </h1>
-                        <div class="content">
-                            ${siteData.workPreviews.map(item => `
-                                <div class="work-item">
-                                    <h2 class="work-item-title glitch-text" data-text="${item.title}">
-                                        <span class="text-content">${item.title}</span>
-                                    </h2>
-                                    <p class="glitch-text" data-text="${item.fullContent}">
-                                        <span class="text-content">${item.fullContent}</span>
-                                    </p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    ${renderFooter([['Home','home'],['About','about'],['Insights','blog']])}
-                `;
-            } else if (pageName === 'about') {
-                pageContent.innerHTML = `
-                    <div class="content-page">
-                        <h1 class="glitch-text" data-text="ABOUT">
-                            <span class="text-content">ABOUT</span>
-                        </h1>
-                        <div class="content">
-                            <p class="glitch-text" data-text="${siteData.aboutText}">
-                                <span class="text-content">${siteData.aboutText}</span>
-                            </p>
-                        </div>
-                    </div>
-                    ${renderFooter([['Home','home'],['Work','work'],['Insights','blog']])}
-                `;
-            } else if (pageName === 'garage') {
-                pageContent.innerHTML = `
-                    <div class="content-page">
-                        <h1 class="glitch-text" data-text="GARAGE">
-                            <span class="text-content">GARAGE</span>
-                        </h1>
-                        <p style="font-size:11px;color:var(--text-tertiary);margin-bottom:2rem;">Current listings. Inquire via email.</p>
-                        <div class="garage-grid">
-                            ${siteData.garageListings.map(car => `
-                                <div class="garage-card">
-                                    <div class="garage-card-image">
-                                        ${car.image
-                                            ? `<img src="${car.image}" alt="${car.title}">`
-                                            : `[ no image ]`}
-                                    </div>
-                                    <div class="garage-card-body">
-                                        <div class="garage-card-title">${car.year !== '—' ? car.year + ' ' : ''}${car.title}</div>
-                                        <div class="garage-card-price">${car.price !== '—' ? car.price : 'Price on request'}</div>
-                                        ${car.mileage !== '—' ? `<div class="garage-card-meta">${car.mileage} km</div>` : ''}
-                                        <div class="garage-card-meta">${car.condition}</div>
-                                        <a class="garage-card-contact" href="mailto:${siteData.contactEmail}">inquire →</a>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    ${renderFooter([['Home','home'],['Work','work'],['Insights','blog'],['Contact','contact']])}
-                `;
-            } else if (pageName === 'blog') {
-                pageContent.innerHTML = `
-                    <div class="content-page">
-                        <h1 class="glitch-text" data-text="INSIGHTS">
-                            <span class="text-content">INSIGHTS</span>
-                        </h1>
-                        <div class="content">
-                            ${siteData.blogPosts.map(post => `
-                                <div class="blog-post-item glitch-text" data-text="${post.title}" data-view-blog="${post.id}">
-                                    <div class="preview-meta glitch-text" data-text="${post.date}">
-                                        <span class="text-content">${post.date}</span>
-                                    </div>
-                                    <div class="blog-post-title glitch-text" data-text="${post.title}">
-                                        <span class="text-content">${post.title}</span>
-                                    </div>
-                                    <p class="glitch-text" data-text="${post.preview}">
-                                        <span class="text-content">${post.preview}</span>
-                                    </p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    ${renderFooter([['Home','home'],['Work','work'],['About','about']])}
-                `;
-            } else if (pageName === 'contact') {
-                pageContent.innerHTML = `
-                    <div class="content-page">
-                        <h1 class="glitch-text" data-text="CONTACT">
-                            <span class="text-content">CONTACT</span>
-                        </h1>
-                        <div class="content">
-                            <p style="font-size:13px;line-height:1.9;color:var(--text-primary);margin-bottom:1rem;">
-                                <a href="mailto:${siteData.contactEmail}" style="color:inherit;text-decoration:none;">${siteData.contactEmail}</a>
-                            </p>
-                            <p style="font-size:11px;color:var(--text-tertiary);line-height:2;">
-                                <a href="https://linkedin.com/in/varrel" target="_blank" style="color:inherit;text-decoration:none;display:block;">LinkedIn ↗</a>
-                            </p>
-                        </div>
-                    </div>
-                    ${renderFooter([['Home','home'],['Garage','garage'],['Work','work'],['About','about']])}
-                `;
-            } else if (pageName === 'experience') {
-                window.open(siteData.cvUrl, '_blank');
-                return;
-            }
-
-            setupGlitchEffects();
-        }
-
-        function setupPageDelegation() {
-            const pageContent = document.getElementById('pageContent');
-            pageContent.addEventListener('click', (e) => {
-                const workTarget = e.target.closest('[data-view-work]');
-                const blogTarget = e.target.closest('[data-view-blog]');
-                const navTarget = e.target.closest('[data-nav]');
-                if (workTarget) viewWorkItem(parseInt(workTarget.dataset.viewWork));
-                else if (blogTarget) viewBlogPost(parseInt(blogTarget.dataset.viewBlog));
-                else if (navTarget) { e.preventDefault(); loadPage(navTarget.dataset.nav); }
-            });
-        }
-
-        function runIntroSequence() {
-            introHasPlayed = true;
-            const MIN_DURATION_MS = 2500;
-            const loadStartTime = performance.now();
-
-            heroBlockScroll = (e) => {
-                const hero = document.getElementById('hero');
-                if (hero && hero.getBoundingClientRect().bottom <= 0) return;
-                e.preventDefault();
-            };
-            window.addEventListener('wheel', heroBlockScroll, { passive: false });
-            window.addEventListener('touchmove', heroBlockScroll, { passive: false });
-
-            // Collapse heroIdentity and padding so heroArtwork fills full hero section
-            const heroIdentity = document.getElementById('heroIdentity');
-            const heroWrapper = document.getElementById('hero');
-            if (heroIdentity) { heroIdentity.style.maxHeight = '0'; heroIdentity.style.overflow = 'hidden'; heroIdentity.style.opacity = '0'; }
-            if (heroWrapper) { heroWrapper.style.padding = '0'; heroWrapper.style.gap = '0'; }
-
-            // Black overlay covers everything during loading — no renderer inside
-            const overlay = document.createElement('div');
-            overlay.style.cssText = 'position:fixed;inset:0;z-index:500;background:#050505;';
-            document.body.appendChild(overlay);
-
-            // Loading bar
-            const BAR_CHARS = 48;
-            const loadPct = document.createElement('div');
-            loadPct.style.cssText = [
-                'position:absolute', 'bottom:4.4rem', 'left:50%',
-                'transform:translateX(-50%)',
-                'color:#f6f1df',
-                "font-family:'IBM Plex Mono',monospace",
-                'font-size:11px', 'letter-spacing:0.1em',
-                'z-index:20', 'white-space:nowrap',
-                'transition:opacity 0.4s ease',
-            ].join(';');
-            loadPct.textContent = '0%';
-            overlay.appendChild(loadPct);
-
-            const loadBar = document.createElement('div');
-            loadBar.style.cssText = [
-                'position:absolute', 'bottom:2rem', 'left:50%',
-                'transform:translateX(-50%)',
-                'color:#f6f1df',
-                "font-family:'IBM Plex Mono',monospace",
-                'font-size:11px', 'letter-spacing:0.05em',
-                'z-index:20', 'white-space:nowrap',
-                'transition:opacity 0.4s ease',
-            ].join(';');
-            loadBar.textContent = '[' + ' '.repeat(BAR_CHARS) + ']';
-            overlay.appendChild(loadBar);
-
-            function updateLoadBar(progress) {
-                const filled = Math.min(Math.floor(progress * BAR_CHARS), BAR_CHARS);
-                loadBar.textContent = '[' + '='.repeat(filled) + ' '.repeat(BAR_CHARS - filled) + ']';
-                loadPct.textContent = Math.min(Math.round(progress * 100), 100) + '%';
-            }
-
-            const container = document.getElementById('heroArtwork');
-            if (!container) {
-                overlay.remove();
-                if (heroIdentity) heroIdentity.style.opacity = '1';
-                if (heroBlockScroll) { window.removeEventListener('wheel', heroBlockScroll); window.removeEventListener('touchmove', heroBlockScroll); heroBlockScroll = null; }
-                setupHeroModel();
-                return;
-            }
-
-            Promise.all([
-                import('./vendor/three/build/three.module.js'),
-                import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),
-                import('./vendor/three/examples/jsm/loaders/DRACOLoader.js'),
-                import('./vendor/three/examples/jsm/effects/AsciiEffect.js'),
-            ]).then(([THREE, gltfModule, dracoModule, asciiModule]) => {
-                const { GLTFLoader } = gltfModule;
-                const { DRACOLoader } = dracoModule;
-                const { AsciiEffect } = asciiModule;
-
-                let disposed = false;
-                let frameId = null;
-
-                // Intro: 3/4 angle, zoomed in, shifted left-of-centre
-                const INTRO_CAM_Z = 5.6;
-                const INTRO_CAM_X = 3.0;
-                const FINAL_CAM_Z = 6.8;
-                const FINAL_CAM_X = 0.0;
-                const INTRO_ROT_Y = Math.PI * 0.2;
-                const FINAL_ROT_Y = Math.PI * 0.5;
-                const TRANSITION_MS = 3000;
-
-                const pointer = { active: false, x: 0, y: 0, targetX: 0, targetY: 0, enabled: false };
-
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 200);
-                camera.position.set(INTRO_CAM_X, 0.1, INTRO_CAM_Z);
-                camera.lookAt(0, 0.1, 0);
-
-                const renderer = new THREE.WebGLRenderer({ antialias: true });
-                renderer.setClearColor(0xffffff, 1);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-                const effect = new AsciiEffect(renderer, '      .:-=+*#%@GS', {
-                    invert: false,
-                    resolution: 0.18,
-                    overlayProvider: ({ cols, height, rows, width }) => {
-                        if (!pointer.enabled || !pointer.active) return null;
-                        return { col: (pointer.x / width) * cols, row: (pointer.y / height) * rows, text: 'CLICK' };
-                    },
-                });
-                effect.domElement.style.cssText = 'width:100%;height:100%;color:#f6f1df;background-color:#050505;font-size:4.8px;line-height:4.8px;';
-                container.appendChild(effect.domElement);
-
-                scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 7.5));
-                const kl = new THREE.DirectionalLight(0xffffff, 7.5); kl.position.set(2, 5, 4); scene.add(kl);
-                const fl = new THREE.DirectionalLight(0xffffff, 5.5); fl.position.set(-4, 3, 5); scene.add(fl);
-                const rl = new THREE.DirectionalLight(0xffffff, 4.5); rl.position.set(-4, 3, -5); scene.add(rl);
-
-                const dracoLoader = new DRACOLoader();
-                dracoLoader.setDecoderPath('./vendor/three/examples/jsm/libs/draco/');
-                const loader = new GLTFLoader();
-                loader.setDRACOLoader(dracoLoader);
-                const asciiMaterial = new THREE.MeshStandardMaterial({ color: 0x0d0d0d, metalness: 0, roughness: 0.92 });
-
-                const heroResize = () => {
-                    const r = container.getBoundingClientRect();
-                    const w = Math.max(1, Math.floor(r.width));
-                    const h = Math.max(1, Math.floor(r.height));
-                    camera.aspect = w / h;
-                    camera.updateProjectionMatrix();
-                    camera.lookAt(0, 0.1, 0);
-                    renderer.setSize(w, h);
-                    effect.setSize(w, h);
-                };
-                window.addEventListener('resize', heroResize);
-                // ResizeObserver tracks container size continuously — handles padding animation smoothly
-                const resizeObserver = new ResizeObserver(() => heroResize());
-                resizeObserver.observe(container);
-                heroResize();
-
-                let model = null;
-                let phase = 'loading';
-                let transitionStart = null;
-                let transitionEndTime = null;
-
-                heroModelCleanup = () => {
-                    disposed = true;
-                    if (frameId) cancelAnimationFrame(frameId);
-                    window.removeEventListener('resize', heroResize);
-                    resizeObserver.disconnect();
-                    renderer.dispose();
-                    dracoLoader.dispose();
-                    overlay.remove();
-                    container.innerHTML = '';
-                    if (heroBlockScroll) {
-                        window.removeEventListener('wheel', heroBlockScroll);
-                        window.removeEventListener('touchmove', heroBlockScroll);
-                        heroBlockScroll = null;
-                    }
-                };
-
-                loader.load(
-                    siteData.heroModel,
-                    (gltf) => {
-                        if (disposed) return;
-                        model = gltf.scene;
-                        model.traverse(c => {
-                            if (c.isMesh) { c.castShadow = false; c.receiveShadow = false; c.material = asciiMaterial; }
-                        });
-                        const box = new THREE.Box3().setFromObject(model);
-                        const center = box.getCenter(new THREE.Vector3());
-                        const size = box.getSize(new THREE.Vector3());
-                        const scale = 5.8 / Math.max(size.x, size.y, size.z);
-                        model.scale.setScalar(scale);
-                        model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
-                        model.rotation.y = INTRO_ROT_Y;
-                        scene.add(model);
-                        updateLoadBar(1);
-                        const elapsed = performance.now() - loadStartTime;
-                        const wait = Math.max(500, MIN_DURATION_MS - elapsed);
-                        setTimeout(() => {
-                            if (disposed) return;
-                            // Step 1 → 2: fade loading bar, then fade overlay to reveal model
-                            loadBar.style.opacity = '0';
-                            loadPct.style.opacity = '0';
-                            setTimeout(() => {
-                                if (disposed) return;
-                                overlay.style.transition = 'opacity 1s ease';
-                                overlay.style.opacity = '0';
-                                overlay.addEventListener('transitionend', () => {
-                                    overlay.remove();
-                                    // Step 2 → 3: model now visible at 3/4 zoomed — start transition
-                                    phase = 'transitioning';
-                                    transitionStart = performance.now();
-                                }, { once: true });
-                            }, 1200); // hold so user sees model at 3/4 before it moves
-                        }, wait);
-                    },
-                    (xhr) => {
-                        if (xhr.total > 0) {
-                            const elapsed = performance.now() - loadStartTime;
-                            updateLoadBar(Math.min(xhr.loaded / xhr.total, elapsed / MIN_DURATION_MS));
-                        }
-                    },
-                    () => { overlay.remove(); if (heroIdentity) heroIdentity.style.opacity = '1'; }
-                );
-
-                function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
-
-                function animate() {
-                    if (disposed) return;
-                    frameId = requestAnimationFrame(animate);
-
-                    if (phase === 'transitioning') {
-                        const t = Math.min((performance.now() - transitionStart) / TRANSITION_MS, 1);
-                        const e = easeInOut(t);
-                        // Zoom out and pan to centre simultaneously
-                        camera.position.z = INTRO_CAM_Z + (FINAL_CAM_Z - INTRO_CAM_Z) * e;
-                        camera.position.x = INTRO_CAM_X + (FINAL_CAM_X - INTRO_CAM_X) * e;
-                        camera.lookAt(0, 0.1, 0);
-                        if (model) model.rotation.y = INTRO_ROT_Y + (FINAL_ROT_Y - INTRO_ROT_Y) * e;
-                        if (t >= 1) {
-                            // Step 3 → 4: transition done — reveal wordmark + nav
-                            transitionEndTime = performance.now();
-                            phase = 'done';
-                            finishSetup();
-                        }
-                    } else if (phase === 'done' && model) {
-                        model.rotation.y = FINAL_ROT_Y + (performance.now() - transitionEndTime) * 0.00028;
-                        if (pointer.enabled && pointer.active) {
-                            pointer.x += (pointer.targetX - pointer.x) * 0.08;
-                            pointer.y += (pointer.targetY - pointer.y) * 0.08;
-                        }
-                    }
-
-                    effect.render(scene, camera);
-                }
-
-                animate();
-
-                function finishSetup() {
-                    // rAF loop: animate padding 0→1rem and heroIdentity height 0→auto
-                    // heroResize() called every frame so renderer tracks container size smoothly
-                    const FRAME_MS = 900;
-                    const frameStart = performance.now();
-                    const identityFull = 400; // px — well above actual wordmark+nav height to avoid snap
-                    function animateFrame() {
-                        const t = Math.min((performance.now() - frameStart) / FRAME_MS, 1);
-                        const e = easeInOut(t);
-                        const pad = (e * 16).toFixed(1) + 'px';
-                        if (heroWrapper) { heroWrapper.style.padding = pad; heroWrapper.style.gap = pad; }
-                        if (heroIdentity) {
-                            heroIdentity.style.maxHeight = (e * identityFull).toFixed(1) + 'px';
-                            heroIdentity.style.opacity = String(e);
-                        }
-                        heroResize();
-                        if (t < 1) requestAnimationFrame(animateFrame);
-                        else {
-                            // Snap to clean final state
-                            if (heroWrapper) { heroWrapper.style.padding = ''; heroWrapper.style.gap = ''; }
-                            if (heroIdentity) { heroIdentity.style.maxHeight = ''; heroIdentity.style.overflow = ''; heroIdentity.style.opacity = '1'; }
-                            heroResize();
-                        }
-                    }
-                    requestAnimationFrame(animateFrame);
-
-                    // Swap scroll block: intro block → hero block (CLICK to scroll)
-                    if (heroBlockScroll) {
-                        window.removeEventListener('wheel', heroBlockScroll);
-                        window.removeEventListener('touchmove', heroBlockScroll);
-                        heroBlockScroll = null;
-                    }
-                    heroBlockScroll = (e) => {
-                        const hero = document.getElementById('hero');
-                        if (hero && hero.getBoundingClientRect().bottom <= 0) return;
-                        e.preventDefault();
-                    };
-                    window.addEventListener('wheel', heroBlockScroll, { passive: false });
-                    window.addEventListener('touchmove', heroBlockScroll, { passive: false });
-
-                    const unblockScroll = () => {
-                        if (heroBlockScroll) {
-                            window.removeEventListener('wheel', heroBlockScroll);
-                            window.removeEventListener('touchmove', heroBlockScroll);
-                            heroBlockScroll = null;
-                        }
-                    };
-
-                    // Enable CLICK cursor
-                    pointer.enabled = true;
-                    const movePointer = (ev) => {
-                        const r = container.getBoundingClientRect();
-                        pointer.active = true;
-                        pointer.targetX = ev.clientX - r.left;
-                        pointer.targetY = ev.clientY - r.top;
-                        if (pointer.x === 0 && pointer.y === 0) { pointer.x = pointer.targetX; pointer.y = pointer.targetY; }
-                    };
-                    container.addEventListener('pointerenter', () => { pointer.active = true; });
-                    container.addEventListener('pointermove', movePointer);
-                    container.addEventListener('pointerleave', () => { pointer.active = false; });
-
-                    const clickOverlay = document.createElement('div');
-                    clickOverlay.style.cssText = 'position:absolute;inset:0;z-index:10;cursor:none;';
-                    container.appendChild(clickOverlay);
-                    clickOverlay.addEventListener('click', () => {
-                        unblockScroll();
-                        const target = document.getElementById('mainContent');
-                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    });
-
-                    heroModelCleanup = () => {
-                        disposed = true;
-                        unblockScroll();
-                        if (frameId) cancelAnimationFrame(frameId);
-                        window.removeEventListener('resize', heroResize);
-                        resizeObserver.disconnect();
-                        container.innerHTML = '';
-                        renderer.dispose();
-                        dracoLoader.dispose();
-                        if (heroIdentity) { heroIdentity.style.maxHeight = ''; heroIdentity.style.overflow = ''; heroIdentity.style.opacity = ''; }
-                        if (heroWrapper) { heroWrapper.style.padding = ''; heroWrapper.style.gap = ''; }
-                    };
-                }
-
-            }).catch(() => {
-                overlay.remove();
-                if (heroIdentity) { heroIdentity.style.maxHeight = ''; heroIdentity.style.overflow = ''; heroIdentity.style.opacity = '1'; }
-                if (heroWrapper) { heroWrapper.style.padding = ''; heroWrapper.style.gap = ''; }
-                if (heroBlockScroll) {
-                    window.removeEventListener('wheel', heroBlockScroll);
-                    window.removeEventListener('touchmove', heroBlockScroll);
-                    heroBlockScroll = null;
-                }
-                heroModelCleanup = null;
-                setupHeroModel();
-            });
-        }
-
-        function setupHeroModel() {
-            const container = document.getElementById('heroArtwork');
-            const mainContent = document.getElementById('mainContent');
-            if (!container) return;
-
-            let disposed = false;
-            let frameId = null;
-            let resizeHandler = null;
-
-            const pointer = {
-                active: false,
-                x: 0,
-                y: 0,
-                targetX: 0,
-                targetY: 0,
-            };
-
-            heroModelCleanup = () => {
-                disposed = true;
-                container.innerHTML = '';
-            };
-
-            const movePointer = (event) => {
-                const rect = container.getBoundingClientRect();
-                pointer.active = true;
-                pointer.targetX = event.clientX - rect.left;
-                pointer.targetY = event.clientY - rect.top;
-
-                if (pointer.x === 0 && pointer.y === 0) {
-                    pointer.x = pointer.targetX;
-                    pointer.y = pointer.targetY;
-                }
-            };
-
-            container.addEventListener('pointerenter', () => {
-                pointer.active = true;
-            });
-            container.addEventListener('pointermove', movePointer);
-            container.addEventListener('pointerleave', () => {
-                pointer.active = false;
-            });
-            heroBlockScroll = (e) => {
-                const hero = document.getElementById('hero');
-                if (hero && hero.getBoundingClientRect().bottom <= 0) return;
-                e.preventDefault();
-            };
-            window.addEventListener('wheel', heroBlockScroll, { passive: false });
-            window.addEventListener('touchmove', heroBlockScroll, { passive: false });
-
-            const unblockScroll = () => {
-                if (heroBlockScroll) {
-                    window.removeEventListener('wheel', heroBlockScroll);
-                    window.removeEventListener('touchmove', heroBlockScroll);
-                    heroBlockScroll = null;
-                }
-            };
-
-            heroModelCleanup = () => {
-                disposed = true;
-                unblockScroll();
-                container.innerHTML = '';
-            };
-
-            // Transparent overlay guarantees click registration regardless of AsciiEffect pointer-events
-            const clickOverlay = document.createElement('div');
-            clickOverlay.style.cssText = 'position:absolute;inset:0;z-index:10;cursor:none;';
-            container.appendChild(clickOverlay);
-
-            clickOverlay.addEventListener('click', () => {
-                unblockScroll();
-                const target = document.getElementById('mainContent');
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-
-            Promise.all([
-                import('./vendor/three/build/three.module.js'),
-                import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),
-                import('./vendor/three/examples/jsm/loaders/DRACOLoader.js'),
-                import('./vendor/three/examples/jsm/effects/AsciiEffect.js'),
-            ]).then(([THREE, gltfModule, dracoModule, asciiModule]) => {
-                if (disposed) return;
-
-                const { GLTFLoader } = gltfModule;
-                const { DRACOLoader } = dracoModule;
-                const { AsciiEffect } = asciiModule;
-                const scene = new THREE.Scene();
-                scene.background = new THREE.Color(0xffffff);
-
-                const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 200);
-                camera.position.set(0, 0.1, 6.8);
-                camera.lookAt(0, 0.1, 0);
-
-                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-                renderer.setClearColor(0xffffff, 1);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-                const effect = new AsciiEffect(renderer, '      .:-=+*#%@GS', {
-                    invert: false,
-                    resolution: 0.18,
-                    overlayProvider: ({ cols, height, rows, width }) => {
-                        if (!pointer.active) return null;
-                        return {
-                            col: (pointer.x / width) * cols,
-                            row: (pointer.y / height) * rows,
-                            text: 'CLICK',
-                        };
-                    },
-                });
-
-                effect.domElement.style.width = '100%';
-                effect.domElement.style.height = '100%';
-                effect.domElement.style.color = '#f6f1df';
-                effect.domElement.style.backgroundColor = '#050505';
-                effect.domElement.style.fontSize = '4.8px';
-                effect.domElement.style.lineHeight = '4.8px';
-                container.appendChild(effect.domElement);
-
-                scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 7.5));
-
-                const keyLight = new THREE.DirectionalLight(0xffffff, 7.5);
-                keyLight.position.set(2, 5, 4);
-                scene.add(keyLight);
-
-                const fillLight = new THREE.DirectionalLight(0xffffff, 5.5);
-                fillLight.position.set(-4, 3, 5);
-                scene.add(fillLight);
-
-                const rimLight = new THREE.DirectionalLight(0xffffff, 4.5);
-                rimLight.position.set(-4, 3, -5);
-                scene.add(rimLight);
-
-                const dracoLoader = new DRACOLoader();
-                dracoLoader.setDecoderPath('./vendor/three/examples/jsm/libs/draco/');
-
-                const loader = new GLTFLoader();
-                loader.setDRACOLoader(dracoLoader);
-
-                const asciiMaterial = new THREE.MeshStandardMaterial({
-                    color: 0x0d0d0d,
-                    metalness: 0,
-                    roughness: 0.92,
-                });
-
-                let model = null;
-                let baseRotationY = 0;
-
-                const resize = () => {
-                    const rect = container.getBoundingClientRect();
-                    const width = Math.max(1, Math.floor(rect.width));
-                    const height = Math.max(1, Math.floor(rect.height));
-                    camera.aspect = width / height;
-                    camera.updateProjectionMatrix();
-                    camera.lookAt(0, 0.1, 0);
-                    renderer.setSize(width, height);
-                    effect.setSize(width, height);
-                };
-
-                resizeHandler = resize;
-                window.addEventListener('resize', resize);
-                resize();
-
-                loader.load(
-                    siteData.heroModel,
-                    (gltf) => {
-                        if (disposed) return;
-                        model = gltf.scene;
-                        model.traverse((child) => {
-                            if (child.isMesh) {
-                                child.castShadow = false;
-                                child.receiveShadow = false;
-                                child.material = asciiMaterial;
-                            }
-                        });
-
-                        const box = new THREE.Box3().setFromObject(model);
-                        const center = box.getCenter(new THREE.Vector3());
-                        const size = box.getSize(new THREE.Vector3());
-                        const maxAxis = Math.max(size.x, size.y, size.z);
-                        const scale = 5.8 / maxAxis;
-
-                        model.scale.setScalar(scale);
-                        model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
-                        baseRotationY = Math.PI * 0.5;
-                        model.rotation.y = baseRotationY;
-                        scene.add(model);
-                    },
-                    undefined,
-                    () => {
-                        container.textContent = 'Could not load model.';
-                    },
-                );
-
-                const animate = () => {
-                    if (disposed) return;
-                    frameId = requestAnimationFrame(animate);
-                    if (pointer.active) {
-                        pointer.x += (pointer.targetX - pointer.x) * 0.08;
-                        pointer.y += (pointer.targetY - pointer.y) * 0.08;
-                    }
-                    if (model) {
-                        model.rotation.y = baseRotationY + performance.now() * 0.00028;
-                    }
-                    effect.render(scene, camera);
-                };
-
-                animate();
-
-                heroModelCleanup = () => {
-                    disposed = true;
-                    unblockScroll();
-                    if (frameId) cancelAnimationFrame(frameId);
-                    if (resizeHandler) window.removeEventListener('resize', resizeHandler);
-                    container.innerHTML = '';
-                    renderer.dispose();
-                    dracoLoader.dispose();
-                };
-            }).catch(() => {
-                if (!disposed) {
-                    container.style.color = '#f6f1df';
-                    container.style.fontSize = '11px';
-                    container.textContent = '[ model unavailable ]';
-                }
-            });
-
-        }
-
-        function setupGlitchEffects() {
-            glitchObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const targetText = entry.target.dataset.text;
-                        if (targetText) {
-                            setTimeout(() => {
-                                glitchText(entry.target, targetText);
-                                startPeriodicGlitch(entry.target, targetText);
-                            }, 100);
-                            glitchObserver.unobserve(entry.target);
-                        }
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            document.querySelectorAll('.glitch-text').forEach(element => {
-                if (element.dataset.text) {
-                    glitchObserver.observe(element);
-                }
-            });
-
-            setTimeout(() => {
-                document.querySelectorAll('.glitch-text').forEach((element, index) => {
-                    const targetText = element.dataset.text;
-                    if (targetText && element.getBoundingClientRect().top < window.innerHeight) {
-                        setTimeout(() => {
-                            glitchText(element, targetText);
-                            startPeriodicGlitch(element, targetText);
-                        }, index * 100);
-                    }
-                });
-            }, 500);
-        }
-
-
-        // VIEW FUNCTIONS
-        function viewWorkItem(id) {
-            const item = siteData.workPreviews.find(w => w.id === id);
-            if (!item) return;
-
-            clearAllTimers();
-            const pageContent = document.getElementById('pageContent');
-            pageContent.innerHTML = `
-                <div class="content-page">
-                    <button onclick="loadPage('work')" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;font-style:italic;color:var(--text-tertiary);cursor:pointer;padding:0;margin-bottom:2rem;display:block;">← back</button>
-                    <h1 class="glitch-text" data-text="${item.title}">
-                        <span class="text-content">${item.title}</span>
-                    </h1>
-                    <div class="content">
-                        <p class="glitch-text" data-text="${item.fullContent}">
-                            <span class="text-content">${item.fullContent}</span>
-                        </p>
-                    </div>
-                </div>
-                ${renderFooter([['Home','home'],['Work','work'],['About','about']])}
-            `;
-            setupGlitchEffects();
-            window.scrollTo(0, 0);
-        }
-
-        function viewBlogPost(id) {
-            const post = siteData.blogPosts.find(p => p.id === id);
-            if (!post) return;
-
-            clearAllTimers();
-            const pageContent = document.getElementById('pageContent');
-            const paragraphs = post.fullContent.split('\n\n')
-                .map(p => `<p>${p}</p>`).join('');
-            pageContent.innerHTML = `
-                <div class="content-page">
-                    <button onclick="loadPage('blog')" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;font-style:italic;color:var(--text-tertiary);cursor:pointer;padding:0;margin-bottom:2rem;display:block;">← back</button>
-                    <h1 class="glitch-text" data-text="${post.title}">
-                        <span class="text-content">${post.title}</span>
-                    </h1>
-                    <div class="post-date glitch-text" data-text="${post.date}">
-                        <span class="text-content">${post.date}</span>
-                    </div>
-                    <div class="post-body">${paragraphs}</div>
-                </div>
-                ${renderFooter([['Home','home'],['Work','work'],['About','about']])}
-            `;
-            setupGlitchEffects();
-            window.scrollTo(0, 0);
-            }; // end _renderPage
-            setTimeout(_renderPage, 180);
-        }
-
-        // CUSTOM CURSOR
-        document.addEventListener('mousemove', (e) => {
-            const cursor = document.getElementById('customCursor');
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-
-            const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
-            let cursorText = '';
-            let shouldShow = false;
-
-            if (hoveredElement) {
-                if (hoveredElement.closest('.hero-nav-link, .nav-link, .header-left, .header-right')) {
-                    cursorText = 'navigate →';
-                    shouldShow = true;
-                } else if (hoveredElement.closest('.preview-item')) {
-                    const previewItem = hoveredElement.closest('.preview-item');
-                    const section = previewItem.closest('.preview-section');
-                    if (section) {
-                        const header = section.querySelector('.section-header');
-                        if (header && header.textContent.includes('WORK')) {
-                            cursorText = 'view case →';
-                        } else if (header && header.textContent.includes('INSIGHT')) {
-                            cursorText = 'read article →';
-                        } else if (header && header.textContent.includes('GARAGE')) {
-                            cursorText = 'view listing →';
-                        } else {
-                            cursorText = 'learn more →';
-                        }
-                    }
-                    shouldShow = true;
-                } else if (hoveredElement.closest('.footer-column a')) {
-                    cursorText = 'open link →';
-                    shouldShow = true;
-                } else if (hoveredElement.closest('.hero-artwork')) {
-                    cursorText = 'scroll down →';
-                    shouldShow = true;
-                }
-            }
-
-            cursor.textContent = cursorText;
-            if (shouldShow) {
-                cursor.classList.add('visible');
-            } else {
-                cursor.classList.remove('visible');
-            }
+        animate();
+
+        const clickOverlay = document.createElement('div');
+        clickOverlay.style.cssText = 'position:absolute;inset:0;z-index:20;cursor:none;';
+        intro.appendChild(clickOverlay);
+        clickOverlay.addEventListener('click', () => {
+          if (phase !== 'done') return;
+          dismiss();
+          intro.addEventListener('transitionend', cleanupScene, { once: true });
         });
+      }).catch(() => {
+        // Module import failed — Three.js objects don't exist yet, just dismiss
+        dismiss();
+      });
+    })();
 
-        // FLOATING BUTTONS + MENU
-        window.addEventListener('scroll', () => {
-            const floatingButtons = document.getElementById('floatingButtons');
-            const floatingMenu = document.getElementById('floatingMenu');
-            floatingButtons.classList.toggle('visible', window.scrollY > 400);
-            if (currentPage === 'home') {
-                const heroNavRow = document.getElementById('heroNavRow');
-                const past = heroNavRow ? heroNavRow.getBoundingClientRect().bottom < 0 : window.scrollY > 400;
-                floatingMenu.classList.toggle('visible', past);
-            } else {
-                floatingMenu.classList.remove('visible');
-            }
-        });
+    // ── CURSOR ───────────────────────────────────────────────────────────────
+    (function() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      const ring = document.getElementById('cursorRing');
+      const coords = document.getElementById('cursorCoords');
+      const box = document.getElementById('cursorBox');
+      const label = document.getElementById('cursorLabel');
+      const INTERACTIVE = 'a, button, [data-page], .vmark, .nav a';
+      let lastMx = -1, lastMy = -1;
 
-        document.getElementById('floatingMenu').addEventListener('click', (e) => {
-            const item = e.target.closest('[data-nav]');
-            if (item) loadPage(item.dataset.nav);
-        });
-
-        document.getElementById('scrollTopBtn').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        document.getElementById('darkModeBtn').addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            document.getElementById('darkModeBtn').textContent = isDark ? '[ ☀ ]' : '[ ◐ ]';
-            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-        });
-
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.body.classList.add('dark-mode');
-            document.getElementById('darkModeBtn').textContent = '[ ☀ ]';
+      function updateHover(mx, my) {
+        const target = document.elementFromPoint(mx, my);
+        const interactive = target && target.closest(INTERACTIVE);
+        if (interactive) {
+          ring.classList.add('hovered');
+          const r = interactive.getBoundingClientRect(), pad = 6;
+          const br = Math.min((parseFloat(getComputedStyle(interactive).borderRadius) || 0) + pad, 16);
+          box.style.left = (r.left-pad)+'px'; box.style.top = (r.top-pad)+'px';
+          box.style.width = (r.width+pad*2)+'px'; box.style.height = (r.height+pad*2)+'px';
+          box.style.borderRadius = br+'px'; box.classList.add('active');
+          label.textContent = interactive.dataset.label || interactive.getAttribute('aria-label') || interactive.textContent.trim().slice(0,32);
+          const lx = r.left+r.width/2, ly = r.top-pad-26, lw = label.offsetWidth||120;
+          label.style.left = Math.min(Math.max(lx,lw/2+8),window.innerWidth-lw/2-8)+'px';
+          label.style.top = Math.max(ly,8)+'px';
+          label.classList.add('active');
+        } else {
+          ring.classList.remove('hovered');
+          box.classList.remove('active');
+          label.classList.remove('active');
         }
+      }
 
+      let mousePending = false;
+      document.addEventListener('mousemove', (e) => {
+        lastMx = e.clientX; lastMy = e.clientY;
+        // Ring and coords use transform — GPU composited, no layout triggered
+        ring.style.transform = 'translate(' + (lastMx - 11) + 'px,' + (lastMy - 11) + 'px)';
+        ring.classList.add('active');
+        if (!mousePending) {
+          mousePending = true;
+          requestAnimationFrame(() => {
+            mousePending = false;
+            coords.style.transform = 'translate(' + (lastMx + 14) + 'px,' + (lastMy + 14) + 'px)';
+            coords.innerHTML = 'X:' + String(lastMx).padStart(4,'0') + '<br>Y:' + String(lastMy).padStart(4,'0');
+            coords.classList.add('active');
+            updateHover(lastMx, lastMy);
+          });
+        }
+      });
 
-        // NAVIGATION — set up once, delegates to dynamically rendered content
-        // Prevent browser from restoring scroll position on refresh — always start at top
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      // Re-evaluate hover on scroll — strip position transitions so box snaps instantly
+      let scrollEndTimer = null;
+      window.addEventListener('scroll', () => {
+        if (lastMx < 0) return;
+        box.classList.add('no-transition');
+        updateHover(lastMx, lastMy);
+        clearTimeout(scrollEndTimer);
+        scrollEndTimer = setTimeout(() => box.classList.remove('no-transition'), 150);
+      }, { passive: true });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            window.scrollTo(0, 0);
-            document.getElementById('logoLink').addEventListener('click', () => loadPage('home'));
+      document.addEventListener('mouseleave', () => {
+        ring.classList.remove('active'); coords.classList.remove('active');
+        box.classList.remove('active'); label.classList.remove('active');
+      });
+    })();
 
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    loadPage(link.dataset.page);
-                });
-            });
+    // ── THEME ────────────────────────────────────────────────────────────────
+    const toggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const root = document.documentElement;
+    const moonPath = 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z';
+    const sunPath  = 'M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42M12 5a7 7 0 1 0 0 14A7 7 0 0 0 12 5z';
+    function applyTheme(dark) { dark ? root.setAttribute('data-theme','dark') : root.removeAttribute('data-theme'); themeIcon.innerHTML = '<path d="' + (dark ? sunPath : moonPath) + '"/>'; }
+    applyTheme(localStorage.getItem('vp-theme') === 'dark');
+    toggle.addEventListener('click', () => { const d = root.getAttribute('data-theme') === 'dark'; applyTheme(!d); localStorage.setItem('vp-theme', d ? 'light' : 'dark'); });
 
-            document.getElementById('contactLink').addEventListener('click', () => loadPage('contact'));
+    // ── SCROLL TO TOP ────────────────────────────────────────────────────────
+    document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            loadPage('home');
-        });
-    </script>
+    // Clear card animation after it finishes so it doesn't hold a composited layer
+    // (composited layers block backdrop-filter on overlapping fixed elements)
+    const siteCard = document.querySelector('.site-card');
+    if (siteCard) siteCard.addEventListener('animationend', () => { siteCard.style.animation = 'none'; }, { once: true });
+
+    // ── CLOCKS ───────────────────────────────────────────────────────────────
+    function formatTime(d, tz) { return d.toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
+    function tickClocks() {
+      const now = new Date();
+      document.getElementById('clockLocal').textContent = 'LOCAL ' + formatTime(now, Intl.DateTimeFormat().resolvedOptions().timeZone);
+      document.getElementById('clockVancouver').textContent = 'VANCOUVER ' + formatTime(now, 'America/Vancouver');
+    }
+    tickClocks(); setInterval(tickClocks, 1000);
+
+    // ── SMOOTH SCROLL ────────────────────────────────────────────────────────
+    // Skip on touch devices, reduced-motion, or small screens — native scroll is better there
+    (function() {
+      const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isTouch || prefersReduced || window.innerWidth < 760) return;
+
+      let target = window.scrollY, current = window.scrollY, ticking = false;
+      // Keep target in sync if user scrolls via keyboard or other means
+      window.addEventListener('scroll', () => { if (!ticking) { target = window.scrollY; current = window.scrollY; } }, { passive: true });
+      window.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        target = Math.max(0, Math.min(target + e.deltaY, document.body.scrollHeight - window.innerHeight));
+        if (!ticking) {
+          ticking = true;
+          (function loop() {
+            const diff = target - current;
+            if (Math.abs(diff) < 0.5) { current = target; window.scrollTo(0, current); ticking = false; return; }
+            current += diff * 0.12;
+            window.scrollTo(0, current);
+            requestAnimationFrame(loop);
+          })();
+        }
+      }, { passive: false });
+    })();
+  </script>
 </body>
 </html>
