@@ -6,7 +6,7 @@
   <title>Varrel Putra</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
@@ -29,24 +29,24 @@
 
     /* TOKENS */
     :root {
-      --paper: #fafaf7; --bg: #e8e4dc; --ink: #1a1a18; --mid: #6b6b66; --faint: #a8a8a3;
-      --border: rgba(26,26,24,0.10);
-      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      --bg-gradient: radial-gradient(ellipse at 60% 40%, #fafaf7 0%, #f0ece4 55%, #e8e4dc 100%);
+      --paper: #fafaf7; --bg: #ddd8d0; --ink: #1a1a18; --mid: #7d7870; --faint: #b5b0a8;
+      --border: rgba(26,26,24,0.07);
+      --bg-gradient: radial-gradient(ellipse at 50% 55%, #ffffff 0%, #f4f0e8 50%, #ddd8d0 100%);
     }
     [data-theme="dark"] {
       --paper: #131312; --bg: #090908; --ink: #f0ece0; --mid: #807c70; --faint: #4d4a44;
-      --border: rgba(240,236,224,0.10);
-      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      --border: rgba(240,236,224,0.07);
       --bg-gradient: radial-gradient(ellipse at 60% 40%, #1c1c1a 0%, #111110 55%, #090908 100%);
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { background-color: var(--bg); background-image: var(--grain), var(--bg-gradient); background-attachment: local, fixed; scroll-behavior: auto; }
+    html { background-color: var(--bg); background-image: var(--bg-gradient); background-attachment: fixed; scroll-behavior: auto; }
     html, body { height: 100%; }
-    body { background: transparent; color: var(--ink); font-family: 'EB Garamond', serif; font-feature-settings: 'liga','kern','onum'; -webkit-font-smoothing: antialiased; min-height: 100vh; overflow-x: hidden; }
+    body { background: transparent; color: var(--ink); font-family: 'Libre Caslon Text', serif; font-feature-settings: 'liga','kern','onum'; -webkit-font-smoothing: antialiased; min-height: 100vh; overflow-x: hidden; scrollbar-width: none; }
+    body::-webkit-scrollbar { display: none; }
+    body.intro-active { overflow: hidden; }
 
     /* CARD */
-    .site-card { margin: 1.2rem 5rem 1.2rem; padding-bottom: calc(8vh + 5rem); background: var(--paper); background-image: var(--grain); border-radius: 20px; box-shadow: 0 4px 60px rgba(0,0,0,0.10),0 1px 6px rgba(0,0,0,0.06); position: relative; animation: card-enter 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .site-card { margin: 1.2rem 5rem 1.2rem; padding-bottom: calc(8vh + 5rem); background: rgba(255,255,255,0.07); border-radius: 20px; box-shadow: 0 8px 60px rgba(0,0,0,0.12), 0 1px 8px rgba(0,0,0,0.06); position: relative; animation: card-enter 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
     @keyframes card-enter { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
 
     /* SPA PAGES */
@@ -54,8 +54,8 @@
     .page.active { display: block; }
     @keyframes page-in  { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
     @keyframes page-out { from { opacity:1; transform:none; } to { opacity:0; transform:translateY(-8px); } }
-    .page.active  { animation: page-in  0.42s cubic-bezier(0.16,1,0.3,1) both; }
-    .page.exiting { animation: page-out 0.26s ease forwards; display: block; }
+    .page.active  { animation: page-in  0.85s cubic-bezier(0.16,1,0.3,1) both; }
+    .page.exiting { animation: page-out 0.55s cubic-bezier(0.4,0,1,1) forwards; display: block; }
 
     /* HEADER */
     .site-header { position: fixed; top: 0; left: 0; padding: 1.3rem 1.6rem; z-index: 200; pointer-events: none; }
@@ -63,9 +63,12 @@
     .vmark { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 500; font-size: 28px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; line-height: 1; }
 
     /* FOOTER NAV */
-    .site-footer-nav { position: fixed; bottom: 0; left: 5rem; right: 5rem; display: flex; justify-content: space-between; align-items: center; z-index: 9000; padding: 8vh 3.5rem 2.6rem; background: rgba(0,0,0,0.035); -webkit-backdrop-filter: blur(24px) saturate(1.05); backdrop-filter: blur(24px) saturate(1.05); -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 50%, transparent 100%); pointer-events: auto; cursor: default; opacity: 0; transition: opacity 0.6s ease; }
+    .site-footer-nav { position: fixed; bottom: 0; left: 5rem; right: 5rem; display: flex; justify-content: space-between; align-items: center; z-index: 9000; padding: 8vh 3.5rem 2.6rem; background: rgba(0,0,0,0.035); -webkit-backdrop-filter: blur(24px) saturate(1.05); backdrop-filter: blur(24px) saturate(1.05); -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 50%, transparent 100%); pointer-events: none; cursor: default; opacity: 0; transition: opacity 0.6s ease; }
+    @media (hover: none), (max-width: 768px) {
+      .site-footer-nav { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(to top, var(--bg) 40%, transparent 100%); }
+    }
     [data-theme="dark"] .site-footer-nav { background: rgba(0,0,0,0.14); }
-    .site-footer-nav.visible { opacity: 1; }
+    .site-footer-nav.visible { opacity: 1; pointer-events: auto; }
     .site-footer-nav a, .site-footer-nav button { cursor: pointer; }
     .footer-clock { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.07em; color: var(--mid); text-transform: uppercase; min-width: 13ch; }
     .footer-clock.right { text-align: right; }
@@ -85,13 +88,22 @@
     [data-theme="dark"] .v-watermark { color: rgba(240,236,224,0.04); }
 
     /* ── HOME ── */
-    .hero { min-height: calc(100vh - 2.4rem); display: grid; align-items: center; padding: 9rem 4rem 4rem; max-width: 1280px; margin: 0 auto; }
-    .hero-name { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(72px,11vw,168px); letter-spacing: -0.025em; line-height: 0.92; color: var(--ink); margin-bottom: 0.4rem; }
-    .hero-name em { font-style: italic; font-weight: 400; }
-    .hero-role { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(20px,2vw,26px); color: var(--mid); margin-bottom: 4rem; max-width: 32em; }
-    .hero-mission { max-width: 28em; font-size: 19px; line-height: 1.55; color: var(--ink); margin-bottom: 4rem; }
+    .hero { min-height: calc(100vh - 2.4rem); display: grid; align-items: center; padding: 11rem 5rem 6rem; max-width: 1280px; margin: 0 auto; }
+    .hero-name { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(80px,12vw,180px); letter-spacing: -0.03em; line-height: 0.88; color: var(--ink); margin-bottom: 1.2rem; }
+    .hero-name em { font-style: normal; font-weight: 500; }
+    .hero-role { font-family: 'IBM Plex Mono', monospace; font-style: normal; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); margin-bottom: 3.5rem; }
+    .hero-mission { max-width: 26em; font-size: 21px; line-height: 1.75; color: var(--ink); margin-bottom: 3rem; font-style: normal; }
     .hero-mission::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
     .hero-mission em { font-style: italic; color: var(--mid); }
+    .hero-status { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--mid); margin-top: 0.5rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 0.6rem; }
+    .hero-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #c8963e; display: inline-block; flex-shrink: 0; }
+    .hero-actions { display: flex; gap: 2rem; margin-bottom: 4rem; }
+    .hero-cta { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.07em; color: var(--ink); text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--faint); cursor: pointer; transition: color 0.2s, text-decoration-color 0.2s; }
+    .hero-cta:hover { color: var(--ink); text-decoration-color: var(--mid); }
+    .hero-writing { border-top: 1px solid var(--border); padding-top: 2rem; max-width: 28em; }
+    .hero-writing-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.8rem; }
+    .hero-writing-link { font-family: 'EB Garamond', serif; font-size: 20px; color: var(--ink); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+    .hero-writing-link:hover { color: var(--mid); }
     .featured { padding: 4rem 4rem 3rem; max-width: 1280px; margin: 0 auto; }
     .section-rule { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 4rem; }
     .section-rule::before, .section-rule::after { content: ''; flex: 1; height: 1px; background: var(--border); }
@@ -105,13 +117,13 @@
     .colophon-note { margin-top: 0.8rem; }
 
     /* ── SHARED SUBPAGE ── */
-    .page-content { max-width: 1280px; margin: 0 auto; padding: 10rem 4rem 3rem; }
+    .page-content { max-width: 1280px; margin: 0 auto; padding: 14rem 6rem 6rem; }
     .page-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(48px,7vw,96px); letter-spacing: -0.025em; line-height: 0.92; color: var(--ink); margin-bottom: 5rem; }
     .page-title em { font-style: italic; font-weight: 400; }
 
     /* ── WORK ── */
     .work-list { display: grid; gap: 0; }
-    .work-row { display: grid; grid-template-columns: 40px 1fr auto auto; gap: 2rem; align-items: baseline; padding: 1.6rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
+    .work-row { display: grid; grid-template-columns: 40px 1fr auto auto; gap: 2rem; align-items: baseline; padding: 2.8rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
     .work-row:hover { transform: translateX(0.8rem); }
     .work-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint); }
     .work-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 26px; letter-spacing: -0.01em; color: var(--ink); }
@@ -121,7 +133,7 @@
 
     /* ── WRITING ── */
     .post-list { display: grid; gap: 0; }
-    .post-row { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: baseline; padding: 1.6rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
+    .post-row { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: baseline; padding: 2.8rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
     .post-row:hover { transform: translateX(0.8rem); }
     .post-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 26px; letter-spacing: -0.01em; color: var(--ink); }
     .post-title em { font-style: italic; font-weight: 400; color: var(--mid); margin-left: 0.4em; }
@@ -147,9 +159,9 @@
     .garage-section-rule { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3rem; }
     .garage-section-rule::before, .garage-section-rule::after { content: ''; flex: 1; height: 1px; background: var(--border); }
     .garage-section-rule-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--mid); text-transform: uppercase; padding: 0 0.4rem; }
-    .garage-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .garage-card { background: var(--paper); display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: background 0.25s ease; }
-    .garage-card:hover { background: rgba(26,26,24,0.02); }
+    .garage-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 1.5rem; }
+    .garage-card { background: var(--paper); display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .garage-card:hover { background: rgba(26,26,24,0.02); box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-3px); }
     [data-theme="dark"] .garage-card:hover { background: rgba(240,236,224,0.03); }
     .garage-card-image { width: 100%; aspect-ratio: 4/3; background: var(--border); display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint); letter-spacing: 0.1em; }
     .garage-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -195,13 +207,66 @@
     .detail-meta { display: flex; gap: 2rem; margin-bottom: 4rem; flex-wrap: wrap; }
     .detail-meta-item { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
     .detail-meta-item span { color: var(--mid); display: block; margin-top: 0.3rem; text-transform: none; letter-spacing: 0; font-size: 12px; }
-    .detail-body { max-width: 34em; font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.65; color: var(--ink); }
+    .detail-body { max-width: 34em; font-family: 'EB Garamond', serif; font-size: 20px; line-height: 1.8; color: var(--ink); }
     .detail-body p { margin-bottom: 1.5rem; }
     .detail-body p:last-child { margin-bottom: 0; }
     .detail-body em { font-style: italic; color: var(--mid); }
     .detail-body::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
     .detail-action { display: inline-block; margin-top: 3rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--mid); text-decoration: none; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
     .detail-action:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── GARAGE DETAIL (Polestar-style) ── */
+    .garage-detail { display: grid; grid-template-columns: 1fr 400px; gap: 4rem; margin-bottom: 2rem; align-items: start; }
+    .garage-detail-gallery { position: sticky; top: 2rem; }
+    .garage-detail-main { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 0.8rem; cursor: zoom-in; }
+    .garage-detail-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.25s ease; }
+    .garage-detail-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 0.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; opacity: 0.3; transition: opacity 0.2s; }
+    .garage-detail-arrow:hover { opacity: 1; }
+    .garage-detail-arrow svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .garage-detail-arrow.prev { left: 0.5rem; }
+    .garage-detail-arrow.next { right: 0.5rem; }
+    .garage-detail-thumbs { display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; }
+    .garage-detail-thumbs::-webkit-scrollbar { display: none; }
+    .garage-detail-thumb { flex: 0 0 80px; height: 54px; border-radius: 4px; overflow: hidden; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: opacity 0.2s, border-color 0.2s; }
+    .garage-detail-thumb.active { border-color: var(--ink); opacity: 1; }
+    .garage-detail-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    /* Lightbox */
+    .gd-lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+    .gd-lightbox-main { position: relative; max-width: 90vw; max-height: 80vh; display: flex; align-items: center; justify-content: center; }
+    .gd-lightbox-main img { max-width: 90vw; max-height: 78vh; object-fit: contain; border-radius: 4px; }
+    .gd-lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: none; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
+    .gd-lightbox-arrow:hover { background: rgba(255,255,255,0.3); }
+    .gd-lightbox-arrow svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .gd-lightbox-arrow.prev { left: -56px; }
+    .gd-lightbox-arrow.next { right: -56px; }
+    .gd-lightbox-close { position: fixed; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: #fff; font-size: 28px; line-height: 1; }
+    .gd-lightbox-thumbs { display: flex; gap: 0.5rem; overflow-x: auto; max-width: 90vw; scrollbar-width: none; padding-bottom: 0.5rem; }
+    .gd-lightbox-thumbs::-webkit-scrollbar { display: none; }
+    .gd-lightbox-thumb { flex: 0 0 64px; height: 44px; border-radius: 3px; overflow: hidden; cursor: pointer; border: 2px solid transparent; opacity: 0.5; transition: opacity 0.2s, border-color 0.2s; }
+    .gd-lightbox-thumb.active { border-color: #fff; opacity: 1; }
+    .gd-lightbox-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .garage-detail-info { display: flex; flex-direction: column; }
+    .garage-detail-badge { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.6rem; }
+    .garage-detail-title { font-family: 'EB Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 400; font-style: italic; line-height: 1; color: var(--ink); margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+    .garage-detail-trim { font-family: 'EB Garamond', serif; font-style: italic; font-size: 18px; color: var(--mid); margin-bottom: 2rem; }
+    .garage-detail-price { margin-bottom: 2rem; }
+    .garage-detail-price-main { font-family: 'EB Garamond', serif; font-size: 38px; font-weight: 500; color: var(--ink); line-height: 1; }
+    .garage-detail-price-original { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--faint); text-decoration: line-through; margin-top: 0.3rem; }
+    .garage-detail-divider { height: 1px; background: var(--border); margin-bottom: 2rem; }
+    .garage-detail-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2rem; margin-bottom: 2rem; }
+    .garage-detail-spec-item { font-family: 'IBM Plex Mono', monospace; }
+    .garage-detail-spec-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.25rem; }
+    .garage-detail-spec-value { font-size: 12px; color: var(--ink); }
+    .garage-detail-stock { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--faint); margin-bottom: 2rem; }
+    .garage-detail-inquire { display: block; width: 100%; padding: 1rem; background: var(--ink); color: var(--paper); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; text-align: center; text-decoration: none; border-radius: 4px; transition: opacity 0.2s; cursor: pointer; border: none; }
+    .garage-detail-inquire:hover { opacity: 0.8; }
+    .garage-detail-description { border-top: 1px solid var(--border); padding-top: 3rem; }
+    .garage-detail-description p { font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.65; color: var(--ink); margin-bottom: 1.5rem; max-width: 38em; white-space: pre-line; }
+    @media (max-width: 860px) {
+      .garage-detail { grid-template-columns: 1fr; gap: 2rem; }
+      .garage-detail-gallery { position: static; }
+      .garage-detail-specs { grid-template-columns: 1fr 1fr; }
+    }
 
     /* ── GALLERY ── */
     .gallery { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 3rem; user-select: none; }
@@ -283,10 +348,15 @@
         <h1 class="hero-name" id="hero-name"></h1>
         <p class="hero-role" id="hero-role"></p>
         <p class="hero-mission" id="hero-mission"></p>
-      </section>
-      <section class="featured">
-        <div class="section-rule"><span class="section-rule-label">I. &nbsp; Selected Work</span></div>
-        <div class="work-list" id="work-list-home"></div>
+        <p class="hero-status"><span class="hero-status-dot"></span><span>Open to consulting, at your service.</span></p>
+        <div class="hero-actions">
+          <a class="hero-cta" data-page="work">View work →</a>
+          <a class="hero-cta" data-page="contact">Get in touch →</a>
+        </div>
+        <div class="hero-writing">
+          <div class="hero-writing-label">Latest writing</div>
+          <a class="hero-writing-link" id="hero-latest-writing"></a>
+        </div>
       </section>
     </div>
 
@@ -354,7 +424,10 @@
         <div class="contact-grid">
           <div>
             <p class="contact-body" id="contact-body"></p>
-            <a class="contact-email" id="contact-email" href="#" data-label="Send email"></a>
+            <a class="contact-email" id="contact-email" href="#" data-label="Copy email"></a>
+            <div style="margin-top:2rem;">
+              <a href="https://calendly.com/varrelsales/meeting" target="_blank" class="garage-detail-inquire" style="display:inline-block;width:auto;padding:0.9rem 2rem;" data-label="Schedule a meeting">Schedule a Meeting</a>
+            </div>
           </div>
           <div class="contact-sidebar">
             <h4>Elsewhere</h4>
@@ -372,19 +445,50 @@
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           Back
         </button>
-        <div class="gallery" id="detail-gallery" style="display:none"></div>
-        <h1 class="page-title" id="detail-title"></h1>
-        <div class="detail-meta" id="detail-meta"></div>
-        <div class="detail-body" id="detail-body"></div>
-        <a class="detail-action" id="detail-action" href="#" style="display:none"></a>
+        <!-- Standard layout (work / writing) -->
+        <div id="detail-standard">
+          <div class="gallery" id="detail-gallery" style="display:none"></div>
+          <h1 class="page-title" id="detail-title"></h1>
+          <div class="detail-meta" id="detail-meta"></div>
+          <div class="detail-body" id="detail-body"></div>
+          <a class="detail-action" id="detail-action" href="#" style="display:none"></a>
+        </div>
+        <!-- Garage layout (Polestar-style) -->
+        <div id="detail-garage" style="display:none">
+          <div class="garage-detail">
+            <div class="garage-detail-gallery">
+              <div class="garage-detail-main" id="gd-main">
+                <button class="garage-detail-arrow prev" id="gd-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <img id="gd-main-img" src="" alt="">
+                <button class="garage-detail-arrow next" id="gd-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+              <div class="garage-detail-thumbs" id="gd-thumbs"></div>
+            </div>
+            <div class="garage-detail-info">
+              <div class="garage-detail-badge" id="gd-badge"></div>
+              <div class="garage-detail-title" id="gd-title"></div>
+              <div class="garage-detail-trim" id="gd-trim"></div>
+              <div class="garage-detail-price">
+                <div class="garage-detail-price-main" id="gd-price"></div>
+                <div class="garage-detail-price-original" id="gd-original-price" style="display:none"></div>
+              </div>
+              <div class="garage-detail-divider"></div>
+              <div class="garage-detail-specs" id="gd-specs"></div>
+              <div class="garage-detail-stock" id="gd-stock"></div>
+              <a class="garage-detail-inquire" id="gd-inquire" href="#" data-label="Inquire">Message to Inquire</a>
+              <a class="garage-detail-inquire" style="margin-top:0.8rem; background:transparent; color:var(--ink); border:1px solid var(--border);" href="https://calendly.com/varrelsales/meeting" target="_blank" data-label="Schedule a viewing">Schedule a Viewing</a>
+            </div>
+          </div>
+          <div class="garage-detail-description" id="gd-description"></div>
+        </div>
       </main>
     </div>
 
     <!-- SHARED FOOTER -->
     <footer class="colophon" id="site-colophon">
-      <div><h4>Set in</h4><p><em>EB Garamond</em> &amp; IBM&nbsp;Plex&nbsp;Mono</p><p class="colophon-byline" id="colophon-byline"></p></div>
+      <div><a id="colophon-location"></a></div>
       <div><h4>Elsewhere</h4><div id="colophon-links"></div></div>
-      <div><h4>Contact</h4><a id="colophon-email" href="#"></a><a id="colophon-location" href="#"></a><p class="colophon-note"><em id="colophon-quote"></em></p></div>
+      <div><h4>Contact</h4><a id="colophon-email" href="#"></a></div>
     </footer>
 
   </div><!-- /.site-card -->
@@ -400,19 +504,35 @@
       ).join('');
     }
 
+    function makeEmailCopy(el, email) {
+      el.textContent = email;
+      el.href = '#';
+      el.dataset.label = 'Copy email';
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        navigator.clipboard.writeText(email).then(() => {
+          el.dataset.label = 'Copied!';
+          const labelEl = document.getElementById('cursorLabel');
+          if (labelEl) labelEl.textContent = 'Copied!';
+          setTimeout(() => {
+            el.dataset.label = 'Copy email';
+            if (labelEl) labelEl.textContent = 'Copy email';
+          }, 2000);
+        });
+      });
+    }
+
     function renderColophon(c) {
-      document.getElementById('colophon-byline').textContent = c.byline;
       document.getElementById('colophon-links').innerHTML = c.links.map(l => `<a href="${l.url}">${l.label}</a>`).join('');
-      const emailEl = document.getElementById('colophon-email');
-      emailEl.href = `mailto:${c.email}`; emailEl.textContent = c.email;
+      makeEmailCopy(document.getElementById('colophon-email'), c.email);
       document.getElementById('colophon-location').textContent = c.location;
-      document.getElementById('colophon-quote').innerHTML = c.quote;
     }
 
     function openDetail(type, index) {
       const d = siteContent;
       if (!d) return;
       detailOrigin = currentPage;
+      updateDetailBack(currentPage);
 
       const titleEl  = document.getElementById('detail-title');
       const metaEl   = document.getElementById('detail-meta');
@@ -424,6 +544,8 @@
       galleryEl.style.display = 'none';
       galleryEl.innerHTML = '';
       document.body.style.overflow = '';
+      document.getElementById('detail-standard').style.display = 'block';
+      document.getElementById('detail-garage').style.display = 'none';
 
       if (type === 'work') {
         const w = d.work[index];
@@ -446,60 +568,127 @@
 
       } else if (type === 'garage') {
         const l = d.garage.listings[index];
-        titleEl.innerHTML = l.title;
-        metaEl.innerHTML  = `<div class="detail-meta-item">Price<span>${l.price}</span></div><div class="detail-meta-item">Year<span>${l.year}</span></div><div class="detail-meta-item">Mileage<span>${l.mileage}</span></div><div class="detail-meta-item">Condition<span>${l.condition}</span></div>`;
-        bodyEl.innerHTML  = l.body.map(p => `<p>${p}</p>`).join('');
-        actionEl.href = l.contact_url; actionEl.textContent = 'Inquire ↗';
-        actionEl.style.display = 'inline-block'; actionEl.dataset.label = 'Inquire';
+        document.getElementById('detail-standard').style.display = 'none';
+        document.getElementById('detail-garage').style.display = 'block';
 
-        // Gallery
-        const images = l.images || [];
-        if (images.length === 0) {
-          galleryEl.style.display = 'none';
-        } else {
-          galleryEl.style.display = 'block';
-          let current = 0;
-          galleryEl.innerHTML = images.map((img, i) => {
-            const src = typeof img === 'string' ? img : sanityImageUrl(img.asset._ref);
-            return `<img class="gallery-img${i === 0 ? ' active' : ''}" src="${src}" alt="${l.title} — photo ${i+1}">`;
-          }).join('') + `<div class="gallery-dots">${images.map((_, i) =>
-            `<div class="gallery-dot${i === 0 ? ' active' : ''}" data-index="${i}"></div>`
-          ).join('')}</div>`;
+        const images = (l.images || []).map(img => typeof img === 'string' ? img : sanityImageUrl(img.asset._ref));
+        const mainImg = document.getElementById('gd-main-img');
+        const thumbsEl = document.getElementById('gd-thumbs');
+        const mainEl = document.getElementById('gd-main');
+        let gdCurrent = 0;
 
-          function goTo(n) {
-            const imgs = galleryEl.querySelectorAll('.gallery-img');
-            const dots = galleryEl.querySelectorAll('.gallery-dot');
-            imgs[current].classList.remove('active');
-            dots[current].classList.remove('active');
-            current = (n + images.length) % images.length;
-            imgs[current].classList.add('active');
-            dots[current].classList.add('active');
-          }
+        function gdGoTo(n) {
+          gdCurrent = (n + images.length) % images.length;
+          mainImg.src = images[gdCurrent];
+          thumbsEl.querySelectorAll('.garage-detail-thumb').forEach((t, i) => t.classList.toggle('active', i === gdCurrent));
+          const activeThumb = thumbsEl.children[gdCurrent];
+          if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
 
-          galleryEl.querySelectorAll('.gallery-dot').forEach(dot => {
-            dot.addEventListener('click', () => goTo(parseInt(dot.dataset.index)));
-          });
+        if (images.length > 0) {
+          mainImg.src = images[0];
+          thumbsEl.innerHTML = images.map((src, i) =>
+            `<div class="garage-detail-thumb${i === 0 ? ' active' : ''}" data-index="${i}"><img src="${src}" alt=""></div>`
+          ).join('');
+          thumbsEl.querySelectorAll('.garage-detail-thumb').forEach(t =>
+            t.addEventListener('click', () => gdGoTo(parseInt(t.dataset.index)))
+          );
 
-          let wheelLock = false;
-          galleryEl.addEventListener('wheel', e => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (wheelLock) return;
-            wheelLock = true;
-            goTo(current + (e.deltaY > 0 ? 1 : -1));
-            setTimeout(() => wheelLock = false, 500);
+          document.getElementById('gd-prev').addEventListener('click', e => { e.stopPropagation(); gdGoTo(gdCurrent - 1); });
+          document.getElementById('gd-next').addEventListener('click', e => { e.stopPropagation(); gdGoTo(gdCurrent + 1); });
+
+          let gdWheelLock = false;
+          let gdWheelAccum = 0;
+          mainEl.addEventListener('wheel', e => {
+            e.preventDefault(); e.stopPropagation();
+            if (gdWheelLock) return;
+            gdWheelAccum += e.deltaY;
+            if (Math.abs(gdWheelAccum) < 60) return;
+            gdWheelAccum = 0;
+            gdWheelLock = true;
+            gdGoTo(gdCurrent + (e.deltaY > 0 ? 1 : -1));
+            setTimeout(() => gdWheelLock = false, 600);
           }, { passive: false });
 
-          galleryEl.addEventListener('mouseenter', () => {
+          // Lightbox
+          mainEl.addEventListener('click', () => {
+            const lb = document.createElement('div');
+            lb.className = 'gd-lightbox';
+            lb.innerHTML = `
+              <button class="gd-lightbox-close" id="lb-close">✕</button>
+              <div class="gd-lightbox-main">
+                <button class="gd-lightbox-arrow prev" id="lb-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <img id="lb-img" src="${images[gdCurrent]}" alt="">
+                <button class="gd-lightbox-arrow next" id="lb-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+              <div class="gd-lightbox-thumbs">${images.map((src, i) =>
+                `<div class="gd-lightbox-thumb${i === gdCurrent ? ' active' : ''}" data-index="${i}"><img src="${src}" alt=""></div>`
+              ).join('')}</div>`;
+            document.body.appendChild(lb);
             document.body.style.overflow = 'hidden';
-          });
-          galleryEl.addEventListener('mouseleave', () => {
-            document.body.style.overflow = '';
+
+            let lbCurrent = gdCurrent;
+            const lbImg = lb.querySelector('#lb-img');
+            const lbThumbs = lb.querySelectorAll('.gd-lightbox-thumb');
+
+            function lbGoTo(n) {
+              lbCurrent = (n + images.length) % images.length;
+              lbImg.src = images[lbCurrent];
+              lbThumbs.forEach((t, i) => t.classList.toggle('active', i === lbCurrent));
+              lbThumbs[lbCurrent]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+
+            lb.querySelector('#lb-prev').addEventListener('click', e => { e.stopPropagation(); lbGoTo(lbCurrent - 1); });
+            lb.querySelector('#lb-next').addEventListener('click', e => { e.stopPropagation(); lbGoTo(lbCurrent + 1); });
+            lbThumbs.forEach(t => t.addEventListener('click', () => lbGoTo(parseInt(t.dataset.index))));
+            lb.querySelector('#lb-close').addEventListener('click', () => { lb.remove(); document.body.style.overflow = ''; });
+            lb.addEventListener('click', e => { if (e.target === lb) { lb.remove(); document.body.style.overflow = ''; } });
+            lb.addEventListener('keydown', e => {
+              if (e.key === 'ArrowLeft') lbGoTo(lbCurrent - 1);
+              if (e.key === 'ArrowRight') lbGoTo(lbCurrent + 1);
+              if (e.key === 'Escape') { lb.remove(); document.body.style.overflow = ''; }
+            });
+            lb.setAttribute('tabindex', '0'); lb.focus();
           });
         }
-      }
 
-      navigate('detail');
+        const year  = l.year  || '1991';
+        const make  = l.make  || 'Porsche';
+        const model = l.model || '911 Carrera 2';
+        const trim  = l.trim  || 'Coupe';
+        const title = `${year} ${make} ${model}`;
+
+        document.getElementById('gd-badge').textContent = [l.condition_label || 'Used', l.location || 'Vancouver, BC'].join(' · ');
+        document.getElementById('gd-title').textContent = title;
+        document.getElementById('gd-trim').textContent = trim;
+
+        document.getElementById('gd-price').textContent = l.price || '$48,500';
+        const origEl = document.getElementById('gd-original-price');
+        if (l.original_price) { origEl.textContent = l.original_price; origEl.style.display = 'block'; }
+        else { origEl.style.display = 'none'; }
+
+        const specs = [
+          { label: 'Mileage',      value: l.mileage       || '87,400 km' },
+          { label: 'Engine',       value: l.engine        || '3.6L Flat-6' },
+          { label: 'Transmission', value: l.transmission  || '5-Speed Manual' },
+          { label: 'Drivetrain',   value: l.drivetrain    || 'RWD' },
+          { label: 'Fuel Type',    value: l.fuel_type     || 'Gasoline' },
+          { label: 'Body Style',   value: l.body_style    || 'Coupe' },
+          { label: 'Seats',        value: l.seat_count    || '2+2' },
+          { label: 'Exterior',     value: l.color         || 'Guards Red' },
+          { label: 'Interior',     value: l.interior_text || 'Black Leather' },
+        ];
+        document.getElementById('gd-specs').innerHTML = specs.map(s =>
+          `<div class="garage-detail-spec-item"><div class="garage-detail-spec-label">${s.label}</div><div class="garage-detail-spec-value">${s.value}</div></div>`
+        ).join('');
+
+        document.getElementById('gd-stock').textContent = l.stock_number ? `Stock #${l.stock_number}` : '';
+        const inquireEl = document.getElementById('gd-inquire');
+        inquireEl.href = l.contact_url || '#';
+
+        const desc = l.description || (l.body ? l.body.join('\n\n') : 'A clean, unmolested example in original paint with full service history. One of the last air-cooled 911s built before Porsche moved to the water-cooled 996 — immediate, physical, demanding in the best way.');
+        document.getElementById('gd-description').innerHTML = `<p>${desc}</p>`;
+      }
     }
 
     // ── SANITY FETCH ─────────────────────────────────────────────────────────
@@ -536,11 +725,18 @@
 
       // Hero
       document.getElementById('hero-name').innerHTML = `${hero.name} <em>${hero.name_italic}</em>`;
-      document.getElementById('hero-role').innerHTML  = hero.role;
+      document.getElementById('hero-role').innerHTML  = hero.role + ' — Vancouver, BC';
       document.getElementById('hero-mission').innerHTML = hero.mission;
 
+      // Latest writing on home
+      const latestWriting = writing[0];
+      if (latestWriting) {
+        const el = document.getElementById('hero-latest-writing');
+        el.textContent = latestWriting.title + (latestWriting.subtitle ? ` — ${latestWriting.subtitle}` : '');
+        el.addEventListener('click', () => { openDetail('writing', 0); history.pushState({ page: 'detail', detailType: 'writing', detailIndex: 0 }, '', '#detail/writing/0'); showPage('detail'); });
+      }
+
       // Work
-      renderWorkRows(document.getElementById('work-list-home'), work);
       renderWorkRows(document.getElementById('work-list-page'), work);
 
       // Writing
@@ -554,8 +750,7 @@
       document.getElementById('about-based').textContent = about.based_in;
       document.getElementById('about-specialisms').innerHTML = about.specialisms.map(s => `<p>${s}</p>`).join('');
       document.getElementById('about-links').innerHTML = (about.links || []).map(l => `<a href="${l.url}" data-label="View ${l.label}">${l.label} ↗</a>`).join('');
-      const aboutEmail = document.getElementById('about-email');
-      aboutEmail.href = `mailto:${about.email}`; aboutEmail.textContent = about.email;
+      makeEmailCopy(document.getElementById('about-email'), about.email);
 
       // Garage
       document.getElementById('garage-subtitle').textContent = 'A personal index of automobiles. Inquire via email.';
@@ -568,8 +763,7 @@
 
       // Contact
       document.getElementById('contact-body').innerHTML = contact.body;
-      const cEmail = document.getElementById('contact-email');
-      cEmail.href = `mailto:${contact.email}`; cEmail.textContent = contact.email;
+      makeEmailCopy(document.getElementById('contact-email'), contact.email);
       document.getElementById('contact-links').innerHTML = (contact.links || []).map(l => `<a href="${l.url}" data-label="${l.label}">${l.label}</a>`).join('');
       document.getElementById('contact-note').innerHTML = contact.location_note;
 
@@ -591,9 +785,13 @@
     });
 
     // Back button
-    document.getElementById('detail-back').addEventListener('click', () => {
-      navigate(detailOrigin);
-    });
+    const detailBackBtn = document.getElementById('detail-back');
+    detailBackBtn.addEventListener('click', () => { navigate(detailOrigin); });
+
+    function updateDetailBack(origin) {
+      const labels = { work: 'Work', writing: 'Writing', garage: 'Garage', home: 'Home' };
+      detailBackBtn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> ${labels[origin] || 'Back'}`;
+    }
 
     // ── ROUTER ──────────────────────────────────────────────────────────────
     const TITLES = {
@@ -650,7 +848,7 @@
       navTimer = setTimeout(() => {
         if (thisTransition !== transitionId) return;
         showPage(id);
-      }, 260);
+      }, 520);
       history.pushState({ page: id }, '', id === 'home' ? './' : '#' + id);
     }
 
@@ -719,6 +917,7 @@
       const isHardRefresh = navEntry?.type === 'reload' && (navEntry?.transferSize ?? 0) > 0;
       const isFirstVisit  = !sessionStorage.getItem('vp-intro-seen');
       if (reducedMotion || (!isHardRefresh && !isFirstVisit)) { intro.remove(); showNav(); return; }
+      document.body.classList.add('intro-active');
 
       // Conditionally preload GLB only when intro will actually show
       const preloadLink = document.createElement('link');
@@ -747,6 +946,7 @@
 
       function dismiss() {
         sessionStorage.setItem('vp-intro-seen', '1');
+        document.body.classList.remove('intro-active');
         intro.classList.add('dismissed');
         intro.addEventListener('transitionend', () => intro.remove(), { once: true });
         showNav();
@@ -784,12 +984,17 @@
         camera.position.set(INTRO_CAM_X, 0.1, INTRO_CAM_Z);
         camera.lookAt(0, 0.1, 0);
 
-        // Transparent renderer — gallery gradient from CSS shows through
-        // Disable antialias on low-end devices (1x DPI screens) — high-DPI naturally smooths edges anyway
-        const isLowEnd = window.devicePixelRatio <= 1 || (navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 4);
-        const renderer = new THREE.WebGLRenderer({ antialias: !isLowEnd, alpha: true, logarithmicDepthBuffer: true });
+        // Three tiers based on CPU cores and RAM:
+        // Low-end  (≤4 cores or ≤2GB): antialias off, 1x pixel ratio
+        // Mid-range (≤8 cores or ≤4GB): antialias on,  1x pixel ratio
+        // High-end  (>8 cores and >4GB): antialias on,  2x pixel ratio
+        const cores = navigator.hardwareConcurrency || 4;
+        const mem   = navigator.deviceMemory || 4;
+        const forceTier = new URLSearchParams(location.search).get('tier');
+        const tier = forceTier || ((cores <= 4 || mem <= 2) ? 'low' : (cores <= 8 || mem <= 4) ? 'mid' : 'high');
+        const renderer = new THREE.WebGLRenderer({ antialias: tier !== 'low', alpha: true, logarithmicDepthBuffer: true });
         renderer.setClearColor(0x000000, 0);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        renderer.setPixelRatio(tier === 'high' ? Math.min(window.devicePixelRatio, 2) : 1);
         renderer.outputColorSpace = THREE.SRGBColorSpace;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.0;
@@ -820,11 +1025,39 @@
         loader.load(MODEL, (gltf) => {
           if (disposed) return;
           model = gltf.scene;
-          // Use original model materials — no override
+
+          // Simplify materials on low/mid tier devices — strip expensive PBR extensions
+          if (tier !== 'high') {
+            model.traverse(obj => {
+              if (!obj.isMesh || !obj.material) return;
+              const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+              mats.forEach(mat => {
+                // Strip clearcoat (paint) — replace with increased roughness/metalness
+                if (mat.clearcoat > 0) {
+                  mat.roughness  = Math.max(mat.roughness - 0.08, 0.05);
+                  mat.metalness  = Math.min(mat.metalness + 0.05, 1.0);
+                  mat.clearcoat  = 0;
+                  mat.clearcoatRoughness = 0;
+                }
+                // Strip transmission (glass) — replace with opacity + transparent
+                if (mat.transmission > 0) {
+                  mat.transmission = 0;
+                  mat.opacity      = 0.25;
+                  mat.transparent  = true;
+                  mat.roughness    = 0.05;
+                }
+                // Strip volume / IOR / specular — not supported on simplified path anyway
+                mat.thickness = 0;
+                mat.needsUpdate = true;
+              });
+            });
+          }
+
           const box = new THREE.Box3().setFromObject(model);
           const center = box.getCenter(new THREE.Vector3());
           const size = box.getSize(new THREE.Vector3());
-          const scale = 5.8 / Math.max(size.x, size.y, size.z);
+          const isMobile = window.innerWidth <= 768;
+          const scale = (isMobile ? 3.8 : 5.8) / Math.max(size.x, size.y, size.z);
           model.scale.setScalar(scale);
           model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
           model.rotation.y = INTRO_ROT_Y;
@@ -844,11 +1077,8 @@
           const now = performance.now();
           const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
 
-          // During loading, throttle to ~30fps — model is visible but not interactive yet
-          if (phase === 'loading') {
-            const throttleMs = 33; // ~30fps
-            if (now - lastFrameTime < throttleMs) { frameId = requestAnimationFrame(animate); return; }
-          }
+          // Always cap at 30fps — this is a mood piece, not an interactive scene
+          if (now - lastFrameTime < 33) { frameId = requestAnimationFrame(animate); return; }
 
           lastFrameTime = now;
           frameId = requestAnimationFrame(animate);
