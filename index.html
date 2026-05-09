@@ -418,6 +418,12 @@
       const metaEl   = document.getElementById('detail-meta');
       const bodyEl   = document.getElementById('detail-body');
       const actionEl = document.getElementById('detail-action');
+      const galleryEl = document.getElementById('detail-gallery');
+
+      // Always clear gallery between detail views
+      galleryEl.style.display = 'none';
+      galleryEl.innerHTML = '';
+      document.body.style.overflow = '';
 
       if (type === 'work') {
         const w = d.work[index];
@@ -447,16 +453,16 @@
         actionEl.style.display = 'inline-block'; actionEl.dataset.label = 'Inquire';
 
         // Gallery
-        const galleryEl = document.getElementById('detail-gallery');
         const images = l.images || [];
         if (images.length === 0) {
           galleryEl.style.display = 'none';
         } else {
           galleryEl.style.display = 'block';
           let current = 0;
-          galleryEl.innerHTML = images.map((src, i) =>
-            `<img class="gallery-img${i === 0 ? ' active' : ''}" src="${src}" alt="${l.title} — photo ${i+1}">`
-          ).join('') + `<div class="gallery-dots">${images.map((_, i) =>
+          galleryEl.innerHTML = images.map((img, i) => {
+            const src = typeof img === 'string' ? img : sanityImageUrl(img.asset._ref);
+            return `<img class="gallery-img${i === 0 ? ' active' : ''}" src="${src}" alt="${l.title} — photo ${i+1}">`;
+          }).join('') + `<div class="gallery-dots">${images.map((_, i) =>
             `<div class="gallery-dot${i === 0 ? ' active' : ''}" data-index="${i}"></div>`
           ).join('')}</div>`;
 
@@ -496,59 +502,92 @@
       navigate('detail');
     }
 
-    fetch('./content.json')
-      .then(r => r.json())
-      .then(d => {
-        siteContent = d;
+    // ── SANITY FETCH ─────────────────────────────────────────────────────────
+    const SANITY_PROJECT = 'vutd9g6g';
+    const SANITY_DATASET = 'production';
+    const SANITY_API     = `https://${SANITY_PROJECT}.apicdn.sanity.io/v2025-01-01/data/query/${SANITY_DATASET}`;
 
-        // Hero
-        document.getElementById('hero-name').innerHTML = `${d.hero.name} <em>${d.hero.name_italic}</em>`;
-        document.getElementById('hero-role').innerHTML = d.hero.role;
-        document.getElementById('hero-mission').innerHTML = d.hero.mission;
+    function sanityQuery(query) {
+      return fetch(`${SANITY_API}?query=${encodeURIComponent(query)}`)
+        .then(r => r.json())
+        .then(r => r.result);
+    }
 
-        // Work
-        renderWorkRows(document.getElementById('work-list-home'), d.work);
-        renderWorkRows(document.getElementById('work-list-page'), d.work);
+    function sanityImageUrl(ref) {
+      if (!ref) return null;
+      // ref format: image-abc123-1200x675-jpg
+      const parts = ref.replace('image-', '').split('-');
+      const ext = parts.pop();
+      const id  = parts.join('-');
+      return `https://cdn.sanity.io/images/${SANITY_PROJECT}/${SANITY_DATASET}/${id}.${ext}`;
+    }
 
-        // Writing
-        document.getElementById('post-list').innerHTML = d.writing.map((p, i) =>
-          `<a class="post-row" href="#" data-detail-type="writing" data-detail-index="${i}" data-label="${p.date === 'Coming soon' ? 'Coming soon' : 'Read article'}"><span class="post-title">${p.title} <em>— ${p.subtitle}</em></span><span class="post-date">${p.date}</span></a>`
-        ).join('');
+    Promise.all([
+      sanityQuery('*[_type=="hero"][0]'),
+      sanityQuery('*[_type=="work"] | order(order asc)'),
+      sanityQuery('*[_type=="writing"] | order(order asc)'),
+      sanityQuery('*[_type=="about"][0]'),
+      sanityQuery('*[_type=="garage"] | order(order asc)'),
+      sanityQuery('*[_type=="contact"][0]'),
+      sanityQuery('*[_type=="colophon"][0]'),
+    ]).then(([hero, work, writing, about, garage, contact, colophon]) => {
 
-        // About
-        document.getElementById('about-bio').innerHTML = d.about.bio.map(p => `<p>${p}</p>`).join('');
-        document.getElementById('about-cv').href = d.about.cv_url;
-        document.getElementById('about-based').textContent = d.about.based_in;
-        document.getElementById('about-specialisms').innerHTML = d.about.specialisms.map(s => `<p>${s}</p>`).join('');
-        document.getElementById('about-links').innerHTML = d.about.links.map(l => `<a href="${l.url}" data-label="View ${l.label}">${l.label} ↗</a>`).join('');
-        const aboutEmail = document.getElementById('about-email');
-        aboutEmail.href = `mailto:${d.about.email}`; aboutEmail.textContent = d.about.email;
+      siteContent = { hero, work, writing, about, garage: { listings: garage }, contact, colophon };
 
-        // Garage
-        document.getElementById('garage-subtitle').textContent = d.garage.subtitle;
-        const listings = d.garage.listings;
-        document.getElementById('garage-listings').innerHTML = listings.length === 0
-          ? `<div class="empty-state">No current listings — check back shortly.</div>`
-          : `<div class="garage-grid">${listings.map((l, i) => `<div class="garage-card" data-detail-type="garage" data-detail-index="${i}" style="cursor:pointer" data-label="View listing"><div class="garage-card-image">${l.title}</div><div class="garage-card-body"><div class="garage-card-title">${l.title}</div><div class="garage-card-price">${l.price}</div><div class="garage-card-meta">${l.year} &nbsp;·&nbsp; ${l.mileage}</div><div class="garage-card-meta">${l.condition}</div><span class="garage-card-contact" data-label="View listing">View listing ↗</span></div></div>`).join('')}</div>`;
+      // Hero
+      document.getElementById('hero-name').innerHTML = `${hero.name} <em>${hero.name_italic}</em>`;
+      document.getElementById('hero-role').innerHTML  = hero.role;
+      document.getElementById('hero-mission').innerHTML = hero.mission;
 
-        // Contact
-        document.getElementById('contact-body').innerHTML = d.contact.body;
-        const cEmail = document.getElementById('contact-email');
-        cEmail.href = `mailto:${d.contact.email}`; cEmail.textContent = d.contact.email;
-        document.getElementById('contact-links').innerHTML = d.contact.links.map(l => `<a href="${l.url}" data-label="${l.label}">${l.label}</a>`).join('');
-        document.getElementById('contact-note').innerHTML = d.contact.location_note;
+      // Work
+      renderWorkRows(document.getElementById('work-list-home'), work);
+      renderWorkRows(document.getElementById('work-list-page'), work);
 
-        // Colophon
-        renderColophon(d.colophon);
-      })
-      .catch(err => console.error('Could not load content.json:', err));
+      // Writing
+      document.getElementById('post-list').innerHTML = writing.map((p, i) =>
+        `<a class="post-row" href="#" data-detail-type="writing" data-detail-index="${i}" data-label="${p.date === 'Coming soon' ? 'Coming soon' : 'Read article'}"><span class="post-title">${p.title}${p.subtitle ? ` <em>— ${p.subtitle}</em>` : ''}</span><span class="post-date">${p.date}</span></a>`
+      ).join('');
+
+      // About
+      document.getElementById('about-bio').innerHTML = about.bio.map(p => `<p>${p}</p>`).join('');
+      document.getElementById('about-cv').href = about.cv_url || '#';
+      document.getElementById('about-based').textContent = about.based_in;
+      document.getElementById('about-specialisms').innerHTML = about.specialisms.map(s => `<p>${s}</p>`).join('');
+      document.getElementById('about-links').innerHTML = (about.links || []).map(l => `<a href="${l.url}" data-label="View ${l.label}">${l.label} ↗</a>`).join('');
+      const aboutEmail = document.getElementById('about-email');
+      aboutEmail.href = `mailto:${about.email}`; aboutEmail.textContent = about.email;
+
+      // Garage
+      document.getElementById('garage-subtitle').textContent = 'A personal index of automobiles. Inquire via email.';
+      document.getElementById('garage-listings').innerHTML = garage.length === 0
+        ? `<div class="empty-state">No current listings — check back shortly.</div>`
+        : `<div class="garage-grid">${garage.map((l, i) => {
+            const thumb = l.images && l.images[0] ? `<img src="${sanityImageUrl(l.images[0].asset._ref)}" style="width:100%;height:100%;object-fit:cover;display:block;">` : l.title;
+            return `<div class="garage-card" data-detail-type="garage" data-detail-index="${i}" style="cursor:pointer" data-label="View listing"><div class="garage-card-image">${thumb}</div><div class="garage-card-body"><div class="garage-card-title">${l.title}</div><div class="garage-card-price">${l.price}</div><div class="garage-card-meta">${l.year} &nbsp;·&nbsp; ${l.mileage}</div><div class="garage-card-meta">${l.condition}</div><span class="garage-card-contact" data-label="View listing">View listing ↗</span></div></div>`;
+          }).join('')}</div>`;
+
+      // Contact
+      document.getElementById('contact-body').innerHTML = contact.body;
+      const cEmail = document.getElementById('contact-email');
+      cEmail.href = `mailto:${contact.email}`; cEmail.textContent = contact.email;
+      document.getElementById('contact-links').innerHTML = (contact.links || []).map(l => `<a href="${l.url}" data-label="${l.label}">${l.label}</a>`).join('');
+      document.getElementById('contact-note').innerHTML = contact.location_note;
+
+      // Colophon
+      renderColophon(colophon);
+
+    }).catch(err => console.error('Could not load from Sanity:', err));
 
     // Detail click handler
     document.addEventListener('click', e => {
       const el = e.target.closest('[data-detail-type]');
       if (!el) return;
       e.preventDefault();
-      openDetail(el.dataset.detailType, parseInt(el.dataset.detailIndex, 10));
+      const type = el.dataset.detailType;
+      const index = parseInt(el.dataset.detailIndex, 10);
+      openDetail(type, index);
+      history.pushState({ page: 'detail', detailType: type, detailIndex: index }, '', `#detail/${type}/${index}`);
+      showPage('detail');
     });
 
     // Back button
@@ -637,14 +676,29 @@
 
     // Handle browser back/forward
     window.addEventListener('popstate', e => {
-      const page = (e.state && e.state.page) || 'home';
-      showPage(page, true);
+      const state = e.state || {};
+      if (state.page === 'detail' && state.detailType != null) {
+        openDetail(state.detailType, state.detailIndex);
+        showPage('detail', true);
+      } else {
+        showPage(state.page || 'home', true);
+      }
     });
 
     // Init from hash on load
     (function() {
       const hash = location.hash.slice(1);
-      if (hash && document.getElementById('page-' + hash)) {
+      const detailMatch = hash.match(/^detail\/(\w+)\/(\d+)$/);
+      if (detailMatch) {
+        const [, type, index] = detailMatch;
+        history.replaceState({ page: 'detail', detailType: type, detailIndex: +index }, '', location.href);
+        // Wait for Sanity content to load before opening detail
+        const tryOpen = () => {
+          if (siteContent) { openDetail(type, +index); showPage('detail', true); }
+          else setTimeout(tryOpen, 100);
+        };
+        tryOpen();
+      } else if (hash && document.getElementById('page-' + hash)) {
         showPage(hash, true);
         history.replaceState({ page: hash }, '', location.href);
       } else {
@@ -660,7 +714,7 @@
       const footerNav = document.querySelector('.site-footer-nav');
       const showNav = () => footerNav.classList.add('visible');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (initHash && initHash !== 'home' && document.getElementById('page-' + initHash)) { intro.remove(); showNav(); return; }
+      if (initHash && initHash !== 'home' && (document.getElementById('page-' + initHash) || initHash.startsWith('detail/'))) { intro.remove(); showNav(); return; }
       const navEntry   = performance.getEntriesByType('navigation')[0];
       const isHardRefresh = navEntry?.type === 'reload' && (navEntry?.transferSize ?? 0) > 0;
       const isFirstVisit  = !sessionStorage.getItem('vp-intro-seen');
