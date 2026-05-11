@@ -89,13 +89,41 @@
       .site-footer-nav { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(to top, var(--bg) 40%, transparent 100%); }
       .cursor-ring, .cursor-coords, .cursor-box, .cursor-label { display: none !important; }
     }
+    /* HAMBURGER — mobile only */
+    .hamburger { display: none; }
+    .mob-nav-overlay { display: none; }
+    @media (max-width: 760px) {
+      .site-footer-nav { display: none !important; }
+      .float-btns { bottom: 1.4rem; }
+      .hamburger { display: flex; flex-direction: column; justify-content: center; gap: 5px; position: fixed; top: 1rem; right: 1.2rem; z-index: 9200; width: 36px; height: 36px; background: var(--paper); border: 1px solid var(--border); border-radius: 50%; padding: 0; cursor: pointer; align-items: center; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+      .hamburger span { display: block; width: 14px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .hamburger.open span:nth-child(2) { opacity: 0; }
+      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .mob-nav-overlay { display: flex; position: fixed; inset: 0; z-index: 9100; background: var(--paper); flex-direction: column; justify-content: center; padding: 4rem 2.4rem; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+      .mob-nav-overlay.open { opacity: 1; pointer-events: auto; }
+      .mob-nav-overlay .mob-nav-links { display: flex; flex-direction: column; gap: 0; }
+      .mob-nav-overlay .mob-nav-link { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(48px, 12vw, 72px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; border: none; background: none; cursor: pointer; padding: 0; text-align: left; transition: color 0.2s ease; opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s ease; }
+      .mob-nav-overlay.open .mob-nav-link { opacity: 1; transform: translateY(0); }
+      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(1) { transition-delay: 0.05s; }
+      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(2) { transition-delay: 0.1s; }
+      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(3) { transition-delay: 0.15s; }
+      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(4) { transition-delay: 0.2s; }
+      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(5) { transition-delay: 0.25s; }
+      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(6) { transition-delay: 0.3s; }
+      .mob-nav-overlay .mob-nav-link.active { color: var(--mid); }
+      .mob-nav-overlay .mob-nav-num { font-family: 'IBM Plex Mono', monospace; font-style: normal; font-size: 11px; letter-spacing: 0.15em; color: var(--faint); vertical-align: super; margin-right: 0.4em; }
+      .mob-nav-footer { margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--faint); text-transform: uppercase; }
+      .mob-nav-status { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; }
+      .mob-nav-dot { width: 6px; height: 6px; border-radius: 50%; background: #c8963e; display: inline-block; flex-shrink: 0; }
+    }
     [data-theme="dark"] .site-footer-nav { background: rgba(0,0,0,0.14); }
     .site-footer-nav.visible { opacity: 1; pointer-events: auto; }
     .site-footer-nav a, .site-footer-nav button { cursor: pointer; }
     .footer-clock { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.07em; color: var(--mid); text-transform: uppercase; min-width: 13ch; }
     .footer-clock.right { text-align: right; }
-    .nav { display: flex; gap: 2.8rem; }
-    .nav a { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.07em; color: var(--mid); text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--faint); transition: color 0.2s ease, text-decoration-color 0.2s ease; cursor: pointer; }
+    .nav { display: flex; gap: clamp(1rem,2.2vw,2.8rem); }
+    .nav a { font-family: 'IBM Plex Mono', monospace; font-size: clamp(11px,1.1vw,13px); letter-spacing: 0.07em; color: var(--mid); text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--faint); transition: color 0.2s ease, text-decoration-color 0.2s ease; cursor: pointer; white-space: nowrap; }
     .nav a:hover, .nav a.active { color: var(--ink); text-decoration-color: var(--mid); }
     .nav .num { color: var(--faint); margin-right: 0.45em; }
 
@@ -375,6 +403,27 @@
     <span class="footer-clock right" id="clockVancouver"></span>
   </nav>
 
+  <!-- Mobile hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Mobile nav overlay -->
+  <div class="mob-nav-overlay" id="mobNavOverlay">
+    <div class="mob-nav-links">
+      <button class="mob-nav-link active" data-page="home"><span class="mob-nav-num">00</span>Home</button>
+      <button class="mob-nav-link" data-page="work"><span class="mob-nav-num">01</span>Work</button>
+      <button class="mob-nav-link" data-page="writing"><span class="mob-nav-num">02</span>Writing</button>
+      <button class="mob-nav-link" data-page="about"><span class="mob-nav-num">03</span>About</button>
+      <button class="mob-nav-link" data-page="garage"><span class="mob-nav-num">04</span>Garage</button>
+      <button class="mob-nav-link" data-page="contact"><span class="mob-nav-num">05</span>Contact</button>
+    </div>
+    <div class="mob-nav-footer">
+      <div class="mob-nav-status"><span class="mob-nav-dot"></span>Open to consulting</div>
+      <div id="mobNavClock"></div>
+    </div>
+  </div>
+
   <div class="float-btns">
     <button class="float-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" data-label="Toggle theme">
       <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -585,8 +634,9 @@
       document.getElementById('colophon-links').innerHTML = c.links.map(l => `<a href="${l.url}">${l.label}</a>`).join('');
       makeEmailCopy(document.getElementById('colophon-email'), c.email);
       document.getElementById('colophon-location').textContent = c.location;
-      if (c.byline) document.getElementById('colophon-byline').textContent = c.byline;
-      if (c.quote)  document.getElementById('colophon-quote').textContent = '“' + c.quote + '”';
+      const bylineEl = document.getElementById('colophon-byline');
+      if (bylineEl && c.byline) bylineEl.textContent = c.byline;
+      if (c.quote)  document.getElementById('colophon-quote').textContent = '”' + c.quote + '”';
     }
 
     function openDetail(type, index) {
@@ -985,6 +1035,7 @@
       document.title = TITLES[id] || 'Varrel Putra';
       window.scrollTo(0, 0);
       currentPage = id;
+      document.querySelectorAll('.mob-nav-link').forEach(b => b.classList.toggle('active', b.dataset.page === id));
     }
 
     let navTimer = null, transitionId = 0;
@@ -1359,6 +1410,46 @@
 
     // ── SCROLL TO TOP ────────────────────────────────────────────────────────
     document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ── HAMBURGER NAV ────────────────────────────────────────────────────────
+    const hamburger    = document.getElementById('hamburger');
+    const mobOverlay   = document.getElementById('mobNavOverlay');
+    const mobNavLinks  = document.querySelectorAll('.mob-nav-link');
+
+    function closeMobNav() {
+      hamburger.classList.remove('open');
+      mobOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      const isMobile = window.innerWidth <= 760;
+      if (!isMobile) return;
+      const isOpen = mobOverlay.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    mobNavLinks.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navigate(btn.dataset.page);
+        closeMobNav();
+      });
+    });
+
+
+    // Close on back-swipe / ESC
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobNav(); });
+
+    // Clock inside overlay
+    function tickMobClock() {
+      const el = document.getElementById('mobNavClock');
+      if (!el) return;
+      const now = new Date();
+      el.textContent = 'Vancouver ' + now.toLocaleTimeString('en-US', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit' });
+    }
+    tickMobClock();
+    setInterval(tickMobClock, 1000);
 
     // Clear card animation after it finishes so it doesn't hold a composited layer
     // (composited layers block backdrop-filter on overlapping fixed elements)
