@@ -187,10 +187,23 @@ body { scrollbar-width: none; }
   background: var(--ink); border: 1px solid var(--ink);
   cursor: pointer; padding: 0; z-index: 2; touch-action: none;
   transition: width 0.35s var(--ease), height 0.35s var(--ease),
+              transform 0.5s var(--ease),
               background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
 }
 .radial-trigger:hover { background: var(--accent); border-color: var(--accent); }
 .radial.open .radial-trigger { opacity: 0; pointer-events: none; }
+/* First-interaction affordance: an inward "homing" ping that converges on the dot.
+   Size + opacity are driven each frame by JS (--ping-size / --ping-op), so the ring
+   contracts inward and (on desktop) grows stronger the nearer the cursor. Retired for
+   the session the moment the user first opens the menu. */
+.radial-trigger::after {
+  content: ''; position: absolute; left: 50%; top: 50%;
+  width: var(--ping-size, 11px); height: var(--ping-size, 11px);
+  border-radius: 50%; border: 1px solid var(--ink);
+  transform: translate(-50%, -50%);
+  opacity: var(--ping-op, 0); pointer-events: none;
+}
+.radial.open .radial-trigger::after { opacity: 0; }
 
 /* Wheel container is centered in the viewport */
 .radial-menu {
@@ -1404,6 +1417,7 @@ body { hanging-punctuation: first allow-end; }
     let activeIdx = -1;
     // Touch drag-to-select (GTA weapon-wheel) state
     let touchDragging = false, dragId = null, justDragged = false;
+    let affordanceStop = null;   // set by the first-interaction ping affordance below
 
     // Build item elements once
     const els = ITEMS.map((it, i) => {
@@ -1460,6 +1474,8 @@ body { hanging-punctuation: first allow-end; }
 
     function open() {
       isOpen = true;
+      if (affordanceStop) { affordanceStop(); affordanceStop = null; }  // first open = discovered
+      btn.style.transform = '';       // clear any magnetic offset before the dot hides
       computeGeometry();              // size the wheel to the current viewport
       wrapper.classList.add('open');
       document.body.classList.add('vmenu-open');
@@ -1574,6 +1590,84 @@ body { hanging-punctuation: first allow-end; }
       clearTimeout(rzT);
       rzT = setTimeout(() => { computeGeometry(); if (isOpen) render(); }, 150);
     });
+
+    // ── Affordance: a soft, site-wide magnetic lean toward the cursor (desktop, idle only).
+    //    The dot quietly drifts a few px toward the pointer — a whisper that it's alive. ──
+    if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const LEAN = 4;          // max px the dot drifts toward the cursor
+      const RAMP = 600;        // distance (px) over which the lean eases in to full
+      let base = { x: 0, y: 0 };
+      function refreshBase() {
+        const prev = btn.style.transform;
+        btn.style.transform = 'translate(-50%,-50%)';
+        const r = btn.getBoundingClientRect();
+        base = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        btn.style.transform = prev;
+      }
+      refreshBase();
+      window.addEventListener('resize', refreshBase);
+      document.addEventListener('mousemove', e => {
+        if (isOpen) return;
+        const dx = e.clientX - base.x, dy = e.clientY - base.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const k = Math.min(dist / RAMP, 1);
+        const ox = (dx / dist) * LEAN * k;
+        const oy = (dy / dist) * LEAN * k;
+        btn.style.transform = `translate(calc(-50% + ${ox.toFixed(2)}px), calc(-50% + ${oy.toFixed(2)}px))`;
+      });
+    }
+
+    // ── First-interaction affordance: an inward "homing" ping that converges on the dot.
+    //    Loops until the user first opens the menu, then is retired for the whole session.
+    //    Desktop: prominence scales with cursor proximity within RADIUS.
+    //    Mobile: loops at full prominence (no proximity, per request). ──
+    (function () {
+      let seen = false;
+      try { seen = !!sessionStorage.getItem('vp-nav-discovered'); } catch (e) {}
+      if (seen || reduceMotion) return;
+
+      const isTouch = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const CYCLE = 2200, OUTER = 46, INNER = 12, RADIUS = 240, MAXOP = 0.5;
+      let prox = isTouch ? 1 : 0, raf = null, stopped = false, c = { x: 0, y: 0 };
+
+      function measure() {
+        const prev = btn.style.transform;
+        btn.style.transform = 'translate(-50%,-50%)';
+        const r = btn.getBoundingClientRect();
+        c = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        btn.style.transform = prev;
+      }
+      measure();
+      window.addEventListener('resize', measure);
+      function onMove(e) {
+        const d = Math.hypot(e.clientX - c.x, e.clientY - c.y);
+        prox = Math.max(0, Math.min(1, 1 - d / RADIUS));       // 1 at the dot → 0 at the radius edge
+      }
+      if (!isTouch) document.addEventListener('mousemove', onMove);
+
+      function frame(now) {
+        if (stopped) return;
+        raf = requestAnimationFrame(frame);
+        if (isOpen) { btn.style.setProperty('--ping-op', '0'); return; }
+        const t = (now % CYCLE) / CYCLE;
+        const size = OUTER + (INNER - OUTER) * t;              // wide → dot (inward / homing)
+        const op = Math.sin(t * Math.PI) * MAXOP * prox;        // pulse, scaled by proximity
+        btn.style.setProperty('--ping-size', size.toFixed(1) + 'px');
+        btn.style.setProperty('--ping-op', op.toFixed(3));
+      }
+      raf = requestAnimationFrame(frame);
+
+      affordanceStop = function () {                            // called on first open()
+        if (stopped) return;
+        stopped = true;
+        if (raf) cancelAnimationFrame(raf);
+        if (!isTouch) document.removeEventListener('mousemove', onMove);
+        window.removeEventListener('resize', measure);
+        btn.style.setProperty('--ping-op', '0');
+        btn.style.removeProperty('--ping-size');
+        try { sessionStorage.setItem('vp-nav-discovered', '1'); } catch (e) {}
+      };
+    })();
 
     render();
   })();
