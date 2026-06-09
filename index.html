@@ -4,1554 +4,1792 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Varrel Putra</title>
+  <meta name="description" content="Varrel Putra — sales, marketing & brand operator. Building things that endure.">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28' font-family='Georgia,serif' font-style='italic' fill='%231a1a18'>v.</text></svg>">
-
-  <!-- SEO -->
-  <meta name="description" content="Varrel Putra — sales, marketing &amp; brand operator. Building things that endure.">
-  <meta name="author" content="Varrel Putra">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://varrelputra.com/">
   <meta property="og:title" content="Varrel Putra">
-  <meta property="og:description" content="Sales, marketing &amp; brand operator. Building things that endure.">
-  <meta property="og:image" content="https://varrelputra.com/og.jpg">
-
-  <!-- Twitter -->
+  <meta property="og:description" content="Sales, marketing & brand operator. Building things that endure.">
+  <meta property="og:image" content="og.png">
+  <meta property="og:url" content="https://varrelputra.com/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Varrel Putra">
-  <meta name="twitter:description" content="Sales, marketing &amp; brand operator. Building things that endure.">
-  <meta name="twitter:image" content="https://varrelputra.com/og.jpg">
+  <meta name="twitter:description" content="Sales, marketing & brand operator. Building things that endure.">
+  <meta name="twitter:image" content="og.png">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28' font-family='Georgia,serif' font-style='italic' fill='%231a1a18'>v.</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
   <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js"}}</script>
+
   <style>
-    /* INTRO */
-    #intro { position: fixed; inset: 0; z-index: 500; background: #f2ede6; transition: opacity 1.6s cubic-bezier(0.4,0,0.2,1), visibility 1.6s; }
-    #intro.dismissed { opacity: 0; visibility: hidden; pointer-events: none; }
-    #introArtwork { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 55%, #ffffff 0%, #f4f0e8 50%, #ddd8d0 100%); }
-    #introProgress { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; z-index: 30; pointer-events: none; display: flex; align-items: center; gap: 1rem; transition: opacity 0.5s ease; }
-    #introProgressBar { flex: 1; height: 1px; background: rgba(26,26,24,0.12); position: relative; overflow: hidden; }
-    #introProgressFill { position: absolute; inset: 0; background: #1a1a18; transform: scaleX(0); transform-origin: left; will-change: transform; }
-    #introClickHint { position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%); font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #6b6660; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; white-space: nowrap; z-index: 30; }
 
-    /* TOKENS */
-    :root {
-      --paper: #fafaf7; --bg: #ddd8d0; --ink: #1a1a18; --mid: #7d7870; --faint: #b5b0a8;
-      --border: rgba(26,26,24,0.07);
-      --bg-gradient: radial-gradient(ellipse at 50% 55%, #ffffff 0%, #f4f0e8 50%, #ddd8d0 100%);
-    }
-    [data-theme="dark"] {
-      --paper: #0e0d0b; --bg: #070706; --ink: #ede8da; --mid: #7a7568; --faint: #4a4740;
-      --border: rgba(237,232,218,0.07);
-      --bg-gradient: radial-gradient(ellipse at 60% 40%, #181714 0%, #0e0d0b 55%, #070706 100%);
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { background-color: var(--bg); background-image: var(--bg-gradient); background-attachment: fixed; scroll-behavior: auto; }
-    html, body { height: 100%; }
-    body { background: transparent; color: var(--ink); font-family: 'Libre Caslon Text', serif; font-feature-settings: 'liga','kern','onum'; -webkit-font-smoothing: antialiased; min-height: 100vh; overflow-x: hidden; scrollbar-width: none; }
-    body::-webkit-scrollbar { display: none; }
-    body.intro-active { overflow: hidden; }
-
-    /* CARD */
-    .site-card { margin: 1.2rem 5rem 1.2rem; padding-bottom: calc(8vh + 5rem); background: rgba(255,255,255,0.07); border-radius: 20px; box-shadow: 0 8px 60px rgba(0,0,0,0.12), 0 1px 8px rgba(0,0,0,0.06); position: relative; opacity: 0; transform: translateY(14px); transition: opacity 1.4s cubic-bezier(0.16,1,0.3,1), transform 1.4s cubic-bezier(0.16,1,0.3,1); }
-    body.site-ready .site-card { opacity: 1; transform: none; }
-
-    /* SPA PAGES */
-    .page { display: none; }
-    .page.active { display: block; }
-    @keyframes page-in  { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
-    @keyframes page-out { from { opacity:1; transform:none; } to { opacity:0; transform:translateY(-8px); } }
-    .page.active  { animation: page-in  0.85s cubic-bezier(0.16,1,0.3,1) both; }
-    .page.exiting { animation: page-out 0.55s cubic-bezier(0.4,0,1,1) forwards; display: block; }
-
-    /* HEADER */
-    .site-header { position: fixed; top: 0; left: 0; padding: 1.3rem 1.6rem; z-index: 200; pointer-events: none; }
-    .site-header > * { pointer-events: auto; }
-    .vmark { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 500; font-size: 28px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; line-height: 1; }
-
-    /* FOOTER NAV */
-    .site-footer-nav { position: fixed; bottom: 0; left: 5rem; right: 5rem; display: flex; justify-content: space-between; align-items: center; z-index: 9000; padding: 8vh 3.5rem 2.6rem; background: rgba(0,0,0,0.035); -webkit-backdrop-filter: blur(24px) saturate(1.05); backdrop-filter: blur(24px) saturate(1.05); -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 50%, transparent 100%); pointer-events: none; cursor: default; opacity: 0; transition: opacity 0.6s ease; }
-    @media (hover: none), (max-width: 768px) {
-      .site-footer-nav { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(to top, var(--bg) 40%, transparent 100%); }
-      .cursor-ring, .cursor-box, .cursor-label { display: none !important; }
-    }
-    /* HAMBURGER — mobile only */
-    .hamburger { display: none; }
-    .mob-nav-overlay { display: none; }
-    @media (max-width: 760px) {
-      .site-footer-nav { display: none !important; }
-      .float-btns { bottom: 1.4rem; }
-      .hamburger { display: flex; flex-direction: column; justify-content: center; gap: 5px; position: fixed; top: 1rem; right: 1.2rem; z-index: 9200; width: 36px; height: 36px; background: var(--paper); border: 1px solid var(--border); border-radius: 50%; padding: 0; cursor: pointer; align-items: center; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-      .hamburger span { display: block; width: 14px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
-      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-      .hamburger.open span:nth-child(2) { opacity: 0; }
-      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      .mob-nav-overlay { display: flex; position: fixed; inset: 0; z-index: 9100; background: var(--paper); flex-direction: column; justify-content: center; padding: 4rem 2.4rem; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
-      .mob-nav-overlay.open { opacity: 1; pointer-events: auto; }
-      .mob-nav-overlay .mob-nav-links { display: flex; flex-direction: column; gap: 0; }
-      .mob-nav-overlay .mob-nav-link { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(48px, 12vw, 72px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; border: none; background: none; cursor: pointer; padding: 0; text-align: left; transition: color 0.2s ease; opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s ease; }
-      .mob-nav-overlay.open .mob-nav-link { opacity: 1; transform: translateY(0); }
-      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(1) { transition-delay: 0.05s; }
-      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(2) { transition-delay: 0.1s; }
-      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(3) { transition-delay: 0.15s; }
-      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(4) { transition-delay: 0.2s; }
-      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(5) { transition-delay: 0.25s; }
-      .mob-nav-overlay.open .mob-nav-links .mob-nav-link:nth-child(6) { transition-delay: 0.3s; }
-      .mob-nav-overlay .mob-nav-link.active { color: var(--mid); }
-      .mob-nav-overlay .mob-nav-num { display: none; }
-      .mob-nav-footer { margin-top: auto; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
-      .mob-nav-status { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; }
-      .mob-nav-dot { width: 6px; height: 6px; border-radius: 50%; background: #9e8e78; display: inline-block; flex-shrink: 0; }
-    }
-    [data-theme="dark"] .site-footer-nav { background: rgba(0,0,0,0.14); }
-    body.site-ready .site-footer-nav { opacity: 1; pointer-events: auto; }
-    .site-footer-nav a, .site-footer-nav button { cursor: pointer; }
-    .footer-clock { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); min-width: 11ch; }
-    .footer-clock.right { text-align: right; }
-    .nav { display: flex; gap: clamp(1rem,2.2vw,2.8rem); position: relative; }
-    .nav a { font-family: 'Jost', sans-serif; font-weight: 400; font-size: clamp(11px,1vw,12px); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); text-decoration: none; padding-bottom: 2px; transition: color 0.2s ease; cursor: pointer; white-space: nowrap; }
-    .nav a:hover, .nav a.active { color: var(--ink); }
-    .nav .num { display: none; }
-    .nav-indicator { position: absolute; bottom: 0; left: 0; height: 1px; background: var(--ink); transition: transform 0.45s cubic-bezier(0.76,0,0.24,1), width 0.45s cubic-bezier(0.76,0,0.24,1), opacity 0.2s ease; opacity: 0; pointer-events: none; }
-
-    /* FLOAT BUTTONS */
-    .float-btns { position: fixed; bottom: 2.4rem; right: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; z-index: 9100; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
-    body.site-ready .float-btns { opacity: 1; pointer-events: auto; }
-    .float-btn { appearance: none; background: var(--paper); border: 1px solid var(--border); color: var(--mid); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: color 0.2s ease, border-color 0.2s ease; text-decoration: none; cursor: pointer; }
-    .float-btn:hover { color: var(--ink); border-color: var(--ink); }
-    .float-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* WATERMARK */
-    .v-watermark { position: fixed; bottom: -3vw; right: -2vw; font-family: 'EB Garamond', serif; font-style: italic; font-size: 38vw; line-height: 0.8; color: rgba(26,26,24,0.025); pointer-events: none; user-select: none; z-index: 0; }
-    [data-theme="dark"] .v-watermark { color: rgba(240,236,224,0.04); }
-
-    /* ── HOME ── */
-    .hero { min-height: calc(100vh - 2.4rem); display: grid; align-items: center; padding: clamp(5rem,10vh,11rem) clamp(1.4rem,5vw,5rem) clamp(3rem,5vh,6rem); max-width: 1280px; margin: 0 auto; }
-    .hero-name { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(64px,12vw,180px); letter-spacing: -0.03em; line-height: 0.88; color: var(--ink); margin-bottom: 1.2rem; }
-    .hero-name em { font-style: normal; font-weight: 500; }
-    .hero-role { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(10px,1vw,11px); letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 3.5rem; }
-    .hero-mission { max-width: 26em; font-size: clamp(17px,1.6vw,21px); line-height: 1.75; color: var(--ink); margin-bottom: 3rem; font-style: normal; }
-    .hero-mission::first-letter { font-weight: 500; font-size: clamp(40px,4.5vw,56px); line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
-    .hero-mission em { font-style: italic; color: var(--mid); }
-    .hero-status { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); margin-top: 0.5rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 0.6rem; }
-    .hero-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #9e8e78; display: inline-block; flex-shrink: 0; }
-    .hero-actions { display: flex; gap: 2rem; margin-bottom: 4rem; }
-    .hero-cta { font-family: 'Jost', sans-serif; font-weight: 400; font-size: clamp(10px,1vw,11px); letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
-    .hero-cta:hover { color: var(--ink); border-bottom-color: var(--mid); }
-    .hero-writing { border-top: 1px solid var(--border); padding-top: 2rem; max-width: 28em; }
-    .hero-writing-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.8rem; }
-    .hero-writing-link { font-family: 'EB Garamond', serif; font-size: clamp(17px,1.6vw,20px); color: var(--ink); text-decoration: none; cursor: pointer; transition: color 0.2s; }
-    .hero-writing-link:hover { color: var(--mid); }
-    .colophon {border-top: 1px solid var(--border); padding: clamp(2rem,3vw,3rem) clamp(1.4rem,4vw,4rem) clamp(2rem,3vw,4rem); max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: clamp(1.5rem,2.5vw,3rem); font-family: 'Jost', sans-serif; font-weight: 300; font-size: 12px; line-height: 1.8; letter-spacing: 0.04em; color: var(--mid); }
-    .colophon h4 { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.9rem; }
-    .colophon a { color: var(--mid); text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--faint); display: block; transition: color 0.2s ease, text-decoration-color 0.2s ease; }
-    .colophon a:hover { color: var(--ink); text-decoration-color: var(--mid); }
-    .colophon em { font-family: 'EB Garamond', serif; font-style: italic; font-size: 13px; color: var(--ink); }
-
-    .colophon-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #9e8e78; display: inline-block; margin-right: 0.5rem; vertical-align: middle; flex-shrink: 0; }
-    .colophon-status-line { display: flex; align-items: center; margin-top: 0.4rem; }
-
-    /* ── SHARED SUBPAGE ── */
-    .page-content { max-width: 1280px; margin: 0 auto; padding: clamp(5rem,12vh,14rem) clamp(1.4rem,5vw,6rem) clamp(4rem,5vh,6rem); }
-    .page-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(48px,7vw,96px); letter-spacing: -0.025em; line-height: 0.92; color: var(--ink); margin-bottom: clamp(2.5rem,4vw,5rem); }
-    .page-title em { font-style: italic; font-weight: 400; }
-
-    /* ── WORK ── */
-    .work-list { display: grid; gap: 0; }
-    .work-row { display: grid; grid-template-columns: 40px 1fr auto auto; gap: 2rem; align-items: baseline; padding: 2.8rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
-    .work-row:hover { transform: translateX(0.8rem); }
-    .work-num { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; color: var(--faint); }
-    .work-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(20px,2vw,26px); letter-spacing: -0.01em; color: var(--ink); }
-    .work-title em { font-style: italic; font-weight: 400; color: var(--mid); margin-left: 0.4em; }
-    .work-tag { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
-    .work-year { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.06em; color: var(--faint); white-space: nowrap; }
-
-    /* ── WRITING ── */
-    .post-list { display: grid; gap: 0; }
-    .post-row { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: baseline; padding: 2.8rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: transform 0.25s ease; cursor: pointer; }
-    .post-row:hover { transform: translateX(0.8rem); }
-    .post-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(20px,2vw,26px); letter-spacing: -0.01em; color: var(--ink); }
-    .post-title em { font-style: italic; font-weight: 400; color: var(--mid); margin-left: 0.4em; }
-    .post-date { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.06em; color: var(--faint); white-space: nowrap; }
-
-    /* ── ABOUT ── */
-    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-    .about-body { font-family: 'EB Garamond', serif; font-size: clamp(16px,1.5vw,19px); line-height: 1.65; color: var(--ink); }
-    .about-body p { margin-bottom: 1.5rem; }
-    .about-body p:last-child { margin-bottom: 0; }
-    .about-body em { font-style: italic; color: var(--mid); }
-    .about-body::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
-    .cv-link { display: inline-block; margin-top: 2.5rem; font-family: 'Jost', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
-    .cv-link:hover { color: var(--ink); border-color: var(--ink); }
-    .sidebar { padding-top: 0.5rem; }
-    .sidebar-block { margin-bottom: 3rem; }
-    .sidebar-block h4 { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); margin-bottom: 1rem; }
-    .sidebar-block p, .sidebar-block a { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.6; color: var(--mid); text-decoration: none; display: block; transition: color 0.2s ease; margin-bottom: 0.3rem; }
-    .sidebar-block a:hover { color: var(--ink); }
-
-    /* ── GARAGE ── */
-    .page-subtitle { font-family: 'EB Garamond', serif; font-style: italic; font-size: 19px; color: var(--mid); margin-bottom: 5rem; }
-
-    .garage-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 1.5rem; }
-    .garage-card.sold { opacity: 0.4; pointer-events: none; }
-    .garage-card.sold .garage-card-contact { display: none; }
-    .garage-sold-badge { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); background: var(--ink); padding: 3px 8px; border-radius: 2px; display: inline-block; margin-bottom: 0.4rem; }
-    /* FILTER BAR */
-    .filter-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 1.4rem; margin-bottom: 2.5rem; }
-    .filter-btn { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); background: none; border: none; border-bottom: 1px solid transparent; padding: 2px 0; cursor: pointer; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
-    .filter-btn:hover { color: var(--mid); }
-    .filter-btn.active { color: var(--ink); border-bottom-color: var(--ink); }
-    .filter-sep { width: 1px; height: 14px; background: var(--border); flex-shrink: 0; }
-    .color-swatch { width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.15s, border-color 0.15s; flex-shrink: 0; }
-    .color-swatch:hover { transform: scale(1.2); }
-    .color-swatch.active { border-color: var(--ink); transform: scale(1.15); }
-    /* WRITING TAG PILLS */
-    .writing-tag-pill { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); background: none; border: none; border-bottom: 1px solid transparent; padding: 2px 0; cursor: pointer; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
-    .writing-tag-pill:hover { color: var(--mid); }
-    .writing-tag-pill.active { color: var(--ink); border-bottom-color: var(--ink); }
-    .garage-card { background: var(--paper); display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-    .garage-card:hover { background: rgba(26,26,24,0.02); box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-3px); }
-    [data-theme="dark"] .garage-card:hover { background: rgba(240,236,224,0.03); }
-    .garage-card-image { width: 100%; aspect-ratio: 4/3; background: var(--border); display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-style: italic; font-size: 14px; color: var(--faint); }
-    .garage-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .garage-card-body { padding: 1.6rem; border-top: 1px solid var(--border); }
-    .garage-card-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.3rem; }
-    .garage-card-price { font-family: 'EB Garamond', serif; font-size: 17px; color: var(--ink); margin-bottom: 1rem; }
-    .garage-card-meta { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.04em; color: var(--faint); margin-bottom: 0.3rem; }
-    .garage-card-contact { display: inline-block; margin-top: 1.2rem; font-family: 'Jost', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
-    .garage-card-contact:hover { color: var(--ink); border-color: var(--ink); }
-    .empty-state { padding: 5rem 0; text-align: center; font-family: 'EB Garamond', serif; font-style: italic; font-size: 19px; color: var(--faint); }
-
-    /* ── CONTACT ── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-    .contact-body { font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.55; color: var(--ink); max-width: 28em; }
-    .contact-body em { font-style: italic; color: var(--mid); }
-    .contact-email { display: inline-block; margin-top: 3rem; font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(24px,2.5vw,36px); letter-spacing: -0.01em; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 0.1em; transition: color 0.2s ease, border-color 0.2s ease; }
-    .contact-email:hover { color: var(--mid); border-color: var(--mid); }
-    .contact-sidebar h4 { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); margin-bottom: 1.2rem; }
-    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 3rem; }
-    .contact-links a { font-family: 'EB Garamond', serif; font-size: 19px; color: var(--mid); text-decoration: none; display: inline-block; transition: color 0.2s ease; }
-    .contact-links a:hover { color: var(--ink); }
-    .contact-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; line-height: 1.9; letter-spacing: 0.06em; color: var(--faint); margin-top: 3rem; }
-
-    /* CURSOR */
-    @media (hover: hover) and (pointer: fine) {
-      * { cursor: none !important; }
-      .cursor-ring { position: fixed; pointer-events: none; z-index: 9999; top: 0; left: 0; width: 22px; height: 22px; border: 1.5px solid var(--ink); border-radius: 50%; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease; opacity: 0; will-change: transform; }
-      .cursor-ring.active { opacity: 1; }
-      .cursor-ring.hovered { width: 36px; height: 36px; border-color: var(--mid); }
-
-      .cursor-box { position: fixed; pointer-events: none; z-index: 9998; border: 1px solid var(--ink); border-radius: 8px; opacity: 0; transform: scale(0); transform-origin: center center; transition: top 0.08s ease, left 0.08s ease, width 0.08s ease, height 0.08s ease, border-radius 0.08s ease, opacity 0.15s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-      .cursor-box.active { opacity: 1; transform: scale(1); }
-      .cursor-box.no-transition { transition: opacity 0.15s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-      .cursor-label { position: fixed; pointer-events: none; z-index: 10000; background: var(--ink); color: var(--paper); font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; padding: 4px 12px; border-radius: 4px; white-space: nowrap; display: none; transform: translateX(-50%); }
-      .cursor-label.active { display: block; }
-    }
-
-    /* ── DETAIL PAGE ── */
-    .detail-toolbar { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 4rem; }
-    .detail-back { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Jost', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid); text-decoration: none; border: none; background: none; cursor: pointer; padding: 0; margin-bottom: 0; transition: color 0.2s ease; white-space: nowrap; }
-    .detail-back:hover { color: var(--ink); }
-    .detail-back svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-    @media (max-width: 760px) {
-      #page-detail .page-content { padding-top: 4.5rem; }
-      .detail-toolbar {
-        position: fixed; top: 1rem; left: 1.2rem; right: 1.2rem; z-index: 8000;
-        display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
-        margin-bottom: 0; pointer-events: none;
-      }
-      .detail-toolbar .detail-back {
-        pointer-events: auto;
-        background: var(--paper); border: 1px solid var(--border); border-radius: 20px;
-        padding: 6px 12px; font-size: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      }
-    }
-    .detail-meta { display: flex; gap: 2rem; margin-bottom: 4rem; flex-wrap: wrap; }
-    .detail-meta-item { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); }
-    .detail-meta-item span { font-family: 'EB Garamond', serif; font-size: 15px; letter-spacing: 0; color: var(--mid); display: block; margin-top: 0.3rem; text-transform: none; }
-    .detail-body { max-width: 34em; font-family: 'EB Garamond', serif; font-size: clamp(17px,1.6vw,20px); line-height: 1.8; color: var(--ink); }
-    .detail-body p { margin-bottom: 1.5rem; }
-    .detail-body p:last-child { margin-bottom: 0; }
-    .detail-body em { font-style: italic; color: var(--mid); }
-    .detail-body::first-letter { font-weight: 500; font-size: 56px; line-height: 0.85; float: left; padding: 6px 10px 0 0; margin-top: 4px; }
-    .detail-action { display: inline-block; margin-top: 3rem; font-family: 'Jost', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; transition: color 0.2s ease, border-color 0.2s ease; }
-    .detail-action:hover { color: var(--ink); border-color: var(--ink); }
-
-    /* ── GARAGE DETAIL (Polestar-style) ── */
-    .garage-detail { display: grid; grid-template-columns: 1fr min(400px, 36%); gap: 4rem; margin-bottom: 2rem; align-items: start; }
-    .garage-detail-gallery { position: sticky; top: 2rem; min-width: 0; }
-    .garage-detail-main { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 0.8rem; cursor: zoom-in; }
-    .garage-detail-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.25s ease; }
-    .garage-detail-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 0.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; opacity: 0.3; transition: opacity 0.2s; }
-    .garage-detail-arrow:hover { opacity: 1; }
-    .garage-detail-arrow svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .garage-detail-arrow.prev { left: 0.5rem; }
-    .garage-detail-arrow.next { right: 0.5rem; }
-    .garage-detail-thumbs { display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; }
-    .garage-detail-thumbs::-webkit-scrollbar { display: none; }
-    .garage-detail-thumb { flex: 0 0 80px; height: 54px; border-radius: 4px; overflow: hidden; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: opacity 0.2s, border-color 0.2s; }
-    .garage-detail-thumb.active { border-color: var(--ink); opacity: 1; }
-    .garage-detail-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-    /* Lightbox */
-    .gd-lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
-    .gd-lightbox-main { position: relative; max-width: 90vw; max-height: 80vh; display: flex; align-items: center; justify-content: center; }
-    .gd-lightbox-main img { max-width: 90vw; max-height: 78vh; object-fit: contain; border-radius: 4px; }
-    .gd-lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: none; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
-    .gd-lightbox-arrow:hover { background: rgba(255,255,255,0.3); }
-    .gd-lightbox-arrow svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .gd-lightbox-arrow.prev { left: -56px; }
-    .gd-lightbox-arrow.next { right: -56px; }
-    .gd-lightbox-close { position: fixed; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: #fff; font-size: 28px; line-height: 1; }
-    .gd-lightbox-thumbs { display: flex; gap: 0.5rem; overflow-x: auto; max-width: 90vw; scrollbar-width: none; padding-bottom: 0.5rem; }
-    .gd-lightbox-thumbs::-webkit-scrollbar { display: none; }
-    .gd-lightbox-thumb { flex: 0 0 64px; height: 44px; border-radius: 3px; overflow: hidden; cursor: pointer; border: 2px solid transparent; opacity: 0.5; transition: opacity 0.2s, border-color 0.2s; }
-    .gd-lightbox-thumb.active { border-color: #fff; opacity: 1; }
-    .gd-lightbox-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-    .garage-detail-info { display: flex; flex-direction: column; min-width: 0; }
-    .garage-detail-badge { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.6rem; }
-    .garage-detail-title { font-family: 'EB Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 400; font-style: italic; line-height: 1; color: var(--ink); margin-bottom: 0.4rem; letter-spacing: -0.02em; }
-    .garage-detail-trim { font-family: 'EB Garamond', serif; font-style: italic; font-size: 18px; color: var(--mid); margin-bottom: 2rem; }
-    .garage-detail-price { margin-bottom: 2rem; }
-    .garage-detail-price-main { font-family: 'EB Garamond', serif; font-size: 38px; font-weight: 500; color: var(--ink); line-height: 1; }
-    .garage-detail-price-original { font-family: 'EB Garamond', serif; font-size: 15px; color: var(--faint); text-decoration: line-through; margin-top: 0.3rem; }
-    .garage-detail-divider { height: 1px; background: var(--border); margin-bottom: 2rem; }
-    .garage-detail-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2rem; margin-bottom: 2rem; }
-    .garage-detail-spec-item { font-family: 'EB Garamond', serif; }
-    .garage-detail-spec-label { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.25rem; }
-    .garage-detail-spec-value { font-size: 14px; color: var(--ink); overflow-wrap: break-word; }
-    .garage-detail-stock { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 2rem; }
-    .garage-detail-inquire { display: block; width: 100%; padding: 1rem; background: transparent; color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; text-decoration: none; border: 1px solid var(--ink); transition: background 0.25s ease, color 0.25s ease; cursor: pointer; }
-    .garage-detail-inquire:hover { background: var(--ink); color: var(--paper); }
-    .garage-detail-description { border-top: 1px solid var(--border); padding-top: 3rem; }
-    .garage-detail-description p { font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.65; color: var(--ink); margin-bottom: 1.5rem; max-width: 38em; white-space: pre-line; }
-    @media (max-width: 860px) {
-      .garage-detail { grid-template-columns: 1fr; gap: 2rem; }
-      .garage-detail-gallery { position: static; }
-      .garage-detail-specs { grid-template-columns: 1fr 1fr; }
-    }
+/* ── PUBLISHED INTERACTION LAYER ─────────────── */
+#intro { position: fixed; inset: 0; z-index: 9500; background: #f2ede6; transition: opacity 1.6s cubic-bezier(0.4,0,0.2,1), visibility 1.6s; }
+#intro.dismissed { opacity: 0; visibility: hidden; pointer-events: none; }
+#introArtwork { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 55%, #ffffff 0%, #f4f0e8 50%, #ddd8d0 100%); }
+#introProgress { position: absolute; bottom: 1.7rem; left: 2rem; right: 2rem; z-index: 30; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-start; transition: opacity 0.5s ease; }
+#introCounter { display: flex; align-items: baseline; font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(44px, 9vw, 92px); line-height: 0.82; letter-spacing: -0.03em; color: #1a1a18; font-variant-numeric: tabular-nums; }
+#introCounter .num { min-width: 2.4ch; text-align: right; }
+#introCounter .pct { font-size: 0.26em; font-weight: 400; letter-spacing: 0.18em; margin-left: 0.2em; color: #6b6660; transform: translateY(-0.15em); }
+#introClickHint { position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%); font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #6b6660; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; white-space: nowrap; z-index: 30; }
+body.intro-active { overflow: hidden; }
 
 
-    /* MOBILE */
-    @media (max-width: 760px) {
-      .site-header { padding: 1rem 1.2rem; }
-      .site-card { margin: 0; border-radius: 0; box-shadow: none; padding-bottom: calc(8vh + 4rem); }
-      .site-footer-nav { left: 0; right: 0; bottom: 0; border-radius: 0; padding: 8vh 1.4rem 1rem; }
-      .float-btns { right: 1rem; bottom: calc(8vh + 3.8rem); }
-      .nav { gap: 1.2rem; font-size: 11px; }
-      .hero { padding: 7rem 1.4rem 3rem; min-height: 100vh; }
+/* ════════════════════════════════════════════════
+   VARREL PUTRA — luxury site
+   Two typefaces (EB Garamond + Jost), one accent.
+   Discipline, restraint, unhurried motion.
+   ════════════════════════════════════════════════ */
 
-      .colophon { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.4rem; }
-      .page-content { padding: 7rem 1.4rem 10rem; }
-      .work-row { grid-template-columns: 30px 1fr auto; }
-      .work-tag { display: none; }
-      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .garage-grid { grid-template-columns: 1fr; }
-    }
+:root {
+  --paper:  #fafaf7;
+  --bg:     #ddd8d0;
+  --ink:    #1a1a18;
+  --mid:    #7d7870;
+  --faint:  #b5b0a8;
+  --accent: #9e8e78;
+  --border: rgba(26,26,24,0.10);
+  --border-faint: rgba(26,26,24,0.06);
+  --ease: cubic-bezier(0.16,1,0.3,1);
+}
+[data-theme="dark"] {
+  --paper:  #14100b;
+  --bg:     #0b0906;
+  --ink:    #ede8da;
+  --mid:    #8a857a;
+  --faint:  #4a4740;
+  --accent: #b89e80;
+  --border: rgba(237,232,218,0.10);
+  --border-faint: rgba(237,232,218,0.06);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── PAGE-TURN CURTAIN ────────────────────────── */
+.curtain {
+  position: fixed; inset: 0; z-index: 9000;
+  background: var(--bg); opacity: 0; pointer-events: none;
+  transition: opacity 0.42s ease;
+}
+.curtain.show { opacity: 1; }
+
+/* ── CUSTOM CURSOR — single minimal dot, grows to a ring over links ── */
+@media (hover: hover) and (pointer: fine) {
+  * { cursor: none !important; }
+  .cursor-dot {
+    position: fixed; top: 0; left: 0; z-index: 10000; pointer-events: none;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #fff; border: 1px solid transparent; mix-blend-mode: difference;
+    opacity: 0; will-change: transform;
+    transition: width 0.3s var(--ease), height 0.3s var(--ease),
+                background 0.3s ease, border-color 0.3s ease, opacity 0.35s ease;
+  }
+  .cursor-dot.hover {
+    width: 38px; height: 38px; background: transparent; border-color: #fff;
+  }
+  .cursor-dot.down { width: 5px; height: 5px; }
+  .cursor-dot.hover.down { width: 30px; height: 30px; }
+}
+@media (hover: none), (pointer: coarse) { .cursor-dot { display: none; } }
+
+/* ── CHAPTER COUNTER (Work + Garage) ──────────── */
+.chapter-counter {
+  position: fixed; top: 5.5rem; left: 2.4rem; z-index: 210;
+  display: none; align-items: baseline; gap: 0.5rem;
+  font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px;
+  letter-spacing: 0.22em; color: #fff; mix-blend-mode: difference;
+  pointer-events: none;
+}
+.chapter-counter.on { display: flex; }
+.chapter-counter .cc-cur { font-size: 13px; font-weight: 400; }
+.chapter-counter .cc-sep { width: 18px; height: 1px; background: currentColor; opacity: 0.6; transform: translateY(-3px); }
+
+/* ── SCROLL SECTION DOTS (snap pages) ── */
+.scroll-dots {
+  position: fixed; right: 1.7rem; top: 50%; transform: translateY(-50%);
+  z-index: 195; display: none; flex-direction: column; align-items: center; gap: 0.85rem;
+  mix-blend-mode: difference;
+}
+.scroll-dots.on { display: flex; }
+.scroll-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #fff; border: none; padding: 0;
+  cursor: pointer; opacity: 0.4;
+  transition: opacity 0.3s ease, height 0.4s var(--ease), border-radius 0.4s var(--ease);
+}
+.scroll-dot:hover { opacity: 0.85; }
+.scroll-dot.active { opacity: 1; height: 20px; border-radius: 3px; }
+
+html { background: var(--bg); scroll-behavior: auto; scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar { display: none; }
+html.snap { scroll-snap-type: y mandatory; }
+html, body { height: 100%; }
+
+body {
+  font-family: 'EB Garamond', serif;
+  color: var(--ink);
+  background: var(--bg);
+  font-feature-settings: 'liga','kern','onum';
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  opacity: 1;
+  padding-bottom: 5.5rem;
+  transition: opacity 1.2s ease;
+}
+body.ready { opacity: 1; }
+body::-webkit-scrollbar { display: none; }
+body { scrollbar-width: none; }
+
+.mono { font-family: 'Jost', sans-serif; }
+
+/* ── PAGE ROUTING ─────────────────────────────── */
+.page { display: none; }
+.page.active { display: block; animation: pageIn 0.9s var(--ease) both; }
+@keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ── CHROME ───────────────────────────────────── */
+.chrome {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 2.4rem;
+  pointer-events: none;
+}
+.chrome > * { pointer-events: auto; }
+.chrome-right { display: flex; align-items: center; gap: clamp(1rem, 2vw, 1.6rem); }
+
+.wordmark {
+  font-family: 'EB Garamond', serif; font-style: italic; font-weight: 500;
+  font-size: 26px; letter-spacing: -0.02em; color: var(--ink);
+  text-decoration: none; line-height: 1; background: none; border: none;
+  cursor: pointer; padding: 0; transition: color 0.3s ease;
+}
+/* ── RADIAL MENU (GTA weapon-wheel, centered) ── */
+.radial { position: fixed; left: 50%; bottom: 1.55rem; z-index: 195; width: 0; height: 0; }
+
+.radial-backdrop {
+  position: fixed; inset: 0; z-index: -1;
+  background: rgba(0,0,0,0.14);
+  backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
+}
+.radial.open .radial-backdrop {
+  opacity: 1; pointer-events: auto;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+
+.radial-trigger {
+  position: absolute; left: 0; top: 0; transform: translate(-50%,-50%);
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--ink); border: 1px solid var(--ink);
+  cursor: pointer; padding: 0; z-index: 2; touch-action: none;
+  transition: width 0.35s var(--ease), height 0.35s var(--ease),
+              background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+.radial-trigger:hover { background: var(--accent); border-color: var(--accent); }
+.radial.open .radial-trigger { opacity: 0; pointer-events: none; }
+
+/* Wheel container is centered in the viewport */
+.radial-menu {
+  position: fixed; left: 50%; top: 50%;
+  width: 0; height: 0; pointer-events: none;
+}
+
+.radial-item {
+  position: absolute; left: 0; top: 0;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--border); color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0; opacity: 0; pointer-events: none;
+  transform: translate(-50%,-50%) scale(0.2);
+  transition: opacity 0.4s var(--ease), transform 0.5s var(--ease),
+              background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+              box-shadow 0.2s ease;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.12);
+}
+.radial-item svg { width: 19px; height: 19px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.radial-item.active {
+  color: var(--paper); background: var(--accent); border-color: var(--accent);
+  box-shadow: 0 10px 38px rgba(0,0,0,0.24);
+  transform: translate(calc(var(--rx) - 50%), calc(var(--ry) - 50%)) scale(1.28) !important;
+}
+
+/* Center hub — shows the active item's name (GTA weapon name) */
+.radial-hub {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  z-index: 196; pointer-events: none; text-align: center;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.radial.open .radial-hub { opacity: 1; }
+.radial-hub-name {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 1.5rem; color: var(--ink); line-height: 1;
+  min-height: 1.5rem;
+}
+.radial-hub-hint {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--mid); margin-top: 0.55rem;
+}
+
+body.vmenu-open .chapter-counter { opacity: 0; transition: opacity 0.25s ease; }
+/* Radial weapon-wheel is the nav on every breakpoint — enlarge the touch target on phones */
+@media (max-width: 760px) {
+  .radial-trigger { width: 13px; height: 13px; }
+  .radial-trigger::before {
+    content: ''; position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); width: 48px; height: 48px; border-radius: 50%;
+  }
+  .radial.open .radial-trigger { width: 16px; height: 16px; }
+}
+
+.site-footer-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 180;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.4rem;
+  padding: 1rem clamp(1.4rem, 4vw, 2.4rem);
+  pointer-events: none;
+}
+.site-footer-nav > * { pointer-events: auto; }
+.footer-clock {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);
+  min-width: 9rem;
+}
+.footer-clock.right { text-align: right; }
+.nav { position: relative; display: flex; align-items: center; gap: clamp(1rem, 2.2vw, 2.4rem); padding: 0.35rem 0; }
+.nav a {
+  font-family: 'Jost', sans-serif; font-weight: 400;
+  font-size: clamp(10px, 1vw, 11px); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mid); text-decoration: none; cursor: pointer;
+  padding-bottom: 2px; transition: color 0.35s ease; white-space: nowrap;
+}
+.nav a:hover { color: var(--ink); }
+/* All navigation + utilities live in the radial wheel now (every breakpoint) */
+.chrome-right .theme-toggle { display: none; } /* theme is a wheel item */
+@media (min-width: 761px) {
+  .site-footer-nav .nav { display: none; }
+}
+.nav a.active { color: var(--accent); }
+.nav-indicator {
+  position: absolute; left: 0; bottom: -0.35rem;
+  height: 1px; width: 2.2rem; background: var(--accent);
+  opacity: 0; transform: translateX(0);
+  transition: transform 0.45s var(--ease), width 0.45s var(--ease), opacity 0.25s ease;
+}
+
+.theme-toggle {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mid); background: none; border: none; cursor: pointer; padding: 0;
+  transition: color 0.35s ease;
+}
+.theme-toggle:hover { color: var(--ink); }
+
+/* hamburger (mobile) */
+.hamburger { display: none; }
+.mobile-nav { display: none; }
+
+/* ── REVEAL ───────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 1.1s ease, transform 1.1s var(--ease); }
+.reveal.in-view { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+.d5 { transition-delay: 0.58s; }
+
+/* ── LINE-MASK REVEAL — display headings rise line by line ── */
+.split { opacity: 1 !important; transform: none !important; }
+.ln { display: block; overflow: hidden; padding-bottom: 0.04em; }
+.ln-i { display: block; transform: translateY(118%); transition: transform 1.05s var(--ease); will-change: transform; }
+.reveal.in-view .ln-i,
+.chapter.in-view .chapter-name .ln-i { transform: none; }
+.lines-shown .ln-i { transform: none; transition: none; }
+
+/* ── TYPE FINESSE ── */
+.hero-name, .page-title, .cover-title, .chapter-name, .contact-line, .outro-line, .mission { text-wrap: balance; }
+body { hanging-punctuation: first allow-end; }
+
+/* ── SHARED ───────────────────────────────────── */
+.wrap { max-width: 1280px; margin: 0 auto; }
+.eyebrow {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mid);
+}
+.section-rule {
+  display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3.5rem;
+}
+.section-rule::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-rule .eyebrow { color: var(--faint); }
+
+/* ── HOME ─────────────────────────────────────── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(6rem,14vh,12rem) clamp(1.6rem,5vw,5rem) clamp(4rem,8vh,7rem);
+  max-width: 1280px; margin: 0 auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.hero-name {
+  font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic;
+  font-size: clamp(68px, 13vw, 200px); line-height: 0.86; letter-spacing: -0.035em;
+  color: var(--ink); margin-bottom: 1.6rem;
+}
+.hero-name em { font-style: normal; font-weight: 500; }
+.hero-positioning {
+  max-width: 24em; font-size: clamp(18px, 1.8vw, 24px); line-height: 1.6;
+  color: var(--mid); margin-bottom: 3rem;
+}
+.hero-positioning em { font-style: italic; color: var(--ink); }
+.hero-status {
+  font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid);
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.scroll-cue {
+  margin-top: 4rem; font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--faint);
+}
+
+/* full-height idea screens */
+.screen {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: clamp(5rem,12vh,9rem) clamp(1.6rem,5vw,5rem);
+  max-width: 1280px; margin: 0 auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.screen-inner { width: 100%; }
+
+.mission {
+  max-width: 18em; font-size: clamp(24px, 3.2vw, 46px); line-height: 1.4;
+  letter-spacing: -0.015em; color: var(--ink);
+}
+.mission em { font-style: italic; color: var(--mid); }
+.mission .dc::first-letter {
+  font-weight: 500; font-size: 1.1em; line-height: 0.8;
+}
+
+/* home work/writing peeks */
+.peek-list { display: grid; gap: 0; }
+.peek-row {
+  display: grid; grid-template-columns: 44px 1fr auto; gap: 1.6rem; align-items: baseline;
+  padding: 2.2rem 0; border-top: 1px solid var(--border);
+  text-decoration: none; color: inherit; cursor: pointer;
+}
+.peek-row:last-child { border-bottom: 1px solid var(--border); }
+.peek-num { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.14em; color: var(--faint); }
+.peek-title {
+  font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(22px, 2.4vw, 32px);
+  letter-spacing: -0.01em; color: var(--mid); transition: color 0.4s ease;
+}
+.peek-title em { font-style: italic; font-weight: 400; }
+.peek-meta { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.08em; color: var(--faint); white-space: nowrap; }
+.peek-row:hover .peek-title { color: var(--ink); }
+
+/* ── COLOPHON ─────────────────────────────────── */
+.colophon {
+  position: relative; overflow: hidden;
+  border-top: 1px solid var(--border);
+  padding: clamp(3rem,5vw,5rem) clamp(1.6rem,5vw,5rem) clamp(3rem,5vw,4rem);
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(2rem,3vw,3rem);
+  font-family: 'Jost', sans-serif; font-weight: 300; font-size: 12px;
+  line-height: 1.8; letter-spacing: 0.04em; color: var(--mid);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+/* Oversized brand watermark sitting low-contrast behind the footer content */
+.colophon::before {
+  content: 'varrelputra.com';
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0; pointer-events: none;
+  font-family: 'EB Garamond', serif; font-style: italic; font-weight: 700;
+  font-size: clamp(2.2rem, 12vw, 10rem); letter-spacing: -0.04em; line-height: 1;
+  white-space: nowrap; color: var(--ink); opacity: 0.05;
+}
+.colophon > div { position: relative; z-index: 1; }
+.colophon h4 {
+  font-family: 'Jost', sans-serif; font-weight: 400; font-size: 9px;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--faint); margin-bottom: 1rem;
+}
+.colophon a {
+  color: var(--mid); text-decoration: none; display: inline-block;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: color 0.3s ease, background-size 0.4s var(--ease);
+}
+.colophon a:hover { color: var(--ink); background-size: 100% 1px; }
+.colophon-currently { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.8rem; }
+.colophon-currently .status-dot { width: 6px; height: 6px; }
+.colophon em { font-family: 'EB Garamond', serif; font-style: italic; font-size: 14px; color: var(--ink); }
+
+/* ── SUBPAGE HEADER ───────────────────────────── */
+.page-head {
+  padding: clamp(8rem,18vh,15rem) clamp(1.6rem,5vw,6rem) clamp(2.5rem,5vw,4rem);
+  max-width: 1280px; margin: 0 auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.page-title {
+  font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic;
+  font-size: clamp(52px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.03em; color: var(--ink);
+}
+.page-intro {
+  margin-top: 1.6rem; max-width: 30em; font-size: clamp(17px,1.7vw,21px);
+  line-height: 1.6; color: var(--mid);
+}
+/* Work title = full-height opening screen so chapters start clean (no peek) */
+.page[data-page="work"] .page-head {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding-top: 0; padding-bottom: 0; scroll-snap-align: start; scroll-snap-stop: always;
+}
+
+/* ── CHAPTER (Work + Garage) ──────────────────── */
+.chapter {
+  min-height: 100vh; display: grid; grid-template-columns: 1.5fr 1fr;
+  position: relative; overflow: hidden; scroll-snap-align: start; scroll-snap-stop: always;
+}
+.chapter.reverse { grid-template-columns: 1fr 1.5fr; }
+.chapter.reverse .chapter-media { order: 2; }
+.chapter.reverse .chapter-info { order: 1; }
+.chapter-media { position: relative; overflow: hidden; min-height: 50vh; }
+/* ── IMAGE SYSTEM — one unified grade across all photography ──
+   Currently these are solid-colour placeholders. To drop in a real image later,
+   add a background-image to any .ph div, e.g.:
+     <div class="ph" style="background-image:url('img/coastal-ford.jpg')"></div>
+   The grade below (subtle gradient + light vignette) then applies automatically. */
+.ph { background-size: cover; background-position: center; background-color: #2b2b2e; filter: saturate(0.92) contrast(1.03); }
+.ph::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,24,17,0.04) 0%, rgba(18,14,10,0.20) 100%); box-shadow: inset 0 0 90px rgba(0,0,0,0.16); pointer-events: none; }
+.chapter-media .ph { position: absolute; inset: 0; transform: scale(1.12); transition: transform 8s ease-out; }
+.chapter.in-view .chapter-media .ph { transform: scale(1); }
+.ph-label {
+  display: none;
+  position: absolute; bottom: 1.4rem; left: 1.4rem;
+  font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55);
+}
+.chapter-info {
+  background: var(--paper); display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(2.4rem,7vw,7rem);
+}
+.chapter-index {
+  font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem;
+}
+.chapter-name {
+  font-family: 'EB Garamond', serif; font-weight: 400;
+  font-size: clamp(34px, 4.4vw, 70px); line-height: 0.98; letter-spacing: -0.02em;
+  color: var(--ink); margin-bottom: 0.5rem;
+}
+.chapter-name em { font-style: italic; }
+.chapter-tagline {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: clamp(17px,1.7vw,22px); line-height: 1.5; color: var(--mid);
+  margin-bottom: 2.8rem; max-width: 22em;
+}
+.spec-row { display: flex; gap: clamp(1.8rem,3vw,3.5rem); margin-bottom: 3rem; }
+.spec { display: flex; flex-direction: column; gap: 0.4rem; }
+.spec-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+.spec-value { font-family: 'EB Garamond', serif; font-size: clamp(16px,1.5vw,20px); color: var(--ink); }
+.line-cta {
+  align-self: flex-start; font-family: 'Jost', sans-serif; font-weight: 400;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid);
+  text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem;
+  transition: color 0.35s ease, border-color 0.35s ease; cursor: pointer;
+}
+.line-cta:hover { color: var(--ink); border-color: var(--accent); }
+
+/* chapter reveal */
+.chapter .chapter-index, .chapter .chapter-name, .chapter .chapter-tagline,
+.chapter .spec-row, .chapter .line-cta {
+  opacity: 0; transform: translateY(20px); transition: opacity 1.1s ease, transform 1.1s var(--ease);
+}
+.chapter.in-view .chapter-index { transition-delay: 0.1s; }
+.chapter.in-view .chapter-name { transition-delay: 0.22s; }
+.chapter.in-view .chapter-tagline { transition-delay: 0.34s; }
+.chapter.in-view .spec-row { transition-delay: 0.46s; }
+.chapter.in-view .line-cta { transition-delay: 0.58s; }
+.chapter.in-view .chapter-index, .chapter.in-view .chapter-name,
+.chapter.in-view .chapter-tagline, .chapter.in-view .spec-row, .chapter.in-view .line-cta {
+  opacity: 1; transform: none;
+}
+
+/* ── GARAGE COVER + OUTRO ─────────────────────── */
+.cover {
+  min-height: 100vh; scroll-snap-align: start; scroll-snap-stop: always; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: clamp(6rem,12vh,9rem) 2.4rem; background: var(--paper);
+}
+.cover-title {
+  font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic;
+  font-size: clamp(52px, 10vw, 150px); line-height: 0.9; letter-spacing: -0.03em;
+  color: var(--ink); margin: 2rem 0 1.6rem;
+}
+.cover-sub { max-width: 30em; font-size: clamp(16px,1.6vw,20px); line-height: 1.7; color: var(--mid); }
+.cover-index { margin-top: 3rem; width: min(620px, 90vw); }
+.cover-index a {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem;
+  padding: 0.9rem 0; border-top: 1px solid var(--border); text-decoration: none;
+  color: var(--mid); transition: color 0.3s ease;
+}
+.cover-index a:last-child { border-bottom: 1px solid var(--border); }
+.cover-index a:hover { color: var(--ink); }
+.ci-num { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.18em; color: var(--faint); min-width: 2.5em; text-align: left; }
+.ci-name { font-family: 'EB Garamond', serif; font-size: clamp(18px,2vw,24px); letter-spacing: -0.01em; flex: 1; text-align: left; }
+.ci-year { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.08em; color: var(--faint); }
+
+.outro {
+  min-height: 100vh; scroll-snap-align: start; scroll-snap-stop: always; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center; background: var(--paper); padding: 2.4rem;
+}
+.outro-line {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: clamp(28px,4vw,56px); line-height: 1.25; letter-spacing: -0.015em;
+  color: var(--ink); max-width: 18em; margin-bottom: 2.5rem;
+}
+
+/* ── WRITING ──────────────────────────────────── */
+.post-list { display: grid; gap: 0; max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.6rem,5vw,6rem) clamp(5rem,10vh,9rem); }
+.post-row {
+  display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: baseline;
+  padding: 2.8rem 0; border-bottom: 1px solid var(--border);
+  text-decoration: none; color: inherit; cursor: pointer;
+}
+.post-row:first-child { border-top: 1px solid var(--border); }
+.post-title {
+  font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(22px,2.4vw,34px);
+  letter-spacing: -0.01em; color: var(--mid); transition: color 0.4s ease;
+}
+.post-title em { font-style: italic; font-weight: 400; }
+.post-row:hover .post-title { color: var(--ink); }
+.post-date { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.06em; color: var(--faint); white-space: nowrap; }
+
+/* article */
+.article { max-width: 40em; margin: 0 auto; padding: clamp(8rem,16vh,14rem) clamp(1.6rem,5vw,2rem) clamp(5rem,10vh,8rem); }
+.article-back {
+  font-family: 'Jost', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--mid); background: none; border: none; cursor: pointer;
+  padding: 0; margin-bottom: 3rem; transition: color 0.3s ease;
+}
+.article-back:hover { color: var(--ink); }
+.article-date { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 1.2rem; }
+.article-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(34px,5vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 2.5rem; }
+.article-title em { font-style: italic; font-weight: 400; }
+.article-body { font-size: clamp(17px,1.6vw,20px); line-height: 1.75; color: var(--ink); }
+.article-body p { margin-bottom: 1.5rem; }
+.article-body p:first-of-type::first-letter { font-weight: 500; font-size: 56px; line-height: 0.82; float: left; padding: 6px 10px 0 0; }
+.article-body em { font-style: italic; color: var(--mid); }
+
+/* ── ABOUT ────────────────────────────────────── */
+.about-layout {
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2.5rem,5vw,6rem); align-items: stretch;
+  max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.6rem,5vw,6rem) clamp(5rem,10vh,9rem);
+}
+.about-portrait { position: relative; overflow: hidden; min-height: 70vh; border-radius: 2px; }
+.about-portrait .ph { position: absolute; inset: 0; }
+.about-text { display: flex; flex-direction: column; justify-content: center; }
+.about-body { font-size: clamp(17px,1.6vw,21px); line-height: 1.7; color: var(--ink); }
+.about-body p { margin-bottom: 1.5rem; }
+.about-body p:last-child { margin-bottom: 0; }
+.about-body em { font-style: italic; color: var(--mid); }
+.about-body p:first-child::first-letter { font-weight: 500; font-size: 58px; line-height: 0.82; float: left; padding: 6px 10px 0 0; }
+.about-detail { margin-top: 3rem; display: flex; flex-wrap: wrap; gap: 2.5rem; }
+.about-detail .spec-label { margin-bottom: 0.5rem; }
+.about-detail a, .about-detail span { font-family: 'EB Garamond', serif; font-size: 17px; color: var(--mid); text-decoration: none; display: block; transition: color 0.3s ease; }
+.about-detail a:hover { color: var(--ink); }
+
+/* ── CONTACT ──────────────────────────────────── */
+.contact {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  max-width: 1280px; margin: 0 auto; padding: clamp(8rem,16vh,12rem) clamp(1.6rem,5vw,6rem) clamp(5rem,8vh,7rem);
+}
+.contact-line {
+  font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(28px,4.5vw,64px);
+  line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); max-width: 16em; margin-bottom: 2.5rem;
+}
+.contact-email {
+  font-family: 'EB Garamond', serif; font-size: clamp(26px,3.5vw,48px); letter-spacing: -0.01em;
+  color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--border);
+  padding-bottom: 0.1em; align-self: flex-start; transition: color 0.35s ease, border-color 0.35s ease;
+}
+.contact-email:hover { color: var(--ink); border-color: var(--accent); }
+.contact-links { margin-top: 3.5rem; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+.contact-links a {
+  font-family: 'Jost', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.3s ease;
+}
+.contact-links a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
+  padding-bottom: 3px;
+  transition: color 0.3s ease, background-size 0.4s var(--ease);
+}
+.contact-links a:hover { color: var(--ink); background-size: 100% 1px; }
+
+/* ── RESPONSIVE ───────────────────────────────── */
+@media (max-width: 820px) {
+  /* snap stays ON for mobile, but gentler: proximity won't trap a chapter whose
+     text overflows past 100vh the way mandatory can. */
+  html.snap { scroll-snap-type: y proximity; }
+  .chapter, .chapter.reverse { grid-template-columns: 1fr; grid-template-rows: 44vh auto; min-height: 100vh; }
+  .chapter.reverse .chapter-media { order: 1; }
+  .chapter.reverse .chapter-info { order: 2; }
+  .about-layout { grid-template-columns: 1fr; }
+  .about-portrait { min-height: 48vh; }
+  .cover-index { width: 100%; }
+
+  .site-footer-nav { display: none; }
+  .scroll-dots { display: none !important; }
+
+  /* Navigation on mobile is the radial weapon-wheel; legacy hamburger + overlay retired */
+  .hamburger, .mobile-nav { display: none !important; }
+}
+
+/* prefers-reduced-motion — respect the visitor */
+@media (prefers-reduced-motion: reduce) {
+  html, html.snap { scroll-behavior: auto; scroll-snap-type: none; }
+  body { transition: none; }
+  .reveal,
+  .chapter .chapter-index, .chapter .chapter-name, .chapter .chapter-tagline,
+  .chapter .spec-row, .chapter .line-cta {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+  .chapter-media .ph { transform: none !important; transition: none !important; }
+  .ln-i { transform: none !important; transition: none !important; }
+  .curtain { transition: none !important; }
+  .page.active { animation: none !important; }
+}
+
   </style>
 </head>
 <body>
 
-  <div class="cursor-ring" id="cursorRing"></div>
-  <div class="cursor-box" id="cursorBox"></div>
-  <div class="cursor-label" id="cursorLabel"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
   <div id="intro">
     <div id="introArtwork"></div>
     <div id="introProgress">
-      <div id="introProgressBar"><div id="introProgressFill"></div></div>
+      <div id="introCounter"><span class="num">0</span><span class="pct">%</span></div>
     </div>
     <div id="introClickHint">Click anywhere to continue</div>
   </div>
 
-  <div class="v-watermark" aria-hidden="true">v</div>
+  <div class="curtain" id="curtain"></div>
+  <div class="chapter-counter" id="chapterCounter">
+    <span class="cc-cur" id="ccCur">01</span>
+    <span class="cc-sep"></span>
+    <span id="ccTotal">03</span>
+  </div>
+  <nav class="scroll-dots" id="scrollDots" aria-label="Section navigation"></nav>
 
-  <header class="site-header">
-    <a class="vmark" data-page="home" aria-label="Varrel Putra — home">v.</a>
+  <!-- ── CHROME ─────────────────────────────────── -->
+  <header class="chrome">
+    <button class="wordmark" data-nav="home" aria-label="Home">v.</button>
+    <div class="chrome-right">
+      <button class="theme-toggle" id="themeToggle" type="button">Dark</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
   </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a data-nav="work">Work</a>
+    <a data-nav="writing">Writing</a>
+    <a data-nav="about">About</a>
+    <a data-nav="garage">Garage</a>
+    <a data-nav="contact">Contact</a>
+  </nav>
 
   <nav class="site-footer-nav" aria-label="Site navigation">
     <span class="footer-clock" id="clockLocal"></span>
     <div class="nav">
-      <a data-page="home"    data-label="Shift + 0" class="active">Home</a>
-      <a data-page="work"    data-label="Shift + 1">Work</a>
-      <a data-page="writing" data-label="Shift + 2">Writing</a>
-      <a data-page="about"   data-label="Shift + 3">About</a>
-      <a data-page="garage"  data-label="Shift + 4">Garage</a>
-      <a data-page="contact" data-label="Shift + 5">Contact</a>
-      <span class="nav-indicator" id="navIndicator"></span>
+      <a data-nav="home" data-label="Home">Home</a>
+      <a data-nav="work" data-label="Work">Work</a>
+      <a data-nav="writing" data-label="Writing">Writing</a>
+      <a data-nav="about" data-label="About">About</a>
+      <a data-nav="garage" data-label="Garage">Garage</a>
+      <a data-nav="contact" data-label="Contact">Contact</a>
+      <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
     </div>
     <span class="footer-clock right" id="clockVancouver"></span>
   </nav>
 
-  <!-- Mobile hamburger -->
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-
-  <!-- Mobile nav overlay -->
-  <div class="mob-nav-overlay" id="mobNavOverlay">
-    <div class="mob-nav-links">
-      <button class="mob-nav-link active" data-page="home"><span class="mob-nav-num">00</span>Home</button>
-      <button class="mob-nav-link" data-page="work"><span class="mob-nav-num">01</span>Work</button>
-      <button class="mob-nav-link" data-page="writing"><span class="mob-nav-num">02</span>Writing</button>
-      <button class="mob-nav-link" data-page="about"><span class="mob-nav-num">03</span>About</button>
-      <button class="mob-nav-link" data-page="garage"><span class="mob-nav-num">04</span>Garage</button>
-      <button class="mob-nav-link" data-page="contact"><span class="mob-nav-num">05</span>Contact</button>
+  <!-- ── RADIAL MENU (GTA weapon-wheel, centered) ── -->
+  <div class="radial" id="radial">
+    <div class="radial-backdrop" id="radialBackdrop"></div>
+    <div class="radial-menu" id="vmarkMenu" aria-hidden="true"></div>
+    <div class="radial-hub" id="radialHub">
+      <div class="radial-hub-name" id="vmarkLabel"></div>
+      <div class="radial-hub-hint" id="vmarkHint"></div>
     </div>
-    <div class="mob-nav-footer">
-      <div class="mob-nav-status"><span class="mob-nav-dot"></span>Open to consulting</div>
-      <div id="mobNavClock"></div>
-    </div>
+    <button class="radial-trigger" id="vmarkBtn" type="button" aria-label="Menu" aria-expanded="false"></button>
   </div>
 
-  <div class="float-btns">
-    <button class="float-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" data-label="Toggle theme">
-      <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-    <button class="float-btn" id="scrollTop" type="button" aria-label="Scroll to top" data-label="Scroll to top">
-      <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
-    </button>
-  </div>
+  <!-- ══ HOME ══════════════════════════════════════ -->
+  <main class="page" data-page="home">
+    <section class="hero">
+      <h1 class="hero-name reveal">Varrel <em>Putra</em></h1>
+      <p class="hero-positioning reveal d1">Sales, marketing &amp; brand operator. I work where communication, belief, and craft meet &mdash; <em>building things that endure.</em></p>
+      <div class="hero-status reveal d2"><span class="status-dot"></span>Open to select engagements &mdash; 2026</div>
+      <div class="scroll-cue reveal d3">Scroll &darr;</div>
+    </section>
 
-  <div class="site-card">
+    <section class="screen">
+      <div class="screen-inner">
+        <p class="mission reveal"><span class="dc">A</span> builder of things that endure. Sales is communication; marketing is <em>belief.</em> I design client journeys that prize clarity, trust, and the long arc over the quick win.</p>
+      </div>
+    </section>
 
-    <!-- HOME -->
-    <div id="page-home" class="page active">
-      <section class="hero">
-        <h1 class="hero-name" id="hero-name"></h1>
-        <p class="hero-role" id="hero-role"></p>
-        <p class="hero-mission" id="hero-mission"></p>
-        <p class="hero-status"><span class="hero-status-dot"></span><span>Open to consulting, at your service.</span></p>
-        <div class="hero-actions">
-          <a class="hero-cta" data-page="work">View work →</a>
-          <a class="hero-cta" data-page="contact">Get in touch →</a>
-        </div>
-        <div class="hero-writing">
-          <div class="hero-writing-label">Latest writing</div>
-          <a class="hero-writing-link" id="hero-latest-writing"></a>
-        </div>
-      </section>
-    </div>
-
-    <!-- WORK -->
-    <div id="page-work" class="page">
-      <main class="page-content">
-        <h1 class="page-title">Selected <em>Work</em></h1>
-        <div class="work-list" id="work-list-page"></div>
-      </main>
-    </div>
-
-    <!-- WRITING -->
-    <div id="page-writing" class="page">
-      <main class="page-content">
-        <h1 class="page-title">Field <em>Notes</em></h1>
-        <div class="filter-bar" id="writing-filters"></div>
-        <div class="post-list" id="post-list"></div>
-      </main>
-    </div>
-
-    <!-- ABOUT -->
-    <div id="page-about" class="page">
-      <main class="page-content">
-        <div class="about-layout">
-          <div>
-            <h1 class="page-title">Varrel <em>Putra</em></h1>
-            <div class="about-body" id="about-bio"></div>
-            <a id="about-cv" href="#" class="cv-link" data-label="Download CV">Download CV ↗</a>
-          </div>
-          <aside class="sidebar">
-            <div class="sidebar-block">
-              <h4>Based in</h4>
-              <p id="about-based"></p>
-            </div>
-            <div class="sidebar-block">
-              <h4>Specialisms</h4>
-              <div id="about-specialisms"></div>
-            </div>
-            <div class="sidebar-block">
-              <h4>Elsewhere</h4>
-              <div id="about-links"></div>
-            </div>
-            <div class="sidebar-block">
-              <h4>Contact</h4>
-              <a id="about-email" href="#" data-label="Send email"></a>
-            </div>
-          </aside>
-        </div>
-      </main>
-    </div>
-
-    <!-- GARAGE -->
-    <div id="page-garage" class="page">
-      <main class="page-content">
-        <h1 class="page-title">Current <em>Listings</em></h1>
-        <p class="page-subtitle" id="garage-subtitle"></p>
-        <div class="filter-bar" id="garage-filters"></div>
-        <div id="garage-listings"></div>
-      </main>
-    </div>
-
-    <!-- CONTACT -->
-    <div id="page-contact" class="page">
-      <main class="page-content">
-        <h1 class="page-title">Get in <em>touch</em></h1>
-        <div class="contact-grid">
-          <div>
-            <p class="contact-body" id="contact-body"></p>
-            <a class="contact-email" id="contact-email" href="#" data-label="Copy email"></a>
-            <div style="margin-top:2rem;">
-              <a href="https://calendly.com/varrelsales/meeting" target="_blank" class="garage-detail-inquire" style="display:inline-block;width:auto;padding:0.9rem 2rem;" data-label="Schedule a meeting">Schedule a Meeting</a>
-            </div>
-          </div>
-          <div class="contact-sidebar">
-            <h4>Elsewhere</h4>
-            <div class="contact-links" id="contact-links"></div>
-            <p class="contact-note" id="contact-note"></p>
-          </div>
-        </div>
-      </main>
-    </div>
-
-    <!-- DETAIL -->
-    <div id="page-detail" class="page">
-      <main class="page-content">
-        <div class="detail-toolbar">
-          <button class="detail-back" id="detail-back" data-label="Go back">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-            Back
-          </button>
-        </div>
-        <!-- Standard layout (work / writing) -->
-        <div id="detail-standard">
-
-          <h1 class="page-title" id="detail-title"></h1>
-          <div class="detail-meta" id="detail-meta"></div>
-          <div class="detail-body" id="detail-body"></div>
-          <a class="detail-action" id="detail-action" href="#" style="display:none"></a>
-        </div>
-        <!-- Garage layout (Polestar-style) -->
-        <div id="detail-garage" style="display:none">
-          <div class="garage-detail">
-            <div class="garage-detail-gallery">
-              <div class="garage-detail-main" id="gd-main">
-                <button class="garage-detail-arrow prev" id="gd-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-                <img id="gd-main-img" src="" alt="">
-                <button class="garage-detail-arrow next" id="gd-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-              </div>
-              <div class="garage-detail-thumbs" id="gd-thumbs"></div>
-            </div>
-            <div class="garage-detail-info">
-              <div class="garage-detail-badge" id="gd-badge"></div>
-              <div class="garage-detail-title" id="gd-title"></div>
-              <div class="garage-detail-trim" id="gd-trim"></div>
-              <div class="garage-detail-price">
-                <div class="garage-detail-price-main" id="gd-price"></div>
-                <div class="garage-detail-price-original" id="gd-original-price" style="display:none"></div>
-              </div>
-              <div class="garage-detail-divider"></div>
-              <div class="garage-detail-specs" id="gd-specs"></div>
-              <div class="garage-detail-stock" id="gd-stock"></div>
-              <a class="garage-detail-inquire" id="gd-inquire" href="#" data-label="Inquire">Enquire</a>
-              <a class="garage-detail-inquire" style="margin-top:0.8rem; border-color:var(--border); color:var(--mid);" href="https://calendly.com/varrelsales/meeting" target="_blank" rel="noopener" data-label="Schedule a viewing">Schedule a Viewing</a>
-            </div>
-          </div>
-          <div class="garage-detail-description" id="gd-description"></div>
-        </div>
-      </main>
-    </div>
-
-    <!-- SHARED FOOTER -->
-    <footer class="colophon" id="site-colophon">
-      <div>
-        <h4>Availability</h4>
-        <div class="colophon-status-line"><span class="colophon-status-dot"></span><span>Open to consulting</span></div>
-        <div style="margin-top:0.6rem;">Sales, marketing &amp; brand engagements.</div>
-        <div style="margin-top:0.4rem;"><a id="colophon-location"></a>
+    <section class="screen">
+      <div class="screen-inner wrap">
+        <div class="section-rule reveal"><span class="eyebrow">Selected Work</span></div>
+        <div class="peek-list">
+          <a class="peek-row reveal" data-nav="work"><span class="peek-num">01</span><span class="peek-title">Coastal Ford <em>&mdash; retail systems</em></span><span class="peek-meta">Sales &middot; 2025</span></a>
+          <a class="peek-row reveal d1" data-nav="work"><span class="peek-num">02</span><span class="peek-title">Killing Floor <em>&mdash; consulting practice</em></span><span class="peek-meta">Brand &middot; 2025</span></a>
+          <a class="peek-row reveal d2" data-nav="work"><span class="peek-num">03</span><span class="peek-title">The Garage <em>&mdash; a private collection</em></span><span class="peek-meta">Project &middot; 2024</span></a>
         </div>
       </div>
-      <div><h4>Elsewhere</h4><div id="colophon-links"></div></div>
+    </section>
+
+    <section class="screen">
+      <div class="screen-inner wrap">
+        <div class="section-rule reveal"><span class="eyebrow">From the Journal</span></div>
+        <div class="peek-list">
+          <a class="peek-row reveal" data-article="enough"><span class="peek-num">&mdash;</span><span class="peek-title">On Knowing When It&rsquo;s <em>Enough</em></span><span class="peek-meta">Mar 2026</span></a>
+          <a class="peek-row reveal d1" data-article="communication"><span class="peek-num">&mdash;</span><span class="peek-title">Sales Is <em>Communication</em></span><span class="peek-meta">Feb 2026</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="colophon">
+      <div>
+        <h4>Index</h4>
+        <a data-nav="work">Work</a>
+        <a data-nav="writing">Writing</a>
+        <a data-nav="about">About</a>
+        <a data-nav="garage">Garage</a>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <a href="https://linkedin.com/in/varrel" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com/akillingfloor" target="_blank" rel="noopener">Instagram</a>
+        <a href="cv.pdf" target="_blank" rel="noopener">CV</a>
+      </div>
       <div>
         <h4>Contact</h4>
-        <a id="colophon-email" href="#"></a>
-        <div style="margin-top:0.5rem;"><span style="font-family:'Jost',sans-serif;font-weight:400;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);margin-right:0.4em;">CA</span><a href="tel:+16047192799" style="color:inherit;text-decoration:none;">+1 (604) 719-2799</a></div>
+        <a href="mailto:hello@varrelputra.com">hello@varrelputra.com</a>
+        <p class="colophon-currently"><span class="status-dot"></span><span id="localClock"></span> &middot; Vancouver</p>
       </div>
     </footer>
+  </main>
 
-  </div><!-- /.site-card -->
+  <!-- ══ WORK ══════════════════════════════════════ -->
+  <main class="page" data-page="work">
+    <section class="page-head">
+      <h1 class="page-title reveal">Work</h1>
+      <p class="page-intro reveal d1">A few engagements, chosen for what they taught rather than what they paid. Each one a study in the same belief &mdash; that restraint, held consistently, compounds.</p>
+    </section>
+
+    <section class="chapter">
+      <div class="chapter-media"><div class="ph" style="background-color:#3a4a44;"></div><div class="ph-label">Coastal Ford &middot; Vancouver</div></div>
+      <div class="chapter-info">
+        <div class="chapter-index">01 &mdash; Sales</div>
+        <h2 class="chapter-name">Coastal <em>Ford</em></h2>
+        <p class="chapter-tagline">Full-cycle retail, rebuilt around the client rather than the department chart.</p>
+        <div class="spec-row">
+          <div class="spec"><span class="spec-label">Role</span><span class="spec-value">Consultant</span></div>
+          <div class="spec"><span class="spec-label">Year</span><span class="spec-value">2025</span></div>
+          <div class="spec"><span class="spec-label">Focus</span><span class="spec-value">Retail systems</span></div>
+        </div>
+        <a class="line-cta" data-nav="contact">Discuss this work</a>
+      </div>
+    </section>
+
+    <section class="chapter reverse">
+      <div class="chapter-media"><div class="ph" style="background-color:#2b2b2e;"></div><div class="ph-label">Killing Floor &middot; Brand</div></div>
+      <div class="chapter-info">
+        <div class="chapter-index">02 &mdash; Brand</div>
+        <h2 class="chapter-name">Killing <em>Floor</em></h2>
+        <p class="chapter-tagline">A consulting practice advising early-stage brands on positioning and offer design.</p>
+        <div class="spec-row">
+          <div class="spec"><span class="spec-label">Role</span><span class="spec-value">Strategist</span></div>
+          <div class="spec"><span class="spec-label">Year</span><span class="spec-value">2025</span></div>
+          <div class="spec"><span class="spec-label">Focus</span><span class="spec-value">Positioning</span></div>
+        </div>
+        <a class="line-cta" data-nav="contact">Discuss this work</a>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="chapter-media"><div class="ph" style="background-color:#6a5240;"></div><div class="ph-label">The Garage &middot; Collection</div></div>
+      <div class="chapter-info">
+        <div class="chapter-index">03 &mdash; Project</div>
+        <h2 class="chapter-name">The <em>Garage</em></h2>
+        <p class="chapter-tagline">A private collection, presented as an editorial scroll. Restraint as the entire interface.</p>
+        <div class="spec-row">
+          <div class="spec"><span class="spec-label">Role</span><span class="spec-value">Author</span></div>
+          <div class="spec"><span class="spec-label">Year</span><span class="spec-value">2024</span></div>
+          <div class="spec"><span class="spec-label">Focus</span><span class="spec-value">Curation</span></div>
+        </div>
+        <a class="line-cta" data-nav="garage">Enter the garage</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══ WRITING ═══════════════════════════════════ -->
+  <main class="page" data-page="writing">
+    <section class="page-head">
+      <h1 class="page-title reveal">Journal</h1>
+      <p class="page-intro reveal d1">Occasional notes on craft, commerce, and the discipline of leaving things alone.</p>
+    </section>
+    <div class="post-list">
+      <a class="post-row reveal" data-article="enough"><span class="post-title">On Knowing When It&rsquo;s <em>Enough</em></span><span class="post-date">March 2026</span></a>
+      <a class="post-row reveal d1" data-article="communication"><span class="post-title">Sales Is <em>Communication</em></span><span class="post-date">February 2026</span></a>
+      <a class="post-row reveal d2" data-article="endure"><span class="post-title">Building Things That <em>Endure</em></span><span class="post-date">January 2026</span></a>
+    </div>
+  </main>
+
+  <!-- ══ ARTICLE ═══════════════════════════════════ -->
+  <main class="page" data-page="article">
+    <article class="article">
+      <button class="article-back" data-back="writing">&larr; Journal</button>
+      <div class="article-date" id="articleDate"></div>
+      <h1 class="article-title" id="articleTitle"></h1>
+      <div class="article-body" id="articleBody"></div>
+    </article>
+  </main>
+
+  <!-- ══ ABOUT ═════════════════════════════════════ -->
+  <main class="page" data-page="about">
+    <section class="page-head">
+      <h1 class="page-title reveal">About</h1>
+    </section>
+    <div class="about-layout">
+      <div class="about-portrait reveal"><div class="ph" style="background-color:#4a443c;"></div><div class="ph-label">Vancouver, BC</div></div>
+      <div class="about-text reveal d1">
+        <div class="about-body">
+          <p>I work at the meeting point of sales, marketing, and brand &mdash; translating what a business does into something a person can believe. The title changes; the work rarely does.</p>
+          <p>My conviction is simple: <em>communication is the product.</em> Most problems a company calls strategy are really problems of clarity. I help find the clear thing and say it plainly, then build the systems that carry it.</p>
+          <p>Away from the desk I keep a small collection of cars and a longer list of opinions about typography. Both are exercises in the same belief &mdash; that the things made without hurry are the ones that last.</p>
+        </div>
+        <div class="about-detail">
+          <div>
+            <div class="spec-label">Based in</div>
+            <span>Vancouver, BC</span>
+          </div>
+          <div>
+            <div class="spec-label">Curriculum</div>
+            <a href="cv.pdf" target="_blank" rel="noopener">View CV</a>
+          </div>
+          <div>
+            <div class="spec-label">Elsewhere</div>
+            <a href="https://linkedin.com/in/varrel" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ══ GARAGE ════════════════════════════════════ -->
+  <main class="page" data-page="garage">
+    <section class="cover">
+      <div class="eyebrow reveal">Varrel Putra &middot; A Private Collection</div>
+      <h1 class="cover-title reveal d1">The Garage</h1>
+      <p class="cover-sub reveal d2">An evolving index of automobiles &mdash; kept, driven, and occasionally offered. Each chosen for the same reason: it was built to endure.</p>
+      <nav class="cover-index reveal d3">
+        <a data-jump="g1"><span class="ci-num">I</span><span class="ci-name">Porsche 911 Carrera</span><span class="ci-year">1989</span></a>
+        <a data-jump="g2"><span class="ci-num">II</span><span class="ci-name">Mercedes-Benz 560 SEC</span><span class="ci-year">1991</span></a>
+        <a data-jump="g3"><span class="ci-num">III</span><span class="ci-name">BMW E30 M3</span><span class="ci-year">1988</span></a>
+      </nav>
+    </section>
+
+    <section class="chapter" id="g1">
+      <div class="chapter-media"><div class="ph" style="background-color:#3a4a44;"></div><div class="ph-label">Porsche 911 Carrera &middot; 1989</div></div>
+      <div class="chapter-info">
+        <div class="chapter-index">I &mdash; In the collection</div>
+        <h2 class="chapter-name">Porsche <em>911</em> Carrera</h2>
+        <p class="chapter-tagline">The reference point. Air-cooled, unhurried, entirely without pretense.</p>
+        <div class="spec-row">
+          <div class="spec"><span class="spec-label">Year</span><span class="spec-value">1989</span></div>
+          <div class="spec"><span class="spec-label">Drivetrain</span><span class="spec-value">3.2 &middot; Manual</span></div>
+          <div class="spec"><span class="spec-label">Finish</span><span class="spec-value">Oak Green</span></div>
+        </div>
+        <a class="line-cta" data-nav="contact">Inquire</a>
+      </div>
+    </section>
+
+    <section class="chapter reverse" id="g2">
+      <div class="chapter-media"><div class="ph" style="background-color:#2b2b2e;"></div><div class="ph-label">Mercedes-Benz 560 SEC &middot; 1991</div></div>
+      <div class="chapter-info">
+        <div class="chapter-index">II &mdash; In the collection</div>
+        <h2 class="chapter-name">Mercedes-Benz <em>560</em> SEC</h2>
+        <p class="chapter-tagline">A coupé built like a vault. Over-engineered in the way only the W126 era allowed.</p>
+        <div class="spec-row">
+          <div class="spec"><span class="spec-label">Year</span><span class="spec-value">1991</span></div>
+          <div class="spec"><span class="spec-label">Drivetrain</span><span class="spec-value">5.6 V8</span></div>
+          <div class="spec"><span class="spec-label">Finish</span><span class="spec-value">Anthracite</span></div>
+        </div>
+        <a class="line-cta" data-nav="contact">Inquire</a>
+      </div>
+    </section>
+
+    <section class="chapter" id="g3">
+      <div class="chapter-media"><div class="ph" style="background-color:#6a5240;"></div><div class="ph-label">BMW E30 M3 &middot; 1988</div></div>
+      <div class="chapter-info">
+        <div class="chapter-index">III &mdash; In the collection</div>
+        <h2 class="chapter-name">BMW <em>E30</em> M3</h2>
+        <p class="chapter-tagline">Homologation honesty. Boxed arches, a four-cylinder that revs like a promise.</p>
+        <div class="spec-row">
+          <div class="spec"><span class="spec-label">Year</span><span class="spec-value">1988</span></div>
+          <div class="spec"><span class="spec-label">Drivetrain</span><span class="spec-value">S14 &middot; Manual</span></div>
+          <div class="spec"><span class="spec-label">Finish</span><span class="spec-value">Alpine White</span></div>
+        </div>
+        <a class="line-cta" data-nav="contact">Inquire</a>
+      </div>
+    </section>
+
+    <section class="outro">
+      <p class="outro-line reveal">Something here speak to you?</p>
+      <a href="mailto:hello@varrelputra.com" class="contact-email reveal d1">hello@varrelputra.com</a>
+    </section>
+  </main>
+
+  <!-- ══ CONTACT ═══════════════════════════════════ -->
+  <main class="page" data-page="contact">
+    <section class="contact">
+      <p class="contact-line reveal">Let&rsquo;s talk about something worth building.</p>
+      <a href="mailto:hello@varrelputra.com" class="contact-email reveal d1">hello@varrelputra.com</a>
+      <div class="contact-links reveal d2">
+        <a href="https://linkedin.com/in/varrel" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="cv.pdf" target="_blank" rel="noopener">CV</a>
+        <a href="tel:+16047192799">+1 604 719 2799</a>
+        <a data-nav="garage">The Garage</a>
+      </div>
+    </section>
+  </main>
 
   <script>
-    // ── CONTENT FROM JSON ────────────────────────────────────────────────────
-    let siteContent = null;
-    let detailOrigin = 'home'; // which page the user came from before opening a detail
+/* ════════════════════════════════════════════════
+   VARREL PUTRA — site behavior
+   Routing · reveals · theme · snap · writing data
+   ════════════════════════════════════════════════ */
 
-    function renderWorkRows(container, items) {
-      container.innerHTML = items.map((w, i) =>
-        `<a class="work-row" href="#" data-detail-type="work" data-detail-index="${i}" data-label="View case"><span class="work-num">${w.num}</span><span class="work-title">${w.title} <em>— ${w.sub}</em></span><span class="work-tag">${w.tag}</span><span class="work-year">${w.year}</span></a>`
-      ).join('');
+(function () {
+  'use strict';
+
+  /* ── Writing content ─────────────────────────── */
+  const POSTS = {
+    'enough': {
+      title: 'On Knowing When It\u2019s <em>Enough</em>',
+      date: 'March 2026',
+      body: [
+        'The hardest discipline in any craft is not addition. It is subtraction \u2014 knowing the precise moment to stop, to leave the thing alone, to trust that what remains is sufficient.',
+        'Most work fails not because too little was done, but because too much was. We keep reaching for one more feature, one more flourish, one more line of proof, long after the point has been made. The reaching is insecurity wearing the costume of effort.',
+        'I have come to believe that taste is mostly the willingness to remove what is working fine. Anyone can keep what earns its place. The rarer skill is cutting what merely survives.',
+        'So I ask, before anything ships: if I took this away, would it be worse? If the honest answer is no \u2014 or even \u201cnot really\u201d \u2014 then it goes. What is left is quieter. It is also, almost always, better.'
+      ]
+    },
+    'communication': {
+      title: 'Sales Is <em>Communication</em>',
+      date: 'February 2026',
+      body: [
+        'Every transaction is a translation. Someone has a need they cannot fully name, and your job is to name it back to them so clearly that the decision feels like their own \u2014 because it is.',
+        'The worst salespeople perform. The best ones listen so carefully that the customer hears their own thinking, sharpened. Selling, done well, is indistinguishable from consulting. You are paid for clarity, not persuasion.',
+        'Marketing is the same act at scale. It is belief, made legible. And belief cannot be faked at volume \u2014 the audience always knows. So the work is to actually believe the thing, then to say it plainly, then to stop talking.'
+      ]
+    },
+    'endure': {
+      title: 'Building Things That <em>Endure</em>',
+      date: 'January 2026',
+      body: [
+        'There is a kind of work made to be noticed today and forgotten tomorrow, and a kind made to still be standing in twenty years. They look similar at launch. They are not the same.',
+        'Durable things share a quality: they were not in a hurry. The proportion was considered. The material was honest. Nothing was added to impress, and nothing essential was left out to save time.',
+        'I try to build the second kind. It is slower, it is less rewarded in the moment, and it is the only thing I have found worth doing.'
+      ]
+    }
+  };
+
+  /* ── Routing ─────────────────────────────────── */
+  const html = document.documentElement;
+  const pages = {};
+  document.querySelectorAll('.page').forEach(p => { pages[p.dataset.page] = p; });
+  const SNAP_PAGES = ['home', 'work', 'garage'];
+  let current = 'home';
+
+  function showPage(name, opts) {
+    opts = opts || {};
+    if (!pages[name]) name = 'home';
+
+    if (pages[current]) pages[current].classList.remove('active');
+    current = name;
+    const page = pages[name];
+    page.classList.add('active');
+
+    // snap only on cinematic pages
+    if (SNAP_PAGES.indexOf(name) !== -1) html.classList.add('snap');
+    else html.classList.remove('snap');
+
+    // chapter counter only on cinematic pages
+    const counter = document.getElementById('chapterCounter');
+    if (counter) {
+      const chapters = page.querySelectorAll('.chapter');
+      if (SNAP_PAGES.indexOf(name) !== -1 && chapters.length) {
+        counter.classList.add('on');
+        document.getElementById('ccTotal').textContent = String(chapters.length).padStart(2, '0');
+        document.getElementById('ccCur').textContent = '01';
+      } else {
+        counter.classList.remove('on');
+      }
     }
 
-    function makeEmailCopy(el, email) {
-      if (!el || el.dataset.copyBound) return;
-      el.dataset.copyBound = '1';
-      el.textContent = email;
-      el.href = '#';
-      el.dataset.label = 'Copy email';
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        navigator.clipboard.writeText(email).then(() => {
-          el.dataset.label = 'Copied!';
-          const labelEl = document.getElementById('cursorLabel');
-          if (labelEl) labelEl.textContent = 'Copied!';
-          setTimeout(() => {
-            el.dataset.label = 'Copy email';
-            if (labelEl) labelEl.textContent = 'Copy email';
-          }, 2000);
-        });
+    // section scroll dots
+    buildScrollDots(page);
+
+    // reset reveals within this page so they animate fresh
+    page.querySelectorAll('.reveal, .chapter').forEach(el => el.classList.remove('in-view'));
+    page.querySelectorAll('.split.lines-shown').forEach(el => el.classList.remove('lines-shown'));
+
+    // update nav active states
+    document.querySelectorAll('[data-nav]').forEach(a => {
+      a.classList.toggle('active', a.dataset.nav === name);
+    });
+    updateNavIndicator(name);
+
+    // close mobile nav
+    closeMobileNav();
+
+    window.scrollTo(0, 0);
+
+    // re-observe after paint
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => observeReveals());
+    });
+
+    if (!opts.silent) {
+      if (history.replaceState) history.replaceState(null, '', '#' + name);
+    }
+  }
+
+  /* ── Reveal observer ─────────────────────────── */
+  let io = null;
+  function observeReveals() {
+    const active = pages[current];
+    if (!active) return;
+    const els = active.querySelectorAll('.reveal, .chapter');
+
+    // Fallback: no IntersectionObserver → reveal everything immediately
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in-view'));
+      return;
+    }
+
+    if (io) io.disconnect();
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          if (entry.target.classList.contains('chapter')) updateCounter(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    els.forEach(el => io.observe(el));
+
+    // Safety net: anything still hidden after 1.5s gets revealed,
+    // so content can never be permanently invisible (print, embeds, etc.)
+    setTimeout(() => {
+      els.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && !el.classList.contains('in-view')) {
+          el.classList.add('in-view');
+        }
+      });
+    }, 1500);
+  }
+
+  /* ── Chapter counter ──────────────────────── */
+  function updateCounter(chapterEl) {
+    const page = pages[current];
+    if (!page) return;
+    const chapters = Array.prototype.slice.call(page.querySelectorAll('.chapter'));
+    const idx = chapters.indexOf(chapterEl);
+    if (idx === -1) return;
+    const cur = document.getElementById('ccCur');
+    if (cur) cur.textContent = String(idx + 1).padStart(2, '0');
+  }
+
+  /* ── Section scroll dots (snap pages) ─────── */
+  let dotObserver = null;
+  function buildScrollDots(page) {
+    const container = document.getElementById('scrollDots');
+    if (!container) return;
+    if (dotObserver) { dotObserver.disconnect(); dotObserver = null; }
+    container.classList.remove('on');
+    container.innerHTML = '';
+    if (SNAP_PAGES.indexOf(page.dataset.page) === -1) return;
+
+    const sections = Array.from(page.children).filter(el =>
+      el.nodeType === 1 && getComputedStyle(el).scrollSnapAlign === 'start');
+    if (sections.length < 2) return;
+
+    container.innerHTML = sections.map((s, i) =>
+      `<button class="scroll-dot${i === 0 ? ' active' : ''}" data-idx="${i}" type="button" aria-label="Section ${i + 1}"></button>`
+    ).join('');
+    container.classList.add('on');
+    const dots = Array.from(container.children);
+    dots.forEach((d, i) => d.addEventListener('click', () => {
+      const targetY = Math.round(sections[i].getBoundingClientRect().top + window.scrollY);
+      if (reduceMotion) { window.scrollTo(0, targetY); return; }
+      // mandatory snap cancels programmatic smooth scrolls — release it and animate manually
+      html.classList.remove('snap');
+      const startY = window.scrollY, dist = targetY - startY, dur = 620, t0 = performance.now();
+      requestAnimationFrame(function step(now) {
+        const t = Math.min((now - t0) / dur, 1);
+        const e = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // easeInOut
+        window.scrollTo(0, startY + dist * e);
+        if (t < 1) requestAnimationFrame(step);
+        else if (SNAP_PAGES.indexOf(current) !== -1) html.classList.add('snap');
+      });
+    }));
+
+    dotObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const idx = sections.indexOf(e.target);
+        if (idx > -1) dots.forEach((d, j) => d.classList.toggle('active', j === idx));
+      });
+    }, { threshold: 0.55 });
+    sections.forEach(s => dotObserver.observe(s));
+  }
+
+  /* ── Footer nav indicator ─────────────────── */
+  function updateNavIndicator(name) {
+    const indicator = document.getElementById('navIndicator');
+    const activeLink = document.querySelector('.site-footer-nav .nav a[data-nav="' + name + '"]');
+    if (!indicator || !activeLink) return;
+    const nav = activeLink.parentElement;
+    const navRect = nav.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    indicator.style.width = linkRect.width + 'px';
+    indicator.style.transform = 'translateX(' + (linkRect.left - navRect.left) + 'px)';
+    indicator.style.opacity = '1';
+  }
+  window.addEventListener('resize', () => updateNavIndicator(current));
+
+  /* ── Page-turn curtain ────────────────────── */
+  const curtain = document.getElementById('curtain');
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function goTo(name) {
+    if (name === current) { closeMobileNav(); return; }
+    if (!curtain || reduceMotion) { showPage(name); return; }
+    curtain.classList.add('show');
+    setTimeout(() => { showPage(name); }, 420);
+    setTimeout(() => { curtain.classList.remove('show'); }, 500);
+  }
+
+  /* ── Writing: open article ───────────────────── */  function openArticle(slug) {
+    const post = POSTS[slug];
+    if (!post) return;
+    document.getElementById('articleTitle').innerHTML = post.title;
+    document.getElementById('articleDate').textContent = post.date;
+    const bodyEl = document.getElementById('articleBody');
+    bodyEl.innerHTML = post.body.map(p => '<p>' + p + '</p>').join('');
+    if (curtain && !reduceMotion) {
+      curtain.classList.add('show');
+      setTimeout(() => { showPage('article'); }, 420);
+      setTimeout(() => { curtain.classList.remove('show'); }, 500);
+    } else {
+      showPage('article');
+    }
+  }
+
+  /* ── Theme ───────────────────────────────────── */
+  const themeToggle = document.getElementById('themeToggle');
+  function applyTheme(dark) {
+    dark ? html.setAttribute('data-theme', 'dark') : html.removeAttribute('data-theme');
+    if (themeToggle) themeToggle.textContent = dark ? 'Light' : 'Dark';
+  }
+  applyTheme(localStorage.getItem('vp-theme') === 'dark');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const dark = html.getAttribute('data-theme') === 'dark';
+      applyTheme(!dark);
+      localStorage.setItem('vp-theme', dark ? 'light' : 'dark');
+    });
+  }
+
+  /* ── Mobile nav ──────────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  function closeMobileNav() {
+    if (hamburger) hamburger.classList.remove('open');
+    if (mobileNav) mobileNav.classList.remove('open');
+  }
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+  }
+
+  /* ── Global click delegation ─────────────────── */
+  document.addEventListener('click', (e) => {
+    const navEl = e.target.closest('[data-nav]');
+    if (navEl) { e.preventDefault(); goTo(navEl.dataset.nav); return; }
+
+    const artEl = e.target.closest('[data-article]');
+    if (artEl) { e.preventDefault(); openArticle(artEl.dataset.article); return; }
+
+    const backEl = e.target.closest('[data-back]');
+    if (backEl) { e.preventDefault(); goTo(backEl.dataset.back); return; }
+
+    // garage cover index → smooth scroll to chapter (same page)
+    const jumpEl = e.target.closest('[data-jump]');
+    if (jumpEl) {
+      e.preventDefault();
+      const target = document.getElementById(jumpEl.dataset.jump);
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  });
+
+  /* ── Boot ────────────────────────────────────── */
+  const initial = (location.hash || '').replace('#', '');
+  if (initial && pages[initial]) showPage(initial, { silent: true });
+  else showPage('home', { silent: true });
+
+  /* ── Local clocks ───────────────────────────── */
+  function formatTime(date, timeZone) {
+    return date.toLocaleTimeString('en-US', { timeZone, hour: 'numeric', minute: '2-digit' });
+  }
+  function tickClock() {
+    const now = new Date();
+    const localClock = document.getElementById('clockLocal');
+    const vancouverClock = document.getElementById('clockVancouver');
+    const colophonClock = document.getElementById('localClock');
+    try {
+      if (localClock) localClock.textContent = 'LOCAL ' + formatTime(now, Intl.DateTimeFormat().resolvedOptions().timeZone);
+      if (vancouverClock) vancouverClock.textContent = 'VANCOUVER ' + formatTime(now, 'America/Vancouver');
+      if (colophonClock) colophonClock.textContent = formatTime(now, 'America/Vancouver');
+    } catch (err) {
+      const fallback = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      if (localClock) localClock.textContent = 'LOCAL ' + fallback;
+      if (vancouverClock) vancouverClock.textContent = 'VANCOUVER ' + fallback;
+      if (colophonClock) colophonClock.textContent = fallback;
+    }
+  }
+  tickClock();
+  setInterval(tickClock, 30000);
+
+  /* ── Line-mask reveal: split display headings into animatable lines ── */
+  const LINE_SELECTOR = '.hero-name, .page-title, .cover-title, .chapter-name, .contact-line, .outro-line';
+  function splitOne(el) {
+    if (!el.dataset.orig) el.dataset.orig = el.innerHTML;
+    else el.innerHTML = el.dataset.orig;
+    el.classList.remove('split', 'lines-shown');
+
+    // Pass 1 — wrap each word in an inline-block span, remembering italics
+    const wordSpans = [];
+    const frag = document.createDocumentFragment();
+    Array.from(el.childNodes).forEach(node => {
+      const isEm = node.nodeType === 1 && node.tagName === 'EM';
+      node.textContent.split(/(\s+)/).forEach(tok => {
+        if (tok === '') return;
+        if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
+        const s = document.createElement('span');
+        s.textContent = tok; s.style.display = 'inline-block';
+        if (isEm) s.dataset.em = '1';
+        frag.appendChild(s); wordSpans.push(s);
+      });
+    });
+    if (!wordSpans.length) return;
+    el.innerHTML = ''; el.appendChild(frag);
+
+    // Pass 2 — group words into lines by vertical position
+    const lines = []; let cur = null, top = null;
+    wordSpans.forEach(s => {
+      const t = s.offsetTop;
+      if (top === null || Math.abs(t - top) > 3) { cur = []; lines.push(cur); top = t; }
+      cur.push(s);
+    });
+
+    // Pass 3 — rebuild with masked, staggered line wrappers
+    el.innerHTML = '';
+    lines.forEach((line, i) => {
+      const outer = document.createElement('span'); outer.className = 'ln';
+      const inner = document.createElement('span'); inner.className = 'ln-i';
+      inner.style.transitionDelay = (0.07 * i) + 's';
+      line.forEach((s, j) => {
+        const w = document.createElement(s.dataset.em ? 'em' : 'span');
+        w.textContent = s.textContent;
+        inner.appendChild(w);
+        if (j < line.length - 1) inner.appendChild(document.createTextNode(' '));
+      });
+      outer.appendChild(inner); el.appendChild(outer);
+    });
+    el.classList.add('split');
+
+    // Already on screen? show immediately so re-splits never flicker
+    const revealed = el.classList.contains('in-view') ||
+      (el.closest('.reveal') && el.closest('.reveal').classList.contains('in-view')) ||
+      (el.closest('.chapter') && el.closest('.chapter').classList.contains('in-view'));
+    if (revealed) el.classList.add('lines-shown');
+  }
+  function splitHeadings() {
+    if (reduceMotion) return;
+    document.querySelectorAll(LINE_SELECTOR).forEach(splitOne);
+  }
+  if (!reduceMotion) {
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(splitHeadings);
+    let rsT; window.addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(splitHeadings, 220); });
+  }
+
+  observeReveals();
+
+  /* ── Radial menu (bottom-center, all-in-one nav + utilities) ── */
+  (function () {
+    const wrapper  = document.querySelector('.radial');
+    const menu     = document.getElementById('vmarkMenu');
+    const btn      = document.getElementById('vmarkBtn');
+    const labelEl  = document.getElementById('vmarkLabel');
+    const hintEl   = document.getElementById('vmarkHint');
+    const backdrop = document.getElementById('radialBackdrop');
+    if (!wrapper || !menu || !btn || !labelEl) return;
+
+    const ITEMS = [
+      { type:'nav', value:'home',    label:'Home',      icon:'<path d="M3 11l9-7 9 7v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/>' },
+      { type:'nav', value:'work',    label:'Work',      icon:'<rect x="3" y="7" width="18" height="13" rx="1"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>' },
+      { type:'nav', value:'writing', label:'Writing',   icon:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>' },
+      { type:'nav', value:'about',   label:'About',     icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>' },
+      { type:'nav', value:'garage',  label:'Garage',    icon:'<path d="M5 17h14M3 13l2-5h14l2 5"/><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/>' },
+      { type:'nav', value:'contact', label:'Contact',   icon:'<rect x="3" y="5" width="18" height="14"/><polyline points="3 5 12 13 21 5"/>' },
+      { type:'theme', label:'Theme', icon:'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>' },
+      { type:'copy',  label:'Copy',  icon:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' }
+    ];
+    const N = ITEMS.length; // 8
+
+    // Full 360° wheel, evenly spaced, starting at top (12 o'clock), clockwise.
+    // Screen angle convention: 0°=right, 90°=down, -90°=up.
+    const ANGLES = ITEMS.map((_, i) => -90 + i * (360 / N));
+    // → [-90, -45, 0, 45, 90, 135, 180, 225]
+
+    // Bloom stagger: gentle clockwise cascade from the top
+    const STAGGER = ITEMS.map((_, i) => i * 22);
+
+    // Radius + positions are responsive: big wheel on desktop, fits inside phones.
+    let R = 172;
+    let POS = [];
+    function computeGeometry() {
+      const vmin = Math.min(window.innerWidth, window.innerHeight);
+      R = Math.max(116, Math.min(172, vmin * 0.33)); // ~116 on phones, 172 on desktop
+      POS = ANGLES.map(a => {
+        const rad = a * Math.PI / 180;
+        return { x: Math.cos(rad) * R, y: Math.sin(rad) * R };
+      });
+      // push positions onto the elements (CSS .active transform reads --rx/--ry)
+      if (typeof els !== 'undefined') els.forEach((el, i) => {
+        el.style.setProperty('--rx', POS[i].x + 'px');
+        el.style.setProperty('--ry', POS[i].y + 'px');
       });
     }
 
-    function renderColophon(c) {
-      if (!c) return;
-      const linksEl = document.getElementById('colophon-links');
-      if (linksEl && c.links) linksEl.innerHTML = c.links.map(l => `<a href="${l.url}">${l.label}</a>`).join('');
-      const emailEl = document.getElementById('colophon-email');
-      if (emailEl && c.email) makeEmailCopy(emailEl, c.email);
-      const locEl = document.getElementById('colophon-location');
-      if (locEl && c.location) locEl.textContent = c.location;
+    let isOpen    = false;
+    let activeIdx = -1;
+    // Touch drag-to-select (GTA weapon-wheel) state
+    let touchDragging = false, dragId = null, justDragged = false;
+
+    // Build item elements once
+    const els = ITEMS.map((it, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'radial-item';
+      b.setAttribute('aria-label', it.label);
+      b.innerHTML = '<svg viewBox="0 0 24 24">' + it.icon + '</svg>';
+      menu.appendChild(b);
+      b.addEventListener('mouseenter', () => setActive(i));                          // desktop hover
+      b.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') setActive(i); });
+      b.addEventListener('click', e => { e.stopPropagation(); if (justDragged) return; execute(i); });
+      return b;
+    });
+    computeGeometry(); // initial --rx/--ry now that els exist
+
+    function setActive(i) {
+      if (activeIdx === i) return;
+      activeIdx = i;
+      els.forEach((el, idx) => el.classList.toggle('active', idx === i));
+      if (i >= 0) {
+        labelEl.textContent = ITEMS[i].label;
+        hintEl.textContent = ITEMS[i].type === 'nav' ? 'Click to go' : 'Click to apply';
+      } else {
+        labelEl.textContent = '';
+        hintEl.textContent = '';
+      }
     }
 
-    function openDetail(type, index) {
-      const d = siteContent;
-      if (!d) return;
-      detailOrigin = currentPage;
-      updateDetailBack(currentPage);
-
-      const titleEl  = document.getElementById('detail-title');
-      const metaEl   = document.getElementById('detail-meta');
-      const bodyEl   = document.getElementById('detail-body');
-      const actionEl = document.getElementById('detail-action');
-      document.body.style.overflow = '';
-      document.getElementById('detail-standard').style.display = 'block';
-      document.getElementById('detail-garage').style.display = 'none';
-
-      let detailDocTitle = 'Varrel Putra';
-
-      if (type === 'work') {
-        const w = d.work[index];
-        if (!w) return;
-        detailDocTitle = `${w.title} — Work · Varrel Putra`;
-        titleEl.innerHTML = `${w.title} <em>— ${w.sub}</em>`;
-        metaEl.innerHTML  = `<div class="detail-meta-item">Type<span>${w.tag}</span></div><div class="detail-meta-item">Year<span>${w.year}</span></div>`;
-        bodyEl.innerHTML  = (w.body || []).map(p => `<p>${p}</p>`).join('');
-        actionEl.style.display = 'none';
-
-      } else if (type === 'writing') {
-        const p = d.writing[index];
-        if (!p) return;
-        detailDocTitle = `${p.title} — Writing · Varrel Putra`;
-        titleEl.innerHTML = `${p.title} <em>— ${p.subtitle}</em>`;
-        metaEl.innerHTML  = `<div class="detail-meta-item">Published<span>${p.date}</span></div>`;
-        bodyEl.innerHTML  = (p.body || []).map(b => `<p>${b}</p>`).join('');
-        if (p.url && p.url !== '#') {
-          actionEl.href = p.url; actionEl.textContent = 'Read full article ↗';
-          actionEl.style.display = 'inline-block'; actionEl.dataset.label = 'Read full article';
-        } else {
-          actionEl.style.display = 'none';
-        }
-
-      } else if (type === 'garage') {
-        if (window._gdAbort) window._gdAbort.abort();
-        window._gdAbort = new AbortController();
-        const gdSignal = window._gdAbort.signal;
-        const l = d.garage.listings[index];
-        if (!l) return;
-        document.getElementById('detail-standard').style.display = 'none';
-        document.getElementById('detail-garage').style.display = 'block';
-
-        const images = (l.images || []).map(img => typeof img === 'string' ? img : sanityImageUrl(img.asset._ref));
-        const mainImg = document.getElementById('gd-main-img');
-        const thumbsEl = document.getElementById('gd-thumbs');
-        const mainEl = document.getElementById('gd-main');
-        let gdCurrent = 0;
-
-        function gdGoTo(n) {
-          gdCurrent = (n + images.length) % images.length;
-          mainImg.src = images[gdCurrent];
-          thumbsEl.querySelectorAll('.garage-detail-thumb').forEach((t, i) => t.classList.toggle('active', i === gdCurrent));
-          const activeThumb = thumbsEl.children[gdCurrent];
-          if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
-
-        if (images.length > 0) {
-          mainImg.src = images[0];
-          thumbsEl.innerHTML = images.map((src, i) =>
-            `<div class="garage-detail-thumb${i === 0 ? ' active' : ''}" data-index="${i}"><img src="${src}" alt=""></div>`
-          ).join('');
-          thumbsEl.querySelectorAll('.garage-detail-thumb').forEach(t =>
-            t.addEventListener('click', () => gdGoTo(parseInt(t.dataset.index)), { signal: gdSignal })
-          );
-
-          document.getElementById('gd-prev').addEventListener('click', e => { e.stopPropagation(); gdGoTo(gdCurrent - 1); }, { signal: gdSignal });
-          document.getElementById('gd-next').addEventListener('click', e => { e.stopPropagation(); gdGoTo(gdCurrent + 1); }, { signal: gdSignal });
-
-          let gdWheelLock = false;
-          let gdWheelAccum = 0;
-          mainEl.addEventListener('wheel', e => {
-            e.preventDefault(); e.stopPropagation();
-            if (gdWheelLock) return;
-            gdWheelAccum += e.deltaY;
-            if (Math.abs(gdWheelAccum) < 60) return;
-            gdWheelAccum = 0;
-            gdWheelLock = true;
-            gdGoTo(gdCurrent + (e.deltaY > 0 ? 1 : -1));
-            setTimeout(() => gdWheelLock = false, 600);
-          }, { passive: false, signal: gdSignal });
-
-          // Lightbox
-          mainEl.addEventListener('click', () => {
-            const lb = document.createElement('div');
-            lb.className = 'gd-lightbox';
-            lb.innerHTML = `
-              <button class="gd-lightbox-close" id="lb-close">✕</button>
-              <div class="gd-lightbox-main">
-                <button class="gd-lightbox-arrow prev" id="lb-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-                <img id="lb-img" src="${images[gdCurrent]}" alt="">
-                <button class="gd-lightbox-arrow next" id="lb-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-              </div>
-              <div class="gd-lightbox-thumbs">${images.map((src, i) =>
-                `<div class="gd-lightbox-thumb${i === gdCurrent ? ' active' : ''}" data-index="${i}"><img src="${src}" alt=""></div>`
-              ).join('')}</div>`;
-            document.body.appendChild(lb);
-            document.body.style.overflow = 'hidden';
-
-            let lbCurrent = gdCurrent;
-            const lbImg = lb.querySelector('#lb-img');
-            const lbThumbs = lb.querySelectorAll('.gd-lightbox-thumb');
-
-            function lbGoTo(n) {
-              lbCurrent = (n + images.length) % images.length;
-              lbImg.src = images[lbCurrent];
-              lbThumbs.forEach((t, i) => t.classList.toggle('active', i === lbCurrent));
-              lbThumbs[lbCurrent]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
-
-            lb.querySelector('#lb-prev').addEventListener('click', e => { e.stopPropagation(); lbGoTo(lbCurrent - 1); });
-            lb.querySelector('#lb-next').addEventListener('click', e => { e.stopPropagation(); lbGoTo(lbCurrent + 1); });
-            lbThumbs.forEach(t => t.addEventListener('click', () => lbGoTo(parseInt(t.dataset.index))));
-            lb.querySelector('#lb-close').addEventListener('click', () => { lb.remove(); document.body.style.overflow = ''; });
-            lb.addEventListener('click', e => { if (e.target === lb) { lb.remove(); document.body.style.overflow = ''; } });
-            lb.addEventListener('keydown', e => {
-              if (e.key === 'ArrowLeft') lbGoTo(lbCurrent - 1);
-              if (e.key === 'ArrowRight') lbGoTo(lbCurrent + 1);
-              if (e.key === 'Escape') { lb.remove(); document.body.style.overflow = ''; }
-            });
-            lb.setAttribute('tabindex', '0'); lb.focus();
-          }, { signal: gdSignal });
-        }
-
-        const year  = l.year  || '1991';
-        const make  = l.make  || 'Porsche';
-        const model = l.model || '911 Carrera 2';
-        const trim  = l.trim  || 'Coupe';
-        const title = l.title || `${year} ${make} ${model}`;
-        detailDocTitle = `${title} — Garage · Varrel Putra`;
-
-        document.getElementById('gd-badge').textContent = [l.condition_label || 'Used', l.location || 'Vancouver, BC'].join(' · ');
-        document.getElementById('gd-title').textContent = title;
-        document.getElementById('gd-trim').textContent = trim;
-
-        document.getElementById('gd-price').textContent = l.price || '$48,500';
-        const origEl = document.getElementById('gd-original-price');
-        if (l.original_price) { origEl.textContent = l.original_price; origEl.style.display = 'block'; }
-        else { origEl.style.display = 'none'; }
-
-        const specs = [
-          { label: 'Mileage',      value: l.mileage       || '87,400 km' },
-          { label: 'Engine',       value: l.engine        || '3.6L Flat-6' },
-          { label: 'Transmission', value: l.transmission  || '5-Speed Manual' },
-          { label: 'Drivetrain',   value: l.drivetrain    || 'RWD' },
-          { label: 'Fuel Type',    value: l.fuel_type     || 'Gasoline' },
-          { label: 'Body Style',   value: l.body_style    || 'Coupe' },
-          { label: 'Seats',        value: l.seat_count    || '2+2' },
-          { label: 'Exterior',     value: l.color         || 'Guards Red' },
-          { label: 'Interior',     value: l.interior_text || 'Black Leather' },
-        ];
-        document.getElementById('gd-specs').innerHTML = specs.map(s =>
-          `<div class="garage-detail-spec-item"><div class="garage-detail-spec-label">${s.label}</div><div class="garage-detail-spec-value">${s.value}</div></div>`
-        ).join('');
-
-        document.getElementById('gd-stock').textContent = l.stock_number ? `Stock #${l.stock_number}` : '';
-        const inquireEl = document.getElementById('gd-inquire');
-        inquireEl.href = l.contact_url || '#';
-
-        const desc = l.description || (l.body ? l.body.join('\n\n') : 'A clean, unmolested example in original paint with full service history. One of the last air-cooled 911s built before Porsche moved to the water-cooled 996 — immediate, physical, demanding in the best way.');
-        document.getElementById('gd-description').innerHTML = `<p>${desc}</p>`;
-      }
-
-      document.title = detailDocTitle;
+    function clearActive() {
+      activeIdx = -1;
+      els.forEach(el => el.classList.remove('active'));
+      labelEl.textContent = '';
+      hintEl.textContent = '';
     }
 
-    // ── SANITY FETCH ─────────────────────────────────────────────────────────
-    const SANITY_PROJECT = 'vutd9g6g';
-    const SANITY_DATASET = 'production';
-    const SANITY_API     = `https://${SANITY_PROJECT}.apicdn.sanity.io/v2025-01-01/data/query/${SANITY_DATASET}`;
-
-    function sanityQuery(query) {
-      return fetch(`${SANITY_API}?query=${encodeURIComponent(query)}`)
-        .then(r => r.json())
-        .then(r => r.result);
-    }
-
-    function sanityImageUrl(ref) {
-      if (!ref) return null;
-      // ref format: image-abc123-1200x675-jpg
-      const parts = ref.replace('image-', '').split('-');
-      const ext = parts.pop();
-      const id  = parts.join('-');
-      return `https://cdn.sanity.io/images/${SANITY_PROJECT}/${SANITY_DATASET}/${id}.${ext}`;
-    }
-
-    function garageImageSrc(img) {
-      if (!img) return null;
-      if (typeof img === 'string') return img;
-      if (img.asset && img.asset._ref) return sanityImageUrl(img.asset._ref);
-      return null;
-    }
-
-    function applySiteContent(hero, work, writing, about, garageListings, contact, colophon, garageMeta) {
-      hero = hero || {};
-      work = work || [];
-      writing = writing || [];
-      about = about || { bio: [], specialisms: [], links: [] };
-      garageListings = garageListings || [];
-      contact = contact || {};
-      colophon = colophon || {};
-
-      siteContent = { hero, work, writing, about, garage: { listings: garageListings }, contact, colophon };
-
-      // Hero
-      document.getElementById('hero-name').innerHTML = `${hero.name || ''} <em>${hero.name_italic || ''}</em>`;
-      const roleSuffix = hero.role && /vancouver/i.test(hero.role) ? '' : ' — Vancouver, BC';
-      document.getElementById('hero-role').innerHTML  = (hero.role || '') + roleSuffix;
-      document.getElementById('hero-mission').innerHTML = hero.mission;
-      if (hero.status) {
-        const statusEl = document.querySelector('.hero-status span:last-child');
-        if (statusEl) statusEl.textContent = hero.status;
-        const mobStatusEl = document.querySelector('.mob-nav-status span:last-child');
-        if (mobStatusEl) mobStatusEl.textContent = hero.status;
-        const colophonStatusEl = document.querySelector('.colophon-status-line span:last-child');
-        if (colophonStatusEl) colophonStatusEl.textContent = hero.status;
-      }
-
-      // Latest writing on home
-      const latestWriting = writing[0];
-      if (latestWriting) {
-        const el = document.getElementById('hero-latest-writing');
-        el.textContent = latestWriting.title + (latestWriting.subtitle ? ` — ${latestWriting.subtitle}` : '');
-        el.addEventListener('click', () => { openDetail('writing', 0); history.pushState({ page: 'detail', detailType: 'writing', detailIndex: 0 }, '', '#detail/writing/0'); showPage('detail'); });
-      }
-
-      // Work
-      renderWorkRows(document.getElementById('work-list-page'), work);
-
-      // Writing
-      const writingTags = ['All', ...new Set(writing.map(p => p.tag).filter(Boolean))];
-      let activeWritingTag = 'All';
-
-      function renderWritingList() {
-        const filtered = activeWritingTag === 'All' ? writing : writing.filter(p => p.tag === activeWritingTag);
-        document.getElementById('post-list').innerHTML = filtered.map((p, i) => {
-          const realIndex = writing.indexOf(p);
-          return `<a class="post-row" href="#" data-detail-type="writing" data-detail-index="${realIndex}" data-label="${p.date === 'Coming soon' ? 'Coming soon' : 'Read article'}"><span class="post-title">${p.title}${p.subtitle ? ` <em>— ${p.subtitle}</em>` : ''}</span><span class="post-date">${p.date}</span></a>`;
-        }).join('');
-      }
-
-      if (writingTags.length > 1) {
-        document.getElementById('writing-filters').innerHTML = writingTags.map(t =>
-          `<button class="writing-tag-pill${t === 'All' ? ' active' : ''}" data-tag="${t}">${t}</button>`
-        ).join('');
-        document.getElementById('writing-filters').addEventListener('click', e => {
-          const btn = e.target.closest('.writing-tag-pill');
-          if (!btn) return;
-          activeWritingTag = btn.dataset.tag;
-          document.querySelectorAll('.writing-tag-pill').forEach(b => b.classList.toggle('active', b.dataset.tag === activeWritingTag));
-          renderWritingList();
-        });
-      }
-      renderWritingList();
-
-      // About
-      document.getElementById('about-bio').innerHTML = (about.bio || []).map(p => `<p>${p}</p>`).join('');
-      document.getElementById('about-cv').href = about.cv_url || '#';
-      document.getElementById('about-based').textContent = about.based_in;
-      document.getElementById('about-specialisms').innerHTML = (about.specialisms || []).map(s => `<p>${s}</p>`).join('');
-      document.getElementById('about-links').innerHTML = (about.links || []).map(l => `<a href="${l.url}" data-label="View ${l.label}">${l.label} ↗</a>`).join('');
-      makeEmailCopy(document.getElementById('about-email'), about.email);
-
-      // Garage
-      const garageSubtitle = document.getElementById('garage-subtitle');
-      if (garageSubtitle) {
-        garageSubtitle.textContent = (garageMeta && garageMeta.subtitle) || 'Bought well, maintained properly, sold honestly.';
-      }
-
-      const COLOR_MAP = {
-        black:'#1a1a18', white:'#f5f5f0', silver:'#c0bdb8', grey:'#8a8a8a', gray:'#8a8a8a',
-        red:'#b03030', blue:'#2a4a7a', green:'#2a5a3a', yellow:'#d4a820', orange:'#c86020',
-        brown:'#6a4a2a', gold:'#b89040', purple:'#5a3a7a', pink:'#c06080', beige:'#d4c4a0',
-        navy:'#1a2a4a', graphite:'#4a4a4a', pearl:'#ece8e0',
-      };
-      function colorHex(raw) {
-        if (!raw) return '#999';
-        const l = raw.toLowerCase();
-        for (const [k, v] of Object.entries(COLOR_MAP)) { if (l.includes(k)) return v; }
-        return '#999';
-      }
-
-      let garageSort = 'default';
-      let garageColorFilter = null;
-      let garageShowSold = true;
-
-      function garageCard(l, i) {
-        const thumbSrc = l.images && l.images[0] ? garageImageSrc(l.images[0]) : null;
-        const thumb = thumbSrc
-          ? `<img src="${thumbSrc}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">`
-          : '';
-        const cardTitle = l.title || [l.year, l.make, l.model].filter(Boolean).join(' ') || 'Listing';
-        const soldBadge = l.sold ? `<div class="garage-sold-badge">Sold</div>` : '';
-        const soldClass = l.sold ? ' sold' : '';
-        const ptr = l.sold ? '' : ' style="cursor:pointer"';
-        const det = l.sold ? '' : ` data-detail-type="garage" data-detail-index="${i}" data-label="View listing"`;
-        return `<div class="garage-card${soldClass}"${ptr}${det}><div class="garage-card-image">${thumb}</div><div class="garage-card-body">${soldBadge}<div class="garage-card-title">${cardTitle}</div><div class="garage-card-price">${l.price || ''}</div><div class="garage-card-meta">${l.year || ''} &nbsp;·&nbsp; ${l.mileage || ''}</div><div class="garage-card-meta">${l.condition_label || l.condition || ''}</div>${l.sold ? '' : '<span class="garage-card-contact" data-label="View listing">Enquire</span>'}</div></div>`;
-      }
-
-      function renderGarageGrid() {
-        let list = garageListings.map((l, i) => ({ l, i }));
-        if (!garageShowSold) list = list.filter(({ l }) => !l.sold);
-        if (garageColorFilter) list = list.filter(({ l }) => colorHex(l.color) === garageColorFilter);
-        if (garageSort === 'price-asc')  list.sort((a, b) => parseFloat(a.l.price) - parseFloat(b.l.price));
-        if (garageSort === 'price-desc') list.sort((a, b) => parseFloat(b.l.price) - parseFloat(a.l.price));
-        document.getElementById('garage-listings').innerHTML = list.length === 0
-          ? `<div class="empty-state">No listings match.</div>`
-          : `<div class="garage-grid">${list.map(({ l, i }) => garageCard(l, i)).join('')}</div>`;
-      }
-
-      // Build filter bar
-      const colors = [...new Set(garageListings.map(l => l.color).filter(Boolean))];
-      const swatches = colors.map(c => {
-        const hex = colorHex(c);
-        const border = hex === '#f5f5f0' || hex === '#ece8e0' ? 'border:1.5px solid var(--border);' : '';
-        return `<span class="color-swatch" data-color="${hex}" title="${c}" style="background:${hex};${border}"></span>`;
-      }).join('');
-
-      document.getElementById('garage-filters').innerHTML = `
-        <button class="filter-btn active" data-sort="default">All</button>
-        <button class="filter-btn" data-sort="price-asc">Price ↑</button>
-        <button class="filter-btn" data-sort="price-desc">Price ↓</button>
-        <div class="filter-sep"></div>
-        ${swatches}
-        <div class="filter-sep"></div>
-        <button class="filter-btn active" id="sold-toggle" data-sold="show">Show Sold</button>
-      `;
-
-      document.getElementById('garage-filters').addEventListener('click', e => {
-        const sortBtn = e.target.closest('[data-sort]');
-        const soldBtn = e.target.closest('#sold-toggle');
-        const swatch  = e.target.closest('.color-swatch');
-        if (sortBtn) {
-          garageSort = sortBtn.dataset.sort;
-          document.querySelectorAll('[data-sort]').forEach(b => b.classList.toggle('active', b === sortBtn));
+    function render() {
+      els.forEach((el, i) => {
+        if (!isOpen) {
+          el.style.transitionDelay = '';
+          el.style.opacity = '0';
+          el.style.transform = 'translate(-50%,-50%) scale(0.2)';
+          el.style.pointerEvents = 'none';
+          el.classList.remove('active');
+          return;
         }
-        if (soldBtn) {
-          garageShowSold = !garageShowSold;
-          soldBtn.classList.toggle('active', garageShowSold);
-          soldBtn.textContent = garageShowSold ? 'Show Sold' : 'Hide Sold';
-        }
-        if (swatch) {
-          const hex = swatch.dataset.color;
-          if (garageColorFilter === hex) { garageColorFilter = null; swatch.classList.remove('active'); }
-          else { garageColorFilter = hex; document.querySelectorAll('.color-swatch').forEach(s => s.classList.toggle('active', s.dataset.color === hex)); }
-        }
-        renderGarageGrid();
+        el.style.transitionDelay = STAGGER[i] + 'ms';
+        el.style.opacity = '1';
+        el.style.transform =
+          `translate(calc(${POS[i].x}px - 50%), calc(${POS[i].y}px - 50%)) scale(1)`;
+        el.style.pointerEvents = 'auto';
       });
-
-      renderGarageGrid();
-
-      // Contact
-      document.getElementById('contact-body').innerHTML = contact.body;
-      makeEmailCopy(document.getElementById('contact-email'), contact.email);
-      document.getElementById('contact-links').innerHTML = (contact.links || []).map(l => `<a href="${l.url}" data-label="${l.label}">${l.label}</a>`).join('');
-      document.getElementById('contact-note').innerHTML = contact.location_note;
-
-      // Colophon
-      renderColophon(colophon);
+      menu.style.pointerEvents = isOpen ? 'auto' : 'none';
     }
 
-    function loadFromContentJson() {
-      return fetch('./content.json')
-        .then(r => { if (!r.ok) throw new Error('content.json unavailable'); return r.json(); })
-        .then(data => {
-          const garage = data.garage || {};
-          applySiteContent(
-            data.hero,
-            data.work,
-            data.writing,
-            data.about,
-            garage.listings || [],
-            data.contact,
-            data.colophon,
-            garage
-          );
-        });
+    function open() {
+      isOpen = true;
+      computeGeometry();              // size the wheel to the current viewport
+      wrapper.classList.add('open');
+      document.body.classList.add('vmenu-open');
+      btn.setAttribute('aria-expanded', 'true');
+      menu.setAttribute('aria-hidden', 'false');
+      render();
+      // Auto-highlight the item matching the current page
+      const navIdx = ITEMS.findIndex(it => it.type === 'nav' && it.value === current);
+      if (navIdx !== -1) setActive(navIdx);
+      else clearActive();
+    }
+
+    function close() {
+      isOpen = false;
+      clearActive();
+      wrapper.classList.remove('open');
+      document.body.classList.remove('vmenu-open');
+      btn.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+      render();
+    }
+
+    function execute(i) {
+      const it = ITEMS[i];
+      if (it.type === 'nav') { goTo(it.value); close(); return; }
+      if (it.type === 'theme') {
+        const dark = html.getAttribute('data-theme') === 'dark';
+        applyTheme(!dark);
+        localStorage.setItem('vp-theme', dark ? 'light' : 'dark');
+        close(); return;
+      }
+      if (it.type === 'copy') {
+        const finish = () => {
+          labelEl.textContent = 'Copied';
+          setTimeout(() => close(), 900);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(location.href).then(finish)
+            .catch(() => { prompt('Copy this link:', location.href); close(); });
+        } else { prompt('Copy this link:', location.href); close(); }
+      }
+    }
+
+    // Shared steering: highlight the sector nearest a given viewport point.
+    function steerByPoint(clientX, clientY) {
+      const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+      const dx = clientX - cx, dy = clientY - cy; // y down — matches ANGLES
+      if (Math.sqrt(dx * dx + dy * dy) < 40) { clearActive(); return; } // hub dead-zone
+      const ang = Math.atan2(dy, dx) * 180 / Math.PI;
+      let closest = -1, minDiff = Infinity;
+      ANGLES.forEach((a, i) => {
+        let d = Math.abs(a - ang) % 360;
+        if (d > 180) d = 360 - d;
+        if (d < minDiff) { minDiff = d; closest = i; }
+      });
+      if (closest !== activeIdx) setActive(closest);
+    }
+
+    // ── Desktop (mouse): click to open, move to steer, click an item to execute ──
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      if (justDragged) return;               // ignore the click synthesised after a touch drag
+      isOpen ? close() : open();
+    });
+    document.addEventListener('mousemove', e => {
+      if (isOpen && !touchDragging) steerByPoint(e.clientX, e.clientY);
+    });
+
+    // ── Touch / pen: press-and-hold to open, drag to steer, release to confirm (GTA-style) ──
+    btn.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse') return; // desktop keeps the click flow above
+      e.preventDefault(); e.stopPropagation();
+      try { btn.setPointerCapture(e.pointerId); } catch (_) {} // keep tracking after the dot hides
+      touchDragging = true; dragId = e.pointerId;
+      open();
+      clearActive();                         // no pre-selection — releasing in place cancels
+    });
+    btn.addEventListener('pointermove', e => {
+      if (!touchDragging || e.pointerId !== dragId) return;
+      e.preventDefault();
+      steerByPoint(e.clientX, e.clientY);
+    });
+    function endDrag(e) {
+      if (!touchDragging || e.pointerId !== dragId) return;
+      e.preventDefault();
+      touchDragging = false; dragId = null;
+      try { btn.releasePointerCapture(e.pointerId); } catch (_) {}
+      justDragged = true; setTimeout(() => { justDragged = false; }, 500);
+      const sel = activeIdx;
+      if (isOpen && sel >= 0) execute(sel);  // confirm the highlighted item
+      else close();                          // released in the dead-zone → cancel
+    }
+    btn.addEventListener('pointerup', endDrag);
+    btn.addEventListener('pointercancel', e => {
+      if (!touchDragging || e.pointerId !== dragId) return;
+      touchDragging = false; dragId = null; close();
+    });
+
+    // Backdrop click closes menu
+    if (backdrop) backdrop.addEventListener('click', e => { e.stopPropagation(); close(); });
+
+    document.addEventListener('click', e => {
+      if (isOpen && !wrapper.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && isOpen) close();
+    });
+
+    // Reflow the wheel on viewport change / device rotation while it's open
+    let rzT;
+    window.addEventListener('resize', () => {
+      clearTimeout(rzT);
+      rzT = setTimeout(() => { computeGeometry(); if (isOpen) render(); }, 150);
+    });
+
+    render();
+  })();
+
+
+  /* ── Three.js intro from published site ─────── */
+  (function() {
+    const intro = document.getElementById('intro');
+    if (!intro) { document.body.classList.add('ready'); return; }
+    const initHash = location.hash.slice(1);
+    const revealSite = () => requestAnimationFrame(() => {
+      document.body.classList.add('ready');
+      updateNavIndicator(current);
+    });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Non-homepage load → no intro
+    if (initHash && initHash !== 'home' && pages[initHash]) { intro.remove(); revealSite(); return; }
+    // Already seen this tab session → skip on every later reload (hard or soft).
+    // Resets only when the tab closes or a fresh tab/session opens.
+    let introSeen = false;
+    try { introSeen = !!sessionStorage.getItem('vp-intro-seen'); } catch (e) {}
+    if (introSeen) { intro.remove(); revealSite(); return; }
+    if (reducedMotion) { intro.remove(); revealSite(); return; }
+    document.body.classList.add('intro-active');
+
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'fetch';
+    preloadLink.href = './models/930-compressed.glb';
+    preloadLink.crossOrigin = 'anonymous';
+    document.head.appendChild(preloadLink);
+
+    const container = document.getElementById('introArtwork');
+    const progressEl = document.getElementById('introProgress');
+    const counterNum = document.querySelector('#introCounter .num');
+    const clickHint = document.getElementById('introClickHint');
+    const MODEL = './models/930-compressed.glb';
+    const loadStart = performance.now();
+    let lastPct = -1;
+    function applyProgress(p) {
+      const pct = Math.max(0, Math.min(100, Math.round(p * 100)));
+      if (pct === lastPct) return;        // avoid needless DOM writes
+      lastPct = pct;
+      if (counterNum) counterNum.textContent = pct;
+    }
+    applyProgress(0);
+
+    let targetProg = 0, displayProg = 0, modelLoaded = false, lastFrameTime = performance.now();
+    const MIN_LOAD_MS = 3200;
+    function dismiss() {
+      try { sessionStorage.setItem('vp-intro-seen', '1'); } catch (e) {}
+      document.body.classList.remove('intro-active');
+      intro.classList.add('dismissed');
+      intro.addEventListener('transitionend', () => intro.remove(), { once: true });
+      revealSite();
     }
 
     Promise.all([
-      sanityQuery('*[_type=="hero"][0]'),
-      sanityQuery('*[_type=="work"] | order(order asc)'),
-      sanityQuery('*[_type=="writing"] | order(order asc)'),
-      sanityQuery('*[_type=="about"][0]'),
-      sanityQuery('*[_type=="garage"] | order(order asc)'),
-      sanityQuery('*[_type=="contact"][0]'),
-      sanityQuery('*[_type=="colophon"][0]'),
-    ]).then(([hero, work, writing, about, garage, contact, colophon]) => {
-      applySiteContent(hero, work, writing, about, garage, contact, colophon, null);
-    }).catch(err => {
-      console.warn('Sanity unavailable, using content.json:', err);
-      return loadFromContentJson();
-    });
-
-    // Detail click handler
-    document.addEventListener('click', e => {
-      const el = e.target.closest('[data-detail-type]');
-      if (!el) return;
-      e.preventDefault();
-      const type = el.dataset.detailType;
-      const index = parseInt(el.dataset.detailIndex, 10);
-      openDetail(type, index);
-      history.pushState({ page: 'detail', detailType: type, detailIndex: index }, '', `#detail/${type}/${index}`);
-      showPage('detail');
-    });
-
-    // Back button
-    const detailBackBtn = document.getElementById('detail-back');
-    detailBackBtn.addEventListener('click', () => { navigate(detailOrigin); });
-
-    function updateDetailBack(origin) {
-      const labels = { work: 'Work', writing: 'Writing', garage: 'Garage', home: 'Home' };
-      detailBackBtn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> ${labels[origin] || 'Back'}`;
-    }
-
-    // ── ROUTER ──────────────────────────────────────────────────────────────
-    const TITLES = {
-      home: 'Varrel Putra', work: 'Work — Varrel Putra',
-      writing: 'Writing — Varrel Putra', about: 'About — Varrel Putra',
-      garage: 'Garage — Varrel Putra', contact: 'Contact — Varrel Putra',
-      detail: 'Varrel Putra',
-    };
-    const HOTKEY_PAGES = {
-      Digit0: 'home',
-      Digit1: 'work',
-      Digit2: 'writing',
-      Digit3: 'about',
-      Digit4: 'garage',
-      Digit5: 'contact',
-    };
-    let currentPage = 'home';
-
-    function updateNavIndicator(id) {
-      const indicator = document.getElementById('navIndicator');
-      const activeLink = document.querySelector(`.nav a[data-page="${id}"]`);
-      if (!indicator || !activeLink) return;
-      const nav = activeLink.parentElement;
-      const navRect = nav.getBoundingClientRect();
-      const linkRect = activeLink.getBoundingClientRect();
-      indicator.style.width = linkRect.width + 'px';
-      indicator.style.transform = `translateX(${linkRect.left - navRect.left}px)`;
-      indicator.style.opacity = '1';
-    }
-
-    function showPage(id, skipAnim) {
-      const el = document.getElementById('page-' + id);
-      if (!el) return;
-      clearTimeout(navTimer);
-      navTimer = null;
-      document.querySelectorAll('.page').forEach(p => {
-        p.classList.toggle('active', p === el);
-        p.classList.remove('exiting');
-        p.style.animationDuration = '';
-      });
-      if (skipAnim) el.style.animationDuration = '0s';
-      else el.style.animationDuration = '';
-      document.querySelectorAll('.nav a[data-page], .vmark[data-page]').forEach(a => {
-        a.classList.toggle('active', a.dataset.page === id);
-      });
-      updateNavIndicator(id);
-      if (id !== 'detail') document.title = TITLES[id] || 'Varrel Putra';
-      window.scrollTo(0, 0);
-      currentPage = id;
-      document.querySelectorAll('.mob-nav-link').forEach(b => b.classList.toggle('active', b.dataset.page === id));
-    }
-
-    let navTimer = null, transitionId = 0;
-    function navigate(id) {
-      if (id === currentPage) return;
-
-      const target = document.getElementById('page-' + id);
-      if (!target) return;
-
-      transitionId += 1;
-      const thisTransition = transitionId;
-      clearTimeout(navTimer);
-
-      const curr = document.getElementById('page-' + currentPage);
-      document.querySelectorAll('.page.exiting').forEach(p => p.classList.remove('exiting'));
-      if (curr) curr.classList.add('exiting');
-
-      navTimer = setTimeout(() => {
-        if (thisTransition !== transitionId) return;
-        showPage(id);
-      }, 520);
-      history.pushState({ page: id }, '', id === 'home' ? './' : '#' + id);
-    }
-
-    // Wire up all data-page links
-    document.addEventListener('click', e => {
-      const a = e.target.closest('[data-page]');
-      if (!a) return;
-      const page = a.dataset.page;
-      if (!page) return;
-      e.preventDefault();
-      navigate(page);
-    });
-
-    document.addEventListener('keydown', e => {
-      if (!e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) return;
-      const page = HOTKEY_PAGES[e.code];
-      if (!page) return;
-      const typing = e.target.closest('input, textarea, select, [contenteditable="true"]');
-      if (typing) return;
-      e.preventDefault();
-      navigate(page);
-    });
-
-    // Handle browser back/forward
-    window.addEventListener('popstate', e => {
-      const state = e.state || {};
-      if (state.page === 'detail' && state.detailType != null) {
-        openDetail(state.detailType, state.detailIndex);
-        showPage('detail', true);
-      } else {
-        showPage(state.page || 'home', true);
-      }
-    });
-
-    // Init from hash on load
-    (function() {
-      const hash = location.hash.slice(1);
-      const detailMatch = hash.match(/^detail\/(\w+)\/(\d+)$/);
-      if (detailMatch) {
-        const [, type, index] = detailMatch;
-        history.replaceState({ page: 'detail', detailType: type, detailIndex: +index }, '', location.href);
-        // Wait for Sanity content to load before opening detail
-        const tryOpen = () => {
-          if (siteContent) {
-            const originMap = { work: 'work', writing: 'writing', garage: 'garage' };
-            if (originMap[type]) currentPage = originMap[type];
-            openDetail(type, +index);
-            showPage('detail', true);
-          } else setTimeout(tryOpen, 100);
-        };
-        tryOpen();
-      } else if (hash && document.getElementById('page-' + hash)) {
-        showPage(hash, true);
-        history.replaceState({ page: hash }, '', location.href);
-      } else {
-        history.replaceState({ page: 'home' }, '', location.href);
-      }
-    })();
-
-    // ── INTRO ANIMATION ──────────────────────────────────────────────────────
-    (function() {
-      const intro      = document.getElementById('intro');
-      // Skip intro entirely if loading directly into a subpage
-      const initHash = location.hash.slice(1);
-      const revealSite = () => requestAnimationFrame(() => {
-        document.body.classList.add('site-ready');
-        updateNavIndicator(currentPage);
-      });
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (initHash && initHash !== 'home' && (document.getElementById('page-' + initHash) || initHash.startsWith('detail/'))) { intro.remove(); revealSite(); return; }
-      const navEntry   = performance.getEntriesByType('navigation')[0];
-      const isHardRefresh = navEntry?.type === 'reload' && (navEntry?.transferSize ?? 0) > 0;
-      const isFirstVisit  = !sessionStorage.getItem('vp-intro-seen');
-      if (reducedMotion || (!isHardRefresh && !isFirstVisit)) { intro.remove(); revealSite(); return; }
-      document.body.classList.add('intro-active');
-
-      // Conditionally preload GLB only when intro will actually show
-      const preloadLink = document.createElement('link');
-      preloadLink.rel = 'preload'; preloadLink.as = 'fetch';
-      preloadLink.href = './models/930-compressed.glb'; preloadLink.crossOrigin = 'anonymous';
-      document.head.appendChild(preloadLink);
-
-      const container  = document.getElementById('introArtwork');
-      const progressEl = document.getElementById('introProgress');
-      const fillEl     = document.getElementById('introProgressFill');
-      const clickHint  = document.getElementById('introClickHint');
-      const MODEL      = './models/930-compressed.glb';
-      const loadStart  = performance.now();
-
-      // Overlay starts covering everything
-      fillEl.style.transform = 'scaleX(0)';
-
-      let targetProg = 0, displayProg = 0, modelLoaded = false, lastFrameTime = performance.now();
-      const MIN_LOAD_MS = 3200; // minimum visible progress duration
-
-      function applyProgress(p) {
-        fillEl.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-      }
-
-      function dismiss() {
-        sessionStorage.setItem('vp-intro-seen', '1');
-        document.body.classList.remove('intro-active');
-        intro.classList.add('dismissed');
-        intro.addEventListener('transitionend', () => intro.remove(), { once: true });
-        revealSite();
-      }
-
-      Promise.all([
-        import('./vendor/three/build/three.module.js'),
-        import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),
-        import('./vendor/three/examples/jsm/loaders/DRACOLoader.js'),
-      ]).then(([THREE, { GLTFLoader }, { DRACOLoader }]) => {
-        let disposed = false, frameId = null, introPhaseTimer = null;
-
-        function cleanupScene() {
-          disposed = true;
-          cancelAnimationFrame(frameId);
-          clearTimeout(introPhaseTimer);
-          window.removeEventListener('resize', heroResize);
-          scene.traverse(obj => {
-            if (obj.geometry) obj.geometry.dispose();
-            if (obj.material) {
-              const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
-              mats.forEach(m => { Object.values(m).forEach(v => { if (v && v.isTexture) v.dispose(); }); m.dispose(); });
-            }
-          });
-          renderer.dispose();
-          renderer.forceContextLoss();
-          renderer.domElement.remove();
-          draco.dispose();
-        }
-        const INTRO_CAM_Z = 5.6, INTRO_CAM_X = 3.0, FINAL_CAM_Z = 6.8, FINAL_CAM_X = 0.0;
-        const INTRO_ROT_Y = Math.PI * 0.2, FINAL_ROT_Y = Math.PI * 0.5, TRANSITION_MS = 3000;
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 200);
-        camera.position.set(INTRO_CAM_X, 0.1, INTRO_CAM_Z);
-        camera.lookAt(0, 0.1, 0);
-
-        // Three tiers based on CPU cores and RAM:
-        // Low-end  (≤4 cores or ≤2GB): antialias off, 1x pixel ratio
-        // Mid-range (≤8 cores or ≤4GB): antialias on,  1x pixel ratio
-        // High-end  (>8 cores and >4GB): antialias on,  2x pixel ratio
-        const cores = navigator.hardwareConcurrency || 4;
-        const mem   = navigator.deviceMemory || 4;
-        const forceTier = new URLSearchParams(location.search).get('tier');
-        const tier = forceTier || ((cores <= 4 || mem <= 2) ? 'low' : (cores <= 8 || mem <= 4) ? 'mid' : 'high');
-        const renderer = new THREE.WebGLRenderer({ antialias: tier !== 'low', alpha: true, logarithmicDepthBuffer: true });
-        renderer.setClearColor(0x000000, 0);
-        renderer.setPixelRatio(tier === 'high' ? Math.min(window.devicePixelRatio, 2) : 1);
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.0;
-        renderer.domElement.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
-        container.appendChild(renderer.domElement);
-
-        // Studio lighting tuned for original model textures
-        scene.add(new THREE.HemisphereLight(0xffffff, 0xe8e4dc, 2.2));
-        const kl = new THREE.DirectionalLight(0xffffff, 3.0); kl.position.set(3, 6, 4); scene.add(kl);
-        const fl = new THREE.DirectionalLight(0xfaf8f4, 1.8); fl.position.set(-5, 2, 3); scene.add(fl);
-        const rl = new THREE.DirectionalLight(0xffffff, 1.4); rl.position.set(-2, 4, -6); scene.add(rl);
-
-        const draco = new DRACOLoader();
-        draco.setDecoderPath('./vendor/three/examples/jsm/libs/draco/');
-        const loader = new GLTFLoader();
-        loader.setDRACOLoader(draco);
-
-        const heroResize = () => {
-          const w = Math.max(1, container.clientWidth), h = Math.max(1, container.clientHeight);
-          camera.aspect = w / h; camera.updateProjectionMatrix(); camera.lookAt(0, 0.1, 0);
-          renderer.setSize(w, h);
-        };
-        window.addEventListener('resize', heroResize);
-        heroResize();
-
-        let model = null, phase = 'loading', transStart = null, transEndTime = null;
-
-        loader.load(MODEL, (gltf) => {
-          if (disposed) return;
-          model = gltf.scene;
-
-          // Simplify materials on low/mid tier devices — strip expensive PBR extensions
-          if (tier !== 'high') {
-            model.traverse(obj => {
-              if (!obj.isMesh || !obj.material) return;
-              const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
-              mats.forEach(mat => {
-                // Strip clearcoat (paint) — replace with increased roughness/metalness
-                if (mat.clearcoat > 0) {
-                  mat.roughness  = Math.max(mat.roughness - 0.08, 0.05);
-                  mat.metalness  = Math.min(mat.metalness + 0.05, 1.0);
-                  mat.clearcoat  = 0;
-                  mat.clearcoatRoughness = 0;
-                }
-                // Strip transmission (glass) — replace with opacity + transparent
-                if (mat.transmission > 0) {
-                  mat.transmission = 0;
-                  mat.opacity      = 0.25;
-                  mat.transparent  = true;
-                  mat.roughness    = 0.05;
-                }
-                // Strip volume / IOR / specular — not supported on simplified path anyway
-                mat.thickness = 0;
-                mat.needsUpdate = true;
-              });
-            });
+      import('./vendor/three/build/three.module.js'),
+      import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),
+      import('./vendor/three/examples/jsm/loaders/DRACOLoader.js'),
+    ]).then(([THREE, { GLTFLoader }, { DRACOLoader }]) => {
+      let disposed = false, frameId = null, introPhaseTimer = null;
+      function cleanupScene() {
+        disposed = true;
+        cancelAnimationFrame(frameId);
+        clearTimeout(introPhaseTimer);
+        window.removeEventListener('resize', heroResize);
+        scene.traverse(obj => {
+          if (obj.geometry) obj.geometry.dispose();
+          if (obj.material) {
+            const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+            mats.forEach(m => { Object.values(m).forEach(v => { if (v && v.isTexture) v.dispose(); }); m.dispose(); });
           }
-
-          const box = new THREE.Box3().setFromObject(model);
-          const center = box.getCenter(new THREE.Vector3());
-          const size = box.getSize(new THREE.Vector3());
-          const isMobile = window.innerWidth <= 768;
-          const scale = (isMobile ? 3.8 : 5.8) / Math.max(size.x, size.y, size.z);
-          model.scale.setScalar(scale);
-          model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
-          model.rotation.y = INTRO_ROT_Y;
-          scene.add(model);
-          modelLoaded = true;
-          targetProg = 1.0; // animate will smooth display to 1.0
-        },
-        (xhr) => {
-          if (xhr.total > 0) targetProg = Math.max(targetProg, Math.min(xhr.loaded / xhr.total * 0.88, 0.88));
-        },
-        () => { cleanupScene(); dismiss(); });
-
-        function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
-
-        function animate() {
-          if (disposed) return;
-          const now = performance.now();
-          const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
-
-          // Always cap at 30fps — this is a mood piece, not an interactive scene
-          if (now - lastFrameTime < 33) { frameId = requestAnimationFrame(animate); return; }
-
-          lastFrameTime = now;
-          frameId = requestAnimationFrame(animate);
-
-          // Smooth progress — time-based floor ensures visible animation even on fast loads
-          if (phase === 'loading') {
-            const timeProg = Math.min((now - loadStart) / MIN_LOAD_MS, 0.92);
-            targetProg = Math.max(targetProg, timeProg);
-            displayProg += (targetProg - displayProg) * Math.min(dt * 2.8, 1);
-            applyProgress(displayProg);
-            // Trigger transition only once model is loaded AND display reaches 100%
-            if (modelLoaded && displayProg >= 0.995) {
-              phase = 'loaded';
-              progressEl.style.opacity = '0';
-              introPhaseTimer = setTimeout(() => { if (disposed) return; phase = 'transitioning'; transStart = performance.now(); }, 500);
-            }
-          } else if (phase === 'transitioning') {
-            const t = Math.min((now - transStart) / TRANSITION_MS, 1);
-            const e = easeInOut(t);
-            camera.position.z = INTRO_CAM_Z + (FINAL_CAM_Z - INTRO_CAM_Z) * e;
-            camera.position.x = INTRO_CAM_X + (FINAL_CAM_X - INTRO_CAM_X) * e;
-            camera.lookAt(0, 0.1, 0);
-            if (model) model.rotation.y = INTRO_ROT_Y + (FINAL_ROT_Y - INTRO_ROT_Y) * e;
-            if (t >= 1) { phase = 'done'; transEndTime = now; clickHint.style.opacity = '1'; }
-          } else if (phase === 'done' && model) {
-            model.rotation.y = FINAL_ROT_Y + (now - transEndTime) * 0.00028;
-          }
-          renderer.render(scene, camera);
-        }
-        animate();
-
-        const clickOverlay = document.createElement('div');
-        clickOverlay.style.cssText = 'position:absolute;inset:0;z-index:20;cursor:none;';
-        intro.appendChild(clickOverlay);
-        clickOverlay.addEventListener('click', () => {
-          if (phase !== 'done') return;
-          dismiss();
-          intro.addEventListener('transitionend', cleanupScene, { once: true });
         });
-      }).catch(() => {
-        // Module import failed — Three.js objects don't exist yet, just dismiss
-        dismiss();
-      });
-    })();
-
-    // ── CURSOR ───────────────────────────────────────────────────────────────
-    (function() {
-      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-      const ring = document.getElementById('cursorRing');
-      const box = document.getElementById('cursorBox');
-      const label = document.getElementById('cursorLabel');
-      const INTERACTIVE = 'a, button, [data-page], .vmark, .nav a';
-      let lastMx = -1, lastMy = -1;
-
-      function updateHover(mx, my) {
-        const target = document.elementFromPoint(mx, my);
-        const interactive = target && target.closest(INTERACTIVE);
-        if (interactive) {
-          ring.classList.add('hovered');
-          const r = interactive.getBoundingClientRect(), pad = 6;
-          const br = Math.min((parseFloat(getComputedStyle(interactive).borderRadius) || 0) + pad, 16);
-          box.style.left = (r.left-pad)+'px'; box.style.top = (r.top-pad)+'px';
-          box.style.width = (r.width+pad*2)+'px'; box.style.height = (r.height+pad*2)+'px';
-          box.style.borderRadius = br+'px'; box.classList.add('active');
-          label.textContent = interactive.dataset.label || interactive.getAttribute('aria-label') || interactive.textContent.trim().slice(0,32);
-          const lx = r.left+r.width/2, ly = r.top-pad-26, lw = label.offsetWidth||120;
-          label.style.left = Math.min(Math.max(lx,lw/2+8),window.innerWidth-lw/2-8)+'px';
-          label.style.top = Math.max(ly,8)+'px';
-          label.classList.add('active');
-        } else {
-          ring.classList.remove('hovered');
-          box.classList.remove('active');
-          label.classList.remove('active');
-        }
+        renderer.dispose();
+        renderer.forceContextLoss();
+        renderer.domElement.remove();
+        draco.dispose();
       }
-
-      let mousePending = false;
-      document.addEventListener('mousemove', (e) => {
-        lastMx = e.clientX; lastMy = e.clientY;
-        // Ring and coords use transform — GPU composited, no layout triggered
-        ring.style.transform = 'translate(' + (lastMx - 11) + 'px,' + (lastMy - 11) + 'px)';
-        ring.classList.add('active');
-        if (!mousePending) {
-          mousePending = true;
-          requestAnimationFrame(() => {
-            mousePending = false;
-            updateHover(lastMx, lastMy);
+      const INTRO_CAM_Z = 5.6, INTRO_CAM_X = 3.0, FINAL_CAM_Z = 6.8, FINAL_CAM_X = 0.0;
+      const INTRO_ROT_Y = Math.PI * 0.2, FINAL_ROT_Y = Math.PI * 0.5, TRANSITION_MS = 3000;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 200);
+      camera.position.set(INTRO_CAM_X, 0.1, INTRO_CAM_Z);
+      camera.lookAt(0, 0.1, 0);
+      const cores = navigator.hardwareConcurrency || 4;
+      const mem = navigator.deviceMemory || 4;
+      const tier = (cores <= 4 || mem <= 2) ? 'low' : (cores <= 8 || mem <= 4) ? 'mid' : 'high';
+      const renderer = new THREE.WebGLRenderer({ antialias: tier !== 'low', alpha: true, logarithmicDepthBuffer: true });
+      renderer.setClearColor(0x000000, 0);
+      renderer.setPixelRatio(tier === 'high' ? Math.min(window.devicePixelRatio, 2) : 1);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.0;
+      renderer.domElement.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+      container.appendChild(renderer.domElement);
+      scene.add(new THREE.HemisphereLight(0xffffff, 0xe8e4dc, 2.2));
+      const kl = new THREE.DirectionalLight(0xffffff, 3.0); kl.position.set(3, 6, 4); scene.add(kl);
+      const fl = new THREE.DirectionalLight(0xfaf8f4, 1.8); fl.position.set(-5, 2, 3); scene.add(fl);
+      const rl = new THREE.DirectionalLight(0xffffff, 1.4); rl.position.set(-2, 4, -6); scene.add(rl);
+      const draco = new DRACOLoader();
+      draco.setDecoderPath('./vendor/three/examples/jsm/libs/draco/');
+      const loader = new GLTFLoader();
+      loader.setDRACOLoader(draco);
+      const heroResize = () => {
+        const w = Math.max(1, container.clientWidth), h = Math.max(1, container.clientHeight);
+        camera.aspect = w / h; camera.updateProjectionMatrix(); camera.lookAt(0, 0.1, 0);
+        renderer.setSize(w, h);
+      };
+      window.addEventListener('resize', heroResize);
+      heroResize();
+      let model = null, phase = 'loading', transStart = null, transEndTime = null;
+      loader.load(MODEL, (gltf) => {
+        if (disposed) return;
+        model = gltf.scene;
+        if (tier !== 'high') {
+          model.traverse(obj => {
+            if (!obj.isMesh || !obj.material) return;
+            const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+            mats.forEach(mat => {
+              if (mat.clearcoat > 0) {
+                mat.roughness = Math.max(mat.roughness - 0.08, 0.05);
+                mat.metalness = Math.min(mat.metalness + 0.05, 1.0);
+                mat.clearcoat = 0;
+                mat.clearcoatRoughness = 0;
+              }
+              if (mat.transmission > 0) {
+                mat.transmission = 0;
+                mat.opacity = 0.25;
+                mat.transparent = true;
+                mat.roughness = 0.05;
+              }
+              mat.thickness = 0;
+              mat.needsUpdate = true;
+            });
           });
         }
-      });
-
-      // Re-evaluate hover on scroll — strip position transitions so box snaps instantly
-      let scrollEndTimer = null;
-      window.addEventListener('scroll', () => {
-        if (lastMx < 0) return;
-        box.classList.add('no-transition');
-        updateHover(lastMx, lastMy);
-        clearTimeout(scrollEndTimer);
-        scrollEndTimer = setTimeout(() => box.classList.remove('no-transition'), 150);
-      }, { passive: true });
-
-      document.addEventListener('mouseleave', () => {
-        ring.classList.remove('active');
-        box.classList.remove('active'); label.classList.remove('active');
-      });
-    })();
-
-    window.addEventListener('resize', () => updateNavIndicator(currentPage));
-
-    // ── THEME ────────────────────────────────────────────────────────────────
-    const toggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const root = document.documentElement;
-    const moonPath = 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z';
-    const sunPath  = 'M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42M12 5a7 7 0 1 0 0 14A7 7 0 0 0 12 5z';
-    function applyTheme(dark) { dark ? root.setAttribute('data-theme','dark') : root.removeAttribute('data-theme'); themeIcon.innerHTML = '<path d="' + (dark ? sunPath : moonPath) + '"/>'; }
-    applyTheme(localStorage.getItem('vp-theme') === 'dark');
-    toggle.addEventListener('click', () => { const d = root.getAttribute('data-theme') === 'dark'; applyTheme(!d); localStorage.setItem('vp-theme', d ? 'light' : 'dark'); });
-
-    // ── SCROLL TO TOP ────────────────────────────────────────────────────────
-    document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // ── HAMBURGER NAV ────────────────────────────────────────────────────────
-    const hamburger    = document.getElementById('hamburger');
-    const mobOverlay   = document.getElementById('mobNavOverlay');
-    const mobNavLinks  = document.querySelectorAll('.mob-nav-link');
-
-    function closeMobNav() {
-      hamburger.classList.remove('open');
-      mobOverlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    hamburger.addEventListener('click', () => {
-      const isMobile = window.innerWidth <= 760;
-      if (!isMobile) return;
-      const isOpen = mobOverlay.classList.toggle('open');
-      hamburger.classList.toggle('open', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-
-    mobNavLinks.forEach(btn => {
-      btn.addEventListener('click', () => {
-        navigate(btn.dataset.page);
-        closeMobNav();
-      });
-    });
-
-
-    // Close on back-swipe / ESC
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobNav(); });
-
-    // Clock inside overlay
-    function tickMobClock() {
-      const el = document.getElementById('mobNavClock');
-      if (!el) return;
-      const now = new Date();
-      el.textContent = 'Vancouver ' + now.toLocaleTimeString('en-US', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit' });
-    }
-    tickMobClock();
-    setInterval(tickMobClock, 1000);
-
-    // Clear card animation after it finishes so it doesn't hold a composited layer
-    // (composited layers block backdrop-filter on overlapping fixed elements)
-    const siteCard = document.querySelector('.site-card');
-    if (siteCard) siteCard.addEventListener('animationend', () => { siteCard.style.animation = 'none'; }, { once: true });
-
-    // ── CLOCKS ───────────────────────────────────────────────────────────────
-    function formatTime(d, tz) { return d.toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: true }); }
-    function tickClocks() {
-      const now = new Date();
-      document.getElementById('clockLocal').textContent = 'LOCAL ' + formatTime(now, Intl.DateTimeFormat().resolvedOptions().timeZone);
-      document.getElementById('clockVancouver').textContent = 'VANCOUVER ' + formatTime(now, 'America/Vancouver');
-    }
-    tickClocks(); setInterval(tickClocks, 60000);
-
-    // ── SMOOTH SCROLL ────────────────────────────────────────────────────────
-    // Skip on touch devices, reduced-motion, or small screens — native scroll is better there
-    (function() {
-      const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (isTouch || prefersReduced || window.innerWidth < 760) return;
-
-      let target = window.scrollY, current = window.scrollY, ticking = false;
-      // Keep target in sync if user scrolls via keyboard or other means
-      window.addEventListener('scroll', () => { if (!ticking) { target = window.scrollY; current = window.scrollY; } }, { passive: true });
-      window.addEventListener('wheel', function(e) {
-        e.preventDefault();
-        target = Math.max(0, Math.min(target + e.deltaY, document.body.scrollHeight - window.innerHeight));
-        if (!ticking) {
-          ticking = true;
-          (function loop() {
-            const diff = target - current;
-            if (Math.abs(diff) < 0.5) { current = target; window.scrollTo(0, current); ticking = false; return; }
-            current += diff * 0.12;
-            window.scrollTo(0, current);
-            requestAnimationFrame(loop);
-          })();
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const isMobile = window.innerWidth <= 768;
+        const scale = (isMobile ? 3.8 : 5.8) / Math.max(size.x, size.y, size.z);
+        model.scale.setScalar(scale);
+        model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
+        model.rotation.y = INTRO_ROT_Y;
+        scene.add(model);
+        modelLoaded = true;
+        targetProg = 1.0;
+      }, (xhr) => {
+        if (xhr.total > 0) targetProg = Math.max(targetProg, Math.min(xhr.loaded / xhr.total * 0.88, 0.88));
+      }, () => { cleanupScene(); dismiss(); });
+      function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+      function animate() {
+        if (disposed) return;
+        const now = performance.now();
+        const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
+        if (now - lastFrameTime < 33) { frameId = requestAnimationFrame(animate); return; }
+        lastFrameTime = now;
+        frameId = requestAnimationFrame(animate);
+        if (phase === 'loading') {
+          const timeProg = Math.min((now - loadStart) / MIN_LOAD_MS, 0.92);
+          targetProg = Math.max(targetProg, timeProg);
+          displayProg += (targetProg - displayProg) * Math.min(dt * 2.8, 1);
+          applyProgress(displayProg);
+          if (modelLoaded && displayProg >= 0.995) {
+            phase = 'loaded';
+            progressEl.style.opacity = '0';
+            introPhaseTimer = setTimeout(() => { if (disposed) return; phase = 'transitioning'; transStart = performance.now(); }, 500);
+          }
+        } else if (phase === 'transitioning') {
+          const t = Math.min((now - transStart) / TRANSITION_MS, 1);
+          const e = easeInOut(t);
+          camera.position.z = INTRO_CAM_Z + (FINAL_CAM_Z - INTRO_CAM_Z) * e;
+          camera.position.x = INTRO_CAM_X + (FINAL_CAM_X - INTRO_CAM_X) * e;
+          camera.lookAt(0, 0.1, 0);
+          if (model) model.rotation.y = INTRO_ROT_Y + (FINAL_ROT_Y - INTRO_ROT_Y) * e;
+          if (t >= 1) { phase = 'done'; transEndTime = now; clickHint.style.opacity = '1'; }
+        } else if (phase === 'done' && model) {
+          model.rotation.y = FINAL_ROT_Y + (now - transEndTime) * 0.00028;
         }
-      }, { passive: false });
-    })();
+        renderer.render(scene, camera);
+      }
+      animate();
+      const clickOverlay = document.createElement('div');
+      clickOverlay.style.cssText = 'position:absolute;inset:0;z-index:20;cursor:pointer;';
+      intro.appendChild(clickOverlay);
+      clickOverlay.addEventListener('click', () => {
+        if (phase !== 'done') return;
+        dismiss();
+        intro.addEventListener('transitionend', cleanupScene, { once: true });
+      });
+    }).catch(() => dismiss());
+  })();
+
+  /* ── Custom cursor: single minimal dot, expands to a ring over interactive elements ── */
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const dot = document.getElementById('cursorDot');
+    if (!dot) return;
+    const SEL = 'a, button, [data-nav], [data-article], [data-back], [data-jump], [data-detail-type], .scroll-dot, .wordmark, .radial-item, .radial-trigger, .theme-toggle, .nav a, .cover-index a, .line-cta';
+    let x = window.innerWidth / 2, y = window.innerHeight / 2, queued = false;
+    function paint() { queued = false; dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) translate(-50%,-50%)'; }
+    paint();
+    document.addEventListener('mousemove', e => {
+      x = e.clientX; y = e.clientY;
+      dot.style.opacity = '1';
+      if (!queued) { queued = true; requestAnimationFrame(paint); }
+      dot.classList.toggle('hover', !!(e.target.closest && e.target.closest(SEL)));
+    });
+    document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; });
+    document.addEventListener('mousedown', () => dot.classList.add('down'));
+    document.addEventListener('mouseup', () => dot.classList.remove('down'));
+  })();
+})();
+
   </script>
 </body>
 </html>
